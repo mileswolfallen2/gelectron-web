@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gelectron — Electron, Reimagined with Gecko</title>
+  <meta name="description" content="A lighter, faster alternative to Electron powered by Servo and the Gecko engine. Early development — not ready for use.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="warning-banner">
+    <span class="warning-icon">⚠</span>
+    <p><strong>Early Development</strong> — Gelectron is a work in progress. Do not use it in production or for any serious project. APIs are unstable and many features are incomplete.</p>
+  </div>
+
+  <nav class="navbar">
+    <div class="nav-content">
+      <a href="#" class="logo">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">gelectron</span>
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#install">Install</a>
+        <a href="#tech-stack">Tech Stack</a>
+        <a href="#api-support">API Status</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://github.com/mileswolfallen2/gelectron" target="_blank" rel="noopener" class="nav-cta">GitHub →</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <section class="hero">
+      <div class="hero-badge">Early Development — Not Ready for Use</div>
+      <h1>Electron, reimagined<br>with <span class="gradient-text">Gecko &amp; Servo</span></h1>
+      <p class="hero-subtitle">A lighter, faster alternative to Electron. Drop-in compatible, powered by Rust, and built for the modern web.</p>
+      <div class="hero-actions">
+        <a href="https://github.com/mileswolfallen2/gelectron" target="_blank" rel="noopener" class="btn btn-primary">View on GitHub</a>
+        <a href="#features" class="btn btn-secondary">Learn More</a>
+      </div>
+      <div class="hero-comparison">
+        <div class="comparison-card">
+          <div class="comparison-label">Electron</div>
+          <div class="comparison-value">~300 MB</div>
+          <div class="comparison-note">bundles Chromium</div>
+        </div>
+        <div class="comparison-vs">vs</div>
+        <div class="comparison-card highlight">
+          <div class="comparison-label">Gelectron</div>
+          <div class="comparison-value">much smaller</div>
+          <div class="comparison-note">uses Servo</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="early-notice">
+      <div class="notice-content">
+        <h2>🛑 Do not use this yet</h2>
+        <p>Gelectron is in very early development. Many Electron APIs are stubs or incomplete. The project is experimental and will break. Contributions and interest are welcome, but please do not rely on this for anything beyond tinkering.</p>
+      </div>
+    </section>
+
+    <section id="features" class="features">
+      <div class="section-header">
+        <h2>Why Gelectron?</h2>
+        <p>The best parts of Electron, minus the bloat.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🪶</div>
+          <h3>Lightweight</h3>
+          <p>Servo is designed for embedding. Smaller binaries, lower memory usage, and faster startup compared to Chromium-based Electron.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔧</div>
+          <h3>Drop-in Replacement</h3>
+          <p>Run <code>gelectron .</code> instead of <code>electron .</code>. Existing Electron apps should work without code changes.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🦀</div>
+          <h3>Rust-Powered Core</h3>
+          <p>Native rendering via Servo, CSS via Stylo, GPU compositing via WebRender — all written in Rust for safety and performance.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📦</div>
+          <h3>Familiar APIs</h3>
+          <p>Supports <code>BrowserWindow</code>, <code>ipcMain</code>, <code>ipcRenderer</code>, <code>Menu</code>, <code>Tray</code>, <code>dialog</code>, and more. A JavaScript compatibility layer on top.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🌐</div>
+          <h3>Modern Web Engine</h3>
+          <p>Built on Servo — a next-generation browser engine from Mozilla. Better web standards support from day one.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔓</div>
+          <h3>Open Source</h3>
+          <p>MIT licensed. Contributions welcome. Built in the open on GitHub.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-it-works" class="how-it-works">
+      <div class="section-header">
+        <h2>How It Works</h2>
+        <p>If you know Electron, you already know Gelectron.</p>
+      </div>
+      <div class="code-comparison">
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-dot red"></span>
+            <span class="code-dot yellow"></span>
+            <span class="code-dot green"></span>
+            <span class="code-title">Before (Electron)</span>
+          </div>
+          <pre><code>npx electron .</code></pre>
+        </div>
+        <div class="code-block highlight">
+          <div class="code-header">
+            <span class="code-dot red"></span>
+            <span class="code-dot yellow"></span>
+            <span class="code-dot green"></span>
+            <span class="code-title">After (Gelectron)</span>
+          </div>
+          <pre><code>npx gelectron .</code></pre>
+        </div>
+      </div>
+      <p class="code-note">That's it. Same codebase, different engine.</p>
+    </section>
+
+    <section id="install" class="install-guide">
+      <div class="section-header">
+        <h2>Installation Guide</h2>
+        <p>For the brave and the curious. Seriously — read the warning first.</p>
+      </div>
+      <div class="install-content">
+        <div class="install-warning-box">
+          <div class="install-warning-icon">🛑</div>
+          <h3>Stop. Read this first.</h3>
+          <p>Gelectron is <strong>not ready for use</strong>. Installing it now will likely result in broken builds, missing features, and frustration. This guide exists for early explorers and contributors only.</p>
+          <button class="btn btn-warning" id="open-install-modal">I understand — show me anyway</button>
+        </div>
+
+        <div class="install-steps" id="install-steps">
+          <div class="install-step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>Clone the repository</h4>
+              <div class="code-block small">
+                <div class="code-header">
+                  <span class="code-dot red"></span>
+                  <span class="code-dot yellow"></span>
+                  <span class="code-dot green"></span>
+                </div>
+                <pre><code>git clone https://github.com/mileswolfallen2/gelectron.git
+cd gelectron</code></pre>
+              </div>
+            </div>
+          </div>
+          <div class="install-step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>Install Rust (if you haven't)</h4>
+              <div class="code-block small">
+                <div class="code-header">
+                  <span class="code-dot red"></span>
+                  <span class="code-dot yellow"></span>
+                  <span class="code-dot green"></span>
+                </div>
+                <pre><code>curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</code></pre>
+              </div>
+              <p class="step-note">Gelectron's core is written in Rust. You'll need a recent toolchain.</p>
+            </div>
+          </div>
+          <div class="install-step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>Build from source</h4>
+              <div class="code-block small">
+                <div class="code-header">
+                  <span class="code-dot red"></span>
+                  <span class="code-dot yellow"></span>
+                  <span class="code-dot green"></span>
+                </div>
+                <pre><code>cargo build --release</code></pre>
+              </div>
+              <p class="step-note">This will take a while. Servo has a lot of dependencies.</p>
+            </div>
+          </div>
+          <div class="install-step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h4>Run your Electron app</h4>
+              <div class="code-block small">
+                <div class="code-header">
+                  <span class="code-dot red"></span>
+                  <span class="code-dot yellow"></span>
+                  <span class="code-dot green"></span>
+                </div>
+                <pre><code>./target/release/gelectron /path/to/your/electron-app</code></pre>
+              </div>
+              <p class="step-note">It might work. It might not. You've been warned.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="install-requirements">
+          <h4>Requirements</h4>
+          <ul>
+            <li><strong>Rust</strong> — stable toolchain (1.70+)</li>
+            <li><strong>OS</strong> — macOS, Linux, or Windows</li>
+            <li><strong>Disk</strong> — ~2 GB for build dependencies</li>
+            <li><strong>Patience</strong> — builds can take 10–20 minutes</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="tech-stack" class="tech-stack">
+      <div class="section-header">
+        <h2>Built on Proven Technology</h2>
+        <p>Gelectron stands on the shoulders of giants.</p>
+      </div>
+      <div class="tech-grid">
+        <div class="tech-card">
+          <div class="tech-logo">🦀</div>
+          <h3>Rust</h3>
+          <p>Memory-safe systems language powering the entire native layer. No garbage collector, no runtime overhead.</p>
+        </div>
+        <div class="tech-card">
+          <div class="tech-logo">🦁</div>
+          <h3>Servo</h3>
+          <p>Mozilla's next-gen browser engine designed for embedding. Parallel CSS layout, GPU-accelerated rendering.</p>
+        </div>
+        <div class="tech-card">
+          <div class="tech-logo">🎨</div>
+          <h3>WebRender</h3>
+          <p>GPU-based renderer used in Firefox. Converts the web page into a texture for efficient compositing.</p>
+        </div>
+        <div class="tech-card">
+          <div class="tech-logo">🧩</div>
+          <h3>Stylo</h3>
+          <p>Rust-powered CSS engine. Parallel style computation directly from Rust, replacing Gecko's old C++ CSS parser.</p>
+        </div>
+      </div>
+      <div class="architecture-diagram">
+        <div class="arch-layer">
+          <div class="arch-label">Your App</div>
+          <div class="arch-code">HTML / CSS / JavaScript</div>
+        </div>
+        <div class="arch-arrow">↓</div>
+        <div class="arch-layer">
+          <div class="arch-label">Gelectron JS Layer</div>
+          <div class="arch-code">Electron API compatibility (BrowserWindow, IPC, Menu...)</div>
+        </div>
+        <div class="arch-arrow">↓</div>
+        <div class="arch-layer">
+          <div class="arch-label">Gelectron Core (Rust)</div>
+          <div class="arch-code">Window management, process model, native bindings</div>
+        </div>
+        <div class="arch-arrow">↓</div>
+        <div class="arch-layer">
+          <div class="arch-label">Servo Engine</div>
+          <div class="arch-code">Stylo (CSS) + WebRender (GPU) + SpiderMonkey (JS)</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="api-support" class="api-support">
+      <div class="section-header">
+        <h2>API Support Status</h2>
+        <p>Many Electron APIs are already implemented. Some are stubs.</p>
+      </div>
+      <div class="api-table-wrapper">
+        <table class="api-table">
+          <thead>
+            <tr>
+              <th>API</th>
+              <th>Status</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>app</code></td>
+              <td><span class="status implemented">Working</span></td>
+              <td>Core lifecycle management</td>
+            </tr>
+            <tr>
+              <td><code>BrowserWindow</code></td>
+              <td><span class="status implemented">Working</span></td>
+              <td>Window creation and management</td>
+            </tr>
+            <tr>
+              <td><code>ipcMain</code></td>
+              <td><span class="status implemented">Working</span></td>
+              <td>Main process message handling</td>
+            </tr>
+            <tr>
+              <td><code>ipcRenderer</code></td>
+              <td><span class="status implemented">Working</span></td>
+              <td>Renderer process messaging</td>
+            </tr>
+            <tr>
+              <td><code>Menu</code></td>
+              <td><span class="status implemented">Working</span></td>
+              <td>Native menu creation</td>
+            </tr>
+            <tr>
+              <td><code>Tray</code></td>
+              <td><span class="status implemented">Working</span></td>
+              <td>System tray integration</td>
+            </tr>
+            <tr>
+              <td><code>dialog</code></td>
+              <td><span class="status implemented">Working</span></td>
+              <td>Native file/message dialogs</td>
+            </tr>
+            <tr>
+              <td><code>shell</code></td>
+              <td><span class="status implemented">Working</span></td>
+              <td>OS shell interactions</td>
+            </tr>
+            <tr>
+              <td><code>Notification</code></td>
+              <td><span class="status implemented">Working</span></td>
+              <td>Desktop notifications</td>
+            </tr>
+            <tr>
+              <td><code>nativeImage</code></td>
+              <td><span class="status implemented">Working</span></td>
+              <td>Image handling</td>
+            </tr>
+            <tr>
+              <td><code>contextBridge</code></td>
+              <td><span class="status implemented">Working</span></td>
+              <td>Context isolation bridge</td>
+            </tr>
+            <tr>
+              <td><code>autoUpdater</code></td>
+              <td><span class="status stub">Stub</span></td>
+              <td>Placeholder — not yet implemented</td>
+            </tr>
+            <tr>
+              <td><code>protocol</code></td>
+              <td><span class="status stub">Stub</span></td>
+              <td>Placeholder — not yet implemented</td>
+            </tr>
+            <tr>
+              <td><code>net</code></td>
+              <td><span class="status stub">Stub</span></td>
+              <td>Placeholder — not yet implemented</td>
+            </tr>
+            <tr>
+              <td><code>powerMonitor</code></td>
+              <td><span class="status stub">Stub</span></td>
+              <td>Placeholder — not yet implemented</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="roadmap" class="roadmap">
+      <div class="section-header">
+        <h2>Roadmap</h2>
+        <p>Where Gelectron is headed (very early stages).</p>
+      </div>
+      <div class="roadmap-timeline">
+        <div class="roadmap-item done">
+          <div class="roadmap-marker"></div>
+          <div class="roadmap-content">
+            <h3>Phase 1 — Foundation</h3>
+            <ul>
+              <li>Basic window creation via Servo</li>
+              <li>Core Electron API compatibility layer</li>
+              <li>IPC between main and renderer</li>
+              <li>CLI entry point (<code>gelectron .</code>)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="roadmap-item current">
+          <div class="roadmap-marker"></div>
+          <div class="roadmap-content">
+            <h3>Phase 2 — Core APIs</h3>
+            <ul>
+              <li>Menu, Tray, Dialog, Shell</li>
+              <li>Notification support</li>
+              <li>nativeImage handling</li>
+              <li>contextBridge for security</li>
+            </ul>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-marker"></div>
+          <div class="roadmap-content">
+            <h3>Phase 3 — Ecosystem</h3>
+            <ul>
+              <li>autoUpdater integration</li>
+              <li>Protocol handler registration</li>
+              <li>Native Node.js module support</li>
+              <li>Packaging &amp; distribution tools</li>
+            </ul>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-marker"></div>
+          <div class="roadmap-content">
+            <h3>Phase 4 — Production Ready</h3>
+            <ul>
+              <li>Full API parity with Electron</li>
+              <li>Performance optimization</li>
+              <li>Cross-platform CI/CD</li>
+              <li>Documentation &amp; guides</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="faq">
+      <div class="section-header">
+        <h2>Frequently Asked Questions</h2>
+        <p>Got questions? We've got answers (and more questions).</p>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>What is Gelectron?</span>
+            <span class="faq-chevron">›</span>
+          </button>
+          <div class="faq-answer">
+            <p>Gelectron is an experimental, open-source alternative to Electron that uses Mozilla's Servo browser engine instead of Chromium. It aims to be a drop-in replacement — you run <code>gelectron .</code> instead of <code>electron .</code> and your existing app should work.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Why not just use Electron?</span>
+            <span class="faq-chevron">›</span>
+          </button>
+          <div class="faq-answer">
+            <p>Electron bundles a full copy of Chromium (~150–300 MB) and consumes significant memory. Gelectron aims to provide the same developer experience with much lighter resource usage by leveraging Servo, which was designed from the ground up for embedding.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Is Gelectron ready to use?</span>
+            <span class="faq-chevron">›</span>
+          </button>
+          <div class="faq-answer">
+            <p><strong>No.</strong> Gelectron is in very early development. Many APIs are stubs or incomplete. It is experimental and will break. Please do not use it for anything beyond tinkering and contributing. We will announce when it reaches a usable state.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Will my existing Electron app work?</span>
+            <span class="faq-chevron">›</span>
+          </button>
+          <div class="faq-answer">
+            <p>Eventually, yes — that's the goal. Simple apps that use core APIs like <code>BrowserWindow</code>, <code>ipcMain</code>, and <code>ipcRenderer</code> may already work. Apps using advanced or newer Electron APIs will likely need to wait for fuller implementation.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>What language is it written in?</span>
+            <span class="faq-chevron">›</span>
+          </button>
+          <div class="faq-answer">
+            <p>The core is written in <strong>Rust</strong>, using Servo for rendering and Stylo for CSS. On top of that sits a JavaScript compatibility layer that maps Electron's familiar API surface to Gelectron's Rust internals.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>What platforms are supported?</span>
+            <span class="faq-chevron">›</span>
+          </button>
+          <div class="faq-answer">
+            <p>Currently, Gelectron targets macOS, Linux, and Windows. Cross-platform support is a core goal, leveraging Rust's excellent cross-compilation story and Servo's platform-agnostic design.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Can I contribute?</span>
+            <span class="faq-chevron">›</span>
+          </button>
+          <div class="faq-answer">
+            <p>Absolutely! Gelectron is MIT licensed and open source. Check out the <a href="https://github.com/mileswolfallen2/gelectron" target="_blank" rel="noopener">GitHub repo</a> to explore the code, open issues, or submit pull requests. All contributions are welcome — even just starring the repo helps.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>How does performance compare to Electron?</span>
+            <span class="faq-chevron">›</span>
+          </button>
+          <div class="faq-answer">
+            <p>While benchmarks are still early, Servo's architecture offers significant advantages: parallel CSS layout, GPU-accelerated rendering via WebRender, and lower memory overhead from not bundling Chromium. Real-world comparisons will come as the project matures.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Does it support Node.js?</span>
+            <span class="faq-chevron">›</span>
+          </button>
+          <div class="faq-answer">
+            <p>Gelectron includes a JavaScript compatibility layer, but native Node.js module support is planned for a later phase. For now, pure JavaScript modules and many npm packages should work, but native addons (anything with C++ bindings) will not.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>When will it be production ready?</span>
+            <span class="faq-chevron">›</span>
+          </button>
+          <div class="faq-answer">
+            <p>There is no firm timeline. Gelectron is a community-driven passion project. The roadmap outlines the major phases, but progress depends on contributor interest and Servo's own development. Follow the repo for updates.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="cta-content">
+        <h2>Interested in the project?</h2>
+        <p>Star the repo, open an issue, or just follow along. Gelectron is early, but the vision is real.</p>
+        <a href="https://github.com/mileswolfallen2/gelectron" target="_blank" rel="noopener" class="btn btn-primary btn-large">Check it out on GitHub →</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-left">
+        <span class="logo-icon">⚡</span>
+        <span>gelectron</span>
+      </div>
+      <div class="footer-right">
+        <p>MIT License &middot; Early Development &middot; Do Not Use in Production</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="install-modal">
+    <div class="modal">
+      <div class="modal-warning-top"></div>
+      <div class="modal-body">
+        <div class="modal-icon">⚠️</div>
+        <h2>Do Not Use Gelectron</h2>
+        <p>You are about to view installation instructions for software that is <strong>not ready</strong>.</p>
+        <div class="modal-reasons">
+          <div class="modal-reason">
+            <span class="reason-x">✕</span>
+            <span>Many APIs are stubs or broken</span>
+          </div>
+          <div class="modal-reason">
+            <span class="reason-x">✕</span>
+            <span>Your app will almost certainly not work</span>
+          </div>
+          <div class="modal-reason">
+            <span class="reason-x">✕</span>
+            <span>There is no support, no docs, no guarantees</span>
+          </div>
+          <div class="modal-reason">
+            <span class="reason-x">✕</span>
+            <span>Breaking changes happen without notice</span>
+          </div>
+        </div>
+        <p class="modal-cta-text">If you just want to explore the source code, that's great. But please don't build or ship anything with this.</p>
+        <div class="modal-actions">
+          <button class="btn btn-secondary" id="modal-go-back">Go Back — I'll Wait</button>
+          <button class="btn btn-danger" id="modal-continue">I Understand the Risks — Continue</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
