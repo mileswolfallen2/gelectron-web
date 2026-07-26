@@ -112,6 +112,12 @@ a {
   font-size: 1.4rem;
 }
 
+.logo-img {
+  height: 36px;
+  width: auto;
+  border-radius: 8px;
+}
+
 .nav-links {
   display: flex;
   align-items: center;
@@ -290,6 +296,107 @@ a {
   color: var(--text-light);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+}
+
+/* ── Logo Explanation ── */
+
+.logo-explanation {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 32px 80px;
+}
+
+.logo-explain-content {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 48px;
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+}
+
+.logo-explain-content h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 36px;
+}
+
+.logo-breakdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+
+.logo-part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-part-img {
+  height: 72px;
+  width: auto;
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+}
+
+.logo-equals {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--pastel-purple);
+}
+
+.logo-plus {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-light);
+}
+
+.logo-component {
+  background: linear-gradient(135deg, #f5f3ff, #fdf2f8);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 18px 22px;
+  text-align: center;
+  max-width: 200px;
+}
+
+.component-label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.component-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.logo-explain-text {
+  text-align: left;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.logo-explain-text p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  margin-bottom: 14px;
+}
+
+.logo-tagline {
+  margin-bottom: 0;
+  font-style: italic;
+  color: var(--text-light);
 }
 
 /* ── Early Notice ── */
@@ -1128,6 +1235,12 @@ footer {
   font-size: 0.95rem;
 }
 
+.footer-logo-img {
+  height: 28px;
+  width: auto;
+  border-radius: 6px;
+}
+
 .footer-right p {
   font-size: 0.8rem;
   color: var(--text-light);
@@ -1183,6 +1296,24 @@ footer {
 
   .cta-content {
     padding: 40px 24px;
+  }
+
+  .logo-explain-content {
+    padding: 32px 20px;
+  }
+
+  .logo-breakdown {
+    gap: 14px;
+  }
+
+  .logo-equals,
+  .logo-plus {
+    font-size: 1.4rem;
+  }
+
+  .logo-component {
+    max-width: 160px;
+    padding: 14px 16px;
   }
 
   .tech-grid {

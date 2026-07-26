@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gelectron — Electron, Reimagined with Gecko</title>
-  <meta name="description" content="A lighter, faster alternative to Electron powered by Servo and the Gecko engine. Early development — do not use for apps unless pure HTML/CSS/JS.">
+  <meta name="description" content="A lighter, faster alternative to Electron powered by Servo and the Gecko engine. Non-commercial open source project — early development.">
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -14,13 +15,13 @@
 
   <div class="warning-banner">
     <span class="warning-icon">⚠</span>
-    <p><strong>Early Development</strong> — Gelectron is a work in progress. Do not use it for any app unless it is pure HTML, CSS, and JavaScript. APIs are unstable and many features are incomplete.</p>
+    <p><strong>Early Development</strong> — Gelectron is a non-commercial, open source project in early development. APIs are unstable and many features are incomplete.</p>
   </div>
 
   <nav class="navbar">
     <div class="nav-content">
       <a href="#" class="logo">
-        <span class="logo-icon">⚡</span>
+        <img src="logo.png" alt="Gelectron logo" class="logo-img">
         <span class="logo-text">gelectron</span>
       </a>
       <div class="nav-links">
@@ -39,7 +40,7 @@
   <main>
 
     <section class="hero">
-      <div class="hero-badge">Early Development — Do Not Use for Apps (Unless Pure HTML/CSS/JS)</div>
+      <div class="hero-badge">Early Development — Non-Commercial Open Source Project</div>
       <h1>Electron, reimagined<br>with <span class="gradient-text">Gecko &amp; Servo</span></h1>
       <p class="hero-subtitle">A lighter, faster alternative to Electron. Drop-in compatible, powered by Rust, and built for the modern web.</p>
       <div class="hero-actions">
@@ -61,10 +62,37 @@
       </div>
     </section>
 
+    <section class="logo-explanation">
+      <div class="logo-explain-content">
+        <h2>Why This Logo?</h2>
+        <div class="logo-breakdown">
+          <div class="logo-component">
+            <span class="component-label">Electron atom</span>
+            <span class="component-desc">The atom/orbital shape from the Electron logo — the desktop app framework</span>
+          </div>
+          <div class="logo-plus">+</div>
+          <div class="logo-component">
+            <span class="component-label">Firefox flame</span>
+            <span class="component-desc">The warm orange tones from Firefox — the Gecko/Servo engine underneath</span>
+          </div>
+          <div class="logo-equals">=</div>
+          <div class="logo-part">
+            <img src="logo.png" alt="Gelectron logo" class="logo-part-img">
+            <span class="component-label">Gelectron</span>
+          </div>
+        </div>
+        <div class="logo-explain-text">
+          <p>The Gelectron logo is a visual mashup of what the project actually is: <strong>Electron's developer experience</strong> wrapped in <strong>Firefox's rendering engine</strong>.</p>
+          <p>The atom-like orbital rings pay homage to Electron's iconic branding — because at its core, Gelectron aims to be a drop-in replacement. The warm orange gradient and flame-inspired tones are a nod to Firefox and the Gecko engine that powers Servo.</p>
+          <p class="logo-tagline">It's Electron's shape, Firefox's soul. Or at least, that's the idea.</p>
+        </div>
+      </div>
+    </section>
+
     <section class="early-notice">
       <div class="notice-content">
         <h2>🛑 Do not use this yet</h2>
-        <p>Gelectron is in very early development. Many Electron APIs are stubs or incomplete. The project is experimental and will break. Do not use it for any app unless it is pure HTML, CSS, and JavaScript. Contributions and interest are welcome, but please do not rely on this for anything beyond tinkering.</p>
+        <p>Gelectron is in very early development. Many Electron APIs are stubs or incomplete. The project is experimental and will break. This is a non-commercial, community-driven open source project — not affiliated with or endorsed by Electron or Mozilla. Contributions and interest are welcome, but please do not rely on this for anything beyond tinkering.</p>
       </div>
     </section>
 
@@ -144,7 +172,7 @@
         <div class="install-warning-box">
           <div class="install-warning-icon">🛑</div>
           <h3>Stop. Read this first.</h3>
-          <p>Gelectron is <strong>not ready for use</strong>. Do not use it for any app unless it is pure HTML, CSS, and JavaScript. Installing it now will likely result in broken builds, missing features, and frustration. This guide exists for early explorers and contributors only.</p>
+          <p>Gelectron is <strong>not ready for use</strong>. This is a non-commercial, community-driven open source project. Installing it now will likely result in broken builds, missing features, and frustration. This guide exists for early explorers and contributors only.</p>
           <button class="btn btn-warning" id="open-install-modal">I understand — show me anyway</button>
         </div>
 
@@ -206,7 +234,7 @@ cd gelectron</code></pre>
                 </div>
                 <pre><code>./target/release/gelectron /path/to/your/electron-app</code></pre>
               </div>
-              <p class="step-note">It might work with pure HTML/CSS/JS. Anything else will likely break. You've been warned.</p>
+              <p class="step-note">This is an early community project — expect things to break. You've been warned.</p>
             </div>
           </div>
         </div>
@@ -455,7 +483,7 @@ cd gelectron</code></pre>
             <span class="faq-chevron">›</span>
           </button>
           <div class="faq-answer">
-            <p><strong>No.</strong> Gelectron is in very early development. Many APIs are stubs or incomplete. It is experimental and will break. Do not use it for any app unless it is pure HTML, CSS, and JavaScript. We will announce when it reaches a more usable state.</p>
+            <p><strong>No.</strong> Gelectron is a non-commercial, community-driven open source project in very early development. Many APIs are stubs or incomplete. It is experimental and will break. We will announce when it reaches a more usable state.</p>
           </div>
         </div>
         <div class="faq-item">
@@ -518,7 +546,7 @@ cd gelectron</code></pre>
             <span class="faq-chevron">›</span>
           </button>
           <div class="faq-answer">
-            <p>There is no firm timeline. Gelectron is a community-driven passion project. The roadmap outlines the major phases, but progress depends on contributor interest and Servo's own development. Follow the repo for updates.</p>
+            <p>Gelectron is a non-commercial passion project with no firm timeline. The roadmap outlines the major phases, but progress depends on contributor interest and Servo's own development. Follow the repo for updates.</p>
           </div>
         </div>
       </div>
@@ -537,11 +565,11 @@ cd gelectron</code></pre>
   <footer>
     <div class="footer-content">
       <div class="footer-left">
-        <span class="logo-icon">⚡</span>
+        <img src="logo.png" alt="Gelectron" class="footer-logo-img">
         <span>gelectron</span>
       </div>
       <div class="footer-right">
-        <p>MIT License &middot; Early Development &middot; Do Not Use in Production</p>
+        <p>MIT License &middot; Non-Commercial Open Source &middot; Not Affiliated with Electron or Mozilla</p>
       </div>
     </div>
   </footer>
@@ -552,7 +580,7 @@ cd gelectron</code></pre>
       <div class="modal-body">
         <div class="modal-icon">⚠️</div>
         <h2>Do Not Use Gelectron</h2>
-        <p>You are about to view installation instructions for software that is <strong>not ready</strong>. Do not use it for any app unless it is pure HTML, CSS, and JavaScript.</p>
+        <p>You are about to view installation instructions for software that is <strong>not ready</strong>. This is a non-commercial, community-driven open source project.</p>
         <div class="modal-reasons">
           <div class="modal-reason">
             <span class="reason-x">✕</span>
@@ -560,11 +588,7 @@ cd gelectron</code></pre>
           </div>
           <div class="modal-reason">
             <span class="reason-x">✕</span>
-            <span>Your app will almost certainly not work (unless it's pure HTML/CSS/JS)</span>
-          </div>
-          <div class="modal-reason">
-            <span class="reason-x">✕</span>
-            <span>Apps using Node.js modules, native APIs, or Electron extras will break</span>
+            <span>This is an early community project, not a finished product</span>
           </div>
           <div class="modal-reason">
             <span class="reason-x">✕</span>
@@ -572,10 +596,14 @@ cd gelectron</code></pre>
           </div>
           <div class="modal-reason">
             <span class="reason-x">✕</span>
+            <span>Not affiliated with or endorsed by Electron or Mozilla</span>
+          </div>
+          <div class="modal-reason">
+            <span class="reason-x">✕</span>
             <span>Breaking changes happen without notice</span>
           </div>
         </div>
-        <p class="modal-cta-text">If you just want to explore the source code or test a pure HTML/CSS/JS app, that's fine. But please don't build or ship anything serious with this.</p>
+        <p class="modal-cta-text">This is an early, non-commercial open source project. Feel free to explore the source code and experiment, but it's not ready for real-world use yet.</p>
         <div class="modal-actions">
           <button class="btn btn-secondary" id="modal-go-back">Go Back — I'll Wait</button>
           <button class="btn btn-danger" id="modal-continue">I Understand the Risks — Continue</button>
