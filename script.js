@@ -93,8 +93,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Close modal on Escape key
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('active')) {
+    if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
       closeModal();
     }
+  });
+
+  // ── Copy buttons for code blocks ──
+
+  document.querySelectorAll('.code-block').forEach((block) => {
+    const pre = block.querySelector('pre');
+    if (!pre) return;
+
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.textContent = 'Copy';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+
+    btn.addEventListener('click', () => {
+      const code = pre.querySelector('code');
+      const text = (code || pre).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    });
+
+    block.style.position = 'relative';
+    block.appendChild(btn);
   });
 });

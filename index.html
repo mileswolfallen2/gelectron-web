@@ -33,6 +33,7 @@
         <a href="#api-support">API Status</a>
         <a href="#roadmap">Roadmap</a>
         <a href="#faq">FAQ</a>
+        <a href="docs.html">Docs</a>
         <a href="https://github.com/mileswolfallen2/gelectron" target="_blank" rel="noopener" class="nav-cta">GitHub →</a>
       </div>
     </div>
@@ -196,31 +197,31 @@ cd gelectron</code></pre>
           <div class="install-step">
             <div class="step-number">2</div>
             <div class="step-content">
-              <h4>Install Rust (if you haven't)</h4>
+              <h4>Install dependencies</h4>
               <div class="code-block small">
                 <div class="code-header">
                   <span class="code-dot red"></span>
                   <span class="code-dot yellow"></span>
                   <span class="code-dot green"></span>
                 </div>
-                <pre><code>curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</code></pre>
+                <pre><code>npm install</code></pre>
               </div>
-              <p class="step-note">Gelectron's core is written in Rust. You'll need a recent toolchain.</p>
+              <p class="step-note">Requires Rust 1.75+ and Node.js 18+. Install Rust via <a href="https://rustup.rs" target="_blank">rustup.rs</a>.</p>
             </div>
           </div>
           <div class="install-step">
             <div class="step-number">3</div>
             <div class="step-content">
-              <h4>Build from source</h4>
+              <h4>Build the native binary</h4>
               <div class="code-block small">
                 <div class="code-header">
                   <span class="code-dot red"></span>
                   <span class="code-dot yellow"></span>
                   <span class="code-dot green"></span>
                 </div>
-                <pre><code>cargo build --release</code></pre>
+                <pre><code>cargo build --release -p gelectron</code></pre>
               </div>
-              <p class="step-note">This will take a while. Servo has a lot of dependencies.</p>
+              <p class="step-note">First build takes a while — Servo has many dependencies. Subsequent builds are much faster.</p>
             </div>
           </div>
           <div class="install-step">
@@ -233,9 +234,9 @@ cd gelectron</code></pre>
                   <span class="code-dot yellow"></span>
                   <span class="code-dot green"></span>
                 </div>
-                <pre><code>./target/release/gelectron /path/to/your/electron-app</code></pre>
+                <pre><code>cargo run --release -p gelectron -- /path/to/your/electron-app</code></pre>
               </div>
-              <p class="step-note">This is an early community project — expect things to break. You've been warned.</p>
+              <p class="step-note">Or run the built binary directly: <code>./target/release/gelectron &lt;path&gt;</code></p>
             </div>
           </div>
         </div>
@@ -243,10 +244,11 @@ cd gelectron</code></pre>
         <div class="install-requirements">
           <h4>Requirements</h4>
           <ul>
-            <li><strong>Rust</strong> — stable toolchain (1.70+)</li>
+            <li><strong>Rust</strong> — stable toolchain 1.75+</li>
+            <li><strong>Node.js</strong> — 18 or newer</li>
             <li><strong>OS</strong> — macOS, Linux, or Windows</li>
             <li><strong>Disk</strong> — ~2 GB for build dependencies</li>
-            <li><strong>Patience</strong> — builds can take 10–20 minutes</li>
+            <li><strong>Patience</strong> — first build can take 10–20 minutes</li>
           </ul>
         </div>
       </div>

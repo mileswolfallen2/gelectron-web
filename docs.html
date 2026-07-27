@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation — Gelectron</title>
+  <meta name="description" content="Documentation for Gelectron — a lightweight Electron alternative powered by Servo.">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="docs.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-content">
+      <a href="index.html" class="logo">
+        <img src="logo.png" alt="Gelectron logo" class="logo-img">
+        <span class="logo-text">gelectron</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">← Back to Home</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="docs-page">
+    <div class="docs-layout">
+
+      <aside class="docs-sidebar">
+        <div class="sidebar-section">
+          <div class="sidebar-title">Getting Started</div>
+          <a href="#introduction" class="sidebar-link active">Introduction</a>
+          <a href="#prerequisites" class="sidebar-link">Prerequisites</a>
+          <a href="#installation" class="sidebar-link">Installation</a>
+          <a href="#quick-start" class="sidebar-link">Quick Start</a>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-title">Usage</div>
+          <a href="#cli" class="sidebar-link">CLI Reference</a>
+          <a href="#running-apps" class="sidebar-link">Running Apps</a>
+          <a href="#demo" class="sidebar-link">Demo App</a>
+          <a href="#packaging" class="sidebar-link">Packaging</a>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-title">API Reference</div>
+          <a href="#api-main" class="sidebar-link">Main Process</a>
+          <a href="#api-renderer" class="sidebar-link">Renderer Process</a>
+          <a href="#api-compat" class="sidebar-link">Compatibility Shims</a>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-title">Architecture</div>
+          <a href="#how-it-works" class="sidebar-link">How It Works</a>
+          <a href="#project-structure" class="sidebar-link">Project Structure</a>
+          <a href="#env-vars" class="sidebar-link">Environment Variables</a>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-title">More</div>
+          <a href="#contributing" class="sidebar-link">Contributing</a>
+          <a href="#limitations" class="sidebar-link">Known Limitations</a>
+        </div>
+      </aside>
+
+      <div class="docs-content">
+
+        <section id="introduction" class="docs-section">
+          <div class="docs-notice">
+            <span class="docs-notice-icon">⚠️</span>
+            <div>
+              <strong>Early Development</strong>
+              <p>Gelectron is a non-commercial, community-driven open source project in early development. APIs may change. Not all features are implemented. Not affiliated with or endorsed by Electron or Mozilla.</p>
+            </div>
+          </div>
+          <h1>Introduction</h1>
+          <p>Gelectron is a drop-in replacement for Electron that uses Mozilla's <strong>Servo</strong> engine instead of Chromium. The goal is to provide the same developer experience with smaller binaries and lower memory usage.</p>
+          <div class="docs-table-wrapper">
+            <table class="docs-table">
+              <thead>
+                <tr>
+                  <th>Feature</th>
+                  <th>Electron</th>
+                  <th>Gelectron</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Rendering Engine</td>
+                  <td>Chromium</td>
+                  <td>Servo (Gecko CSS / WebRender GPU)</td>
+                </tr>
+                <tr>
+                  <td>Language</td>
+                  <td>C++ / Node.js</td>
+                  <td>Rust / Node.js</td>
+                </tr>
+                <tr>
+                  <td>API Compatibility</td>
+                  <td>Native</td>
+                  <td>Drop-in replacement</td>
+                </tr>
+                <tr>
+                  <td>Memory Usage</td>
+                  <td>High (~218 MB)</td>
+                  <td>Lower (~47 MB)</td>
+                </tr>
+                <tr>
+                  <td>Node.js in Renderer</td>
+                  <td>Yes</td>
+                  <td>No (main process only)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="prerequisites" class="docs-section">
+          <h2>Prerequisites</h2>
+          <ul class="docs-list">
+            <li><strong>Rust</strong> — stable toolchain 1.75+ (<a href="https://rustup.rs" target="_blank">rustup.rs</a>)</li>
+            <li><strong>Node.js</strong> — 18 or newer</li>
+            <li><strong>npm</strong> — comes with Node.js</li>
+            <li><strong>Git</strong> — for cloning the repo</li>
+          </ul>
+          <div class="code-block small">
+            <div class="code-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+              <span class="code-title">Check your versions</span>
+            </div>
+            <pre><code>rustc --version    # should be 1.75+
+node --version     # should be 18+
+npm --version</code></pre>
+          </div>
+        </section>
+
+        <section id="installation" class="docs-section">
+          <h2>Installation</h2>
+          <div class="code-block small">
+            <div class="code-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+              <span class="code-title">Clone and install</span>
+            </div>
+            <pre><code>git clone https://github.com/mileswolfallen2/gelectron.git
+cd gelectron
+npm install</code></pre>
+          </div>
+          <div class="code-block small">
+            <div class="code-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+              <span class="code-title">Build the native binary</span>
+            </div>
+            <pre><code>cargo build --release -p gelectron</code></pre>
+          </div>
+          <p class="docs-note">The first build will take a while — Servo has many dependencies. Subsequent builds are much faster.</p>
+        </section>
+
+        <section id="quick-start" class="docs-section">
+          <h2>Quick Start</h2>
+          <p>The fastest way to see Gelectron running:</p>
+          <div class="code-block small">
+            <div class="code-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+              <span class="code-title">Run the demo</span>
+            </div>
+            <pre><code>cargo run --release -p gelectron -- demo/</code></pre>
+          </div>
+          <p>This opens a window with an interactive demo app running HTML, CSS, JavaScript, canvas animations, and a live clock.</p>
+          <p>To run your own Electron app:</p>
+          <div class="code-block small">
+            <div class="code-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+            </div>
+            <pre><code>cargo run --release -p gelectron -- /path/to/your/electron-app</code></pre>
+          </div>
+        </section>
+
+        <section id="cli" class="docs-section">
+          <h2>CLI Reference</h2>
+          <div class="docs-table-wrapper">
+            <table class="docs-table">
+              <thead>
+                <tr>
+                  <th>Command</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>gelectron &lt;path-to-app&gt;</code></td>
+                  <td>Run an Electron app</td>
+                </tr>
+                <tr>
+                  <td><code>gelectron &lt;file.js&gt;</code></td>
+                  <td>Run a main process script directly</td>
+                </tr>
+                <tr>
+                  <td><code>gelectron --version</code></td>
+                  <td>Print version</td>
+                </tr>
+                <tr>
+                  <td><code>gelectron --help</code></td>
+                  <td>Show help</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Node.js Fallback</h3>
+          <p>If you don't want to build the Rust binary, the CLI can fall back to a pure Node.js shim:</p>
+          <div class="code-block small">
+            <div class="code-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+            </div>
+            <pre><code>node cli/gelectron.js /path/to/electron-app</code></pre>
+          </div>
+          <p class="docs-note">In fallback mode no real window is created — only the JS API layer loads. Use the native binary for actual rendering.</p>
+        </section>
+
+        <section id="running-apps" class="docs-section">
+          <h2>Running Apps</h2>
+          <p>Gelectron reads your app's <code>package.json</code> to find the main script, just like Electron does. Your existing Electron code should work without changes for basic apps.</p>
+          <div class="code-block small">
+            <div class="code-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+              <span class="code-title">Your app's package.json</span>
+            </div>
+            <pre><code>{
+  "name": "my-app",
+  "main": "main.js"
+}</code></pre>
+          </div>
+          <div class="code-block small">
+            <div class="code-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+              <span class="code-title">Your app's main.js</span>
+            </div>
+            <pre><code>const { app, BrowserWindow } = require('electron');
+const path = require('path');
+
+app.whenReady().then(() => {
+  const win = new BrowserWindow({ width: 800, height: 600 });
+  win.loadFile(path.join(__dirname, 'index.html'));
+});
+
+app.on('window-all-closed', () => app.quit());</code></pre>
+          </div>
+          <p>Then run it:</p>
+          <div class="code-block small">
+            <div class="code-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+            </div>
+            <pre><code>cargo run --release -p gelectron -- .</code></pre>
+          </div>
+        </section>
+
+        <section id="demo" class="docs-section">
+          <h2>Demo App</h2>
+          <p>The included demo showcases Gelectron's capabilities:</p>
+          <ul class="docs-list">
+            <li>Interactive counter (DOM updates via JS)</li>
+            <li>Live clock driven by <code>requestAnimationFrame</code></li>
+            <li>Animated canvas with moving shapes</li>
+            <li>CSS grid, gradients, transitions, and flexbox</li>
+          </ul>
+          <div class="code-block small">
+            <div class="code-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+              <span class="code-title">Demo structure</span>
+            </div>
+            <pre><code>demo/
+├── package.json    # { "main": "main.js" }
+├── main.js         # Creates BrowserWindow, loads index.html
+└── index.html      # HTML + CSS + JavaScript</code></pre>
+          </div>
+        </section>
+
+        <section id="packaging" class="docs-section">
+          <h2>Packaging for Distribution</h2>
+          <p>Use <code>gelectron-packager</code> to build standalone executables:</p>
+          <div class="code-block small">
+            <div class="code-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+              <span class="code-title">Package your app</span>
+            </div>
+            <pre><code># Install the packager
+cd packager && npm link && cd ..
+
+# Package for current platform
+gelectron-packager --dir ./my-app --name MyApp
+
+# Package for specific platforms
+gelectron-packager --dir ./my-app --name MyApp --platform darwin --arch arm64
+gelectron-packager --dir ./my-app --name MyApp --platform win32 --arch x64
+gelectron-packager --dir ./my-app --name MyApp --platform linux --arch x64</code></pre>
+          </div>
+          <p>The packager creates a self-contained distributable with the Rust binary, a bundled Node.js runtime (~20 MB), your app source, <code>node_modules</code>, and the Electron compatibility layer.</p>
+          <div class="docs-table-wrapper">
+            <table class="docs-table">
+              <thead>
+                <tr>
+                  <th>Platform</th>
+                  <th>Output</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>macOS</td>
+                  <td><code>.app</code> bundle (double-click to run)</td>
+                </tr>
+                <tr>
+                  <td>Windows</td>
+                  <td>Directory with <code>.exe</code> + <code>.bat</code> launcher</td>
+                </tr>
+                <tr>
+                  <td>Linux</td>
+                  <td>Directory with launcher script + <code>.desktop</code> file</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="api-main" class="docs-section">
+          <h2>Main Process APIs</h2>
+          <p>These modules are available via <code>require('electron')</code> in the main process.</p>
+          <div class="docs-table-wrapper">
+            <table class="docs-table">
+              <thead>
+                <tr>
+                  <th>Module</th>
+                  <th>Status</th>
+                  <th>What's Supported</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>app</code></td>
+                  <td><span class="status implemented">Working</span></td>
+                  <td>Full lifecycle, paths, command line, dock (macOS), <code>whenReady()</code></td>
+                </tr>
+                <tr>
+                  <td><code>BrowserWindow</code></td>
+                  <td><span class="status implemented">Working</span></td>
+                  <td>Create, show/hide, resize, loadURL, loadFile, events, webContents</td>
+                </tr>
+                <tr>
+                  <td><code>ipcMain</code></td>
+                  <td><span class="status implemented">Working</span></td>
+                  <td><code>handle()</code>, <code>on()</code>, <code>removeHandler()</code>, event emission</td>
+                </tr>
+                <tr>
+                  <td><code>Menu</code></td>
+                  <td><span class="status implemented">Working</span></td>
+                  <td><code>buildFromTemplate()</code>, <code>popup()</code>, <code>setApplicationMenu()</code></td>
+                </tr>
+                <tr>
+                  <td><code>MenuItem</code></td>
+                  <td><span class="status implemented">Working</span></td>
+                  <td>All types (normal, checkbox, separator, submenu, role)</td>
+                </tr>
+                <tr>
+                  <td><code>Tray</code></td>
+                  <td><span class="status implemented">Working</span></td>
+                  <td>Create, tooltip, context menu, click events</td>
+                </tr>
+                <tr>
+                  <td><code>dialog</code></td>
+                  <td><span class="status implemented">Working</span></td>
+                  <td><code>showOpenDialog()</code>, <code>showSaveDialog()</code>, <code>showMessageBox()</code>, <code>showErrorBox()</code></td>
+                </tr>
+                <tr>
+                  <td><code>shell</code></td>
+                  <td><span class="status implemented">Working</span></td>
+                  <td><code>openExternal()</code>, <code>showItemInFolder()</code>, <code>openPath()</code></td>
+                </tr>
+                <tr>
+                  <td><code>Notification</code></td>
+                  <td><span class="status implemented">Working</span></td>
+                  <td>Create, show, close, urgency levels</td>
+                </tr>
+                <tr>
+                  <td><code>nativeImage</code></td>
+                  <td><span class="status implemented">Working</span></td>
+                  <td>Create from path/buffer, resize, crop, PNG/JPEG export</td>
+                </tr>
+                <tr>
+                  <td><code>safeStorage</code></td>
+                  <td><span class="status implemented">Working</span></td>
+                  <td>Encrypt/decrypt via system keyring</td>
+                </tr>
+                <tr>
+                  <td><code>contextBridge</code></td>
+                  <td><span class="status implemented">Working</span></td>
+                  <td><code>exposeInMainWorld()</code> for secure preload</td>
+                </tr>
+                <tr>
+                  <td><code>webContents</code></td>
+                  <td><span class="status implemented">Working</span></td>
+                  <td><code>send()</code>, <code>executeJavaScript()</code>, <code>openDevTools()</code>, navigation</td>
+                </tr>
+                <tr>
+                  <td><code>autoUpdater</code></td>
+                  <td><span class="status stub">Stub</span></td>
+                  <td>No-op (reports "no update available")</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="api-renderer" class="docs-section">
+          <h2>Renderer Process APIs</h2>
+          <div class="docs-table-wrapper">
+            <table class="docs-table">
+              <thead>
+                <tr>
+                  <th>Module</th>
+                  <th>Status</th>
+                  <th>What's Supported</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>ipcRenderer</code></td>
+                  <td><span class="status implemented">Working</span></td>
+                  <td><code>invoke()</code>, <code>send()</code>, <code>on()</code>, <code>removeListener()</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="docs-notice small">
+            <span class="docs-notice-icon">ℹ️</span>
+            <div>
+              <strong>No Node.js in the renderer</strong>
+              <p>Gelectron's renderer is a clean browser context. There is no <code>require()</code>, no file system access, no native modules in the renderer. This is architecturally different from Electron. All Node.js code runs in the main process.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="api-compat" class="docs-section">
+          <h2>Compatibility Shims</h2>
+          <p>These modules exist as stubs or partial implementations for API compatibility.</p>
+          <div class="docs-table-wrapper">
+            <table class="docs-table">
+              <thead>
+                <tr>
+                  <th>Module</th>
+                  <th>Status</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>screen</code></td>
+                  <td><span class="status stub">Stub</span></td>
+                  <td><code>getPrimaryDisplay()</code> returns basic info</td>
+                </tr>
+                <tr>
+                  <td><code>clipboard</code></td>
+                  <td><span class="status stub">Stub</span></td>
+                  <td><code>readText()</code>, <code>writeText()</code></td>
+                </tr>
+                <tr>
+                  <td><code>systemPreferences</code></td>
+                  <td><span class="status stub">Stub</span></td>
+                  <td>Basic stubs</td>
+                </tr>
+                <tr>
+                  <td><code>powerMonitor</code></td>
+                  <td><span class="status stub">Stub</span></td>
+                  <td>Event stubs</td>
+                </tr>
+                <tr>
+                  <td><code>globalShortcut</code></td>
+                  <td><span class="status stub">Stub</span></td>
+                  <td>Register/unregister stubs</td>
+                </tr>
+                <tr>
+                  <td><code>session</code></td>
+                  <td><span class="status stub">Stub</span></td>
+                  <td>Cookies, protocol, permissions (stub)</td>
+                </tr>
+                <tr>
+                  <td><code>net</code></td>
+                  <td><span class="status stub">Stub</span></td>
+                  <td><code>fetch()</code> proxy</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="how-it-works" class="docs-section">
+          <h2>How It Works</h2>
+          <p>Gelectron has two execution paths:</p>
+          <h3>1. Native Binary (recommended)</h3>
+          <p>A standalone Rust binary using <strong>tao</strong> (windowing) and <strong>wry</strong> (WebView). It:</p>
+          <ol class="docs-numbered-list">
+            <li>Reads the target app's <code>package.json</code> to find the main script</li>
+            <li>Generates a Node.js setup script that patches <code>require('electron')</code> to point at Gelectron's JS compatibility layer</li>
+            <li>Spawns Node.js as a child process with piped stdin/stdout</li>
+            <li>Runs a tao event loop with wry WebView windows</li>
+            <li>Communicates with Node.js via JSON-line IPC</li>
+          </ol>
+          <h3>2. Node.js Fallback</h3>
+          <p>When the native binary is not built, the CLI falls back to pure Node.js:</p>
+          <ol class="docs-numbered-list">
+            <li>Patches <code>Module._resolveFilename</code> so <code>require('electron')</code> resolves to Gelectron's shim</li>
+            <li>Loads the app's main script — the app runs against the JS compatibility layer</li>
+            <li>No real window is created (API-only mode)</li>
+          </ol>
+
+          <div class="architecture-diagram">
+            <div class="arch-layer">
+              <div class="arch-label">Your App</div>
+              <div class="arch-code">HTML / CSS / JavaScript + package.json</div>
+            </div>
+            <div class="arch-arrow">↓</div>
+            <div class="arch-layer">
+              <div class="arch-label">Gelectron JS Compatibility Layer</div>
+              <div class="arch-code">app · BrowserWindow · Menu · Tray · ipcMain · ipcRenderer · dialog · shell · Notification · nativeImage · contextBridge</div>
+            </div>
+            <div class="arch-arrow">↓</div>
+            <div class="arch-layer">
+              <div class="arch-label">Gelectron Core (Rust)</div>
+              <div class="arch-code">tao (windowing) · wry (WebView) · JSON-line IPC to Node.js</div>
+            </div>
+            <div class="arch-arrow">↓</div>
+            <div class="arch-layer">
+              <div class="arch-label">Servo Engine (future)</div>
+              <div class="arch-code">Stylo (CSS) + WebRender (GPU) — currently using platform native WebView</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="project-structure" class="docs-section">
+          <h2>Project Structure</h2>
+          <div class="code-block small">
+            <div class="code-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+              <span class="code-title">Repository layout</span>
+            </div>
+            <pre><code>gelectron/
+├── Cargo.toml                    # Rust workspace root
+├── package.json                  # npm package
+├── cli/
+│   └── gelectron.js              # CLI entry point (Node.js fallback)
+├── src/electron/                 # JS Electron compatibility layer
+│   ├── index.js                  # Main exports
+│   ├── app.js                    # app lifecycle
+│   ├── browser-window.js         # BrowserWindow + WebContents
+│   ├── ipc-main.js              # ipcMain
+│   ├── ipc-renderer.js          # ipcRenderer
+│   ├── menu.js                  # Menu + MenuItem
+│   ├── tray.js                  # Tray
+│   ├── dialog.js                # File/message dialogs
+│   ├── shell.js                 # Shell operations
+│   ├── notification.js          # Notifications
+│   ├── native-image.js          # Image handling
+│   ├── context-bridge.js        # contextBridge
+│   └── auto-updater.js          # autoUpdater stub
+├── crates/
+│   ├── gelectron-core/          # N-API addon (Rust → Node.js)
+│   └── gelectron-app/           # Standalone native binary
+├── demo/                        # Demo app
+├── packager/                    # gelectron-packager CLI
+└── npm/darwin-arm64/            # Platform-specific npm packages</code></pre>
+          </div>
+        </section>
+
+        <section id="env-vars" class="docs-section">
+          <h2>Environment Variables</h2>
+          <div class="docs-table-wrapper">
+            <table class="docs-table">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>GELECTRON_DEV=1</code></td>
+                  <td>Enable development mode</td>
+                </tr>
+                <tr>
+                  <td><code>GELECTRON_LOG=1</code></td>
+                  <td>Enable verbose logging</td>
+                </tr>
+                <tr>
+                  <td><code>VITE_DEV_SERVER_URL=&lt;url&gt;</code></td>
+                  <td>Connect to a Vite dev server</td>
+                </tr>
+                <tr>
+                  <td><code>RUST_LOG=info</code></td>
+                  <td>Enable Rust-side logging</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="contributing" class="docs-section">
+          <h2>Contributing</h2>
+          <ol class="docs-numbered-list">
+            <li>Fork the repo</li>
+            <li>Create a feature branch</li>
+            <li>Make your changes</li>
+            <li>Build and test: <code>cargo build --release -p gelectron</code></li>
+            <li>Test with the demo: <code>cargo run --release -p gelectron -- demo/</code></li>
+            <li>Submit a PR</li>
+          </ol>
+        </section>
+
+        <section id="limitations" class="docs-section">
+          <h2>Known Limitations</h2>
+          <ul class="docs-list">
+            <li><strong>Servo not fully embedded</strong> — current WebView uses platform native (WebKit on macOS, WebView2 on Windows, webkit2gtk on Linux)</li>
+            <li><strong>No Node.js in renderer</strong> — all Node.js code runs in the main process only</li>
+            <li><strong>Auto-updater is a no-op</strong> — returns "no update available"</li>
+            <li><strong>Single-window only</strong> in the standalone binary</li>
+            <li><strong>Preload scripts</strong> are injected via WebView init scripts, not true Electron preload isolation</li>
+            <li><strong>Some APIs are stubs</strong> — see the API reference for details</li>
+          </ul>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-left">
+        <img src="logo.png" alt="Gelectron" class="footer-logo-img">
+        <span>gelectron</span>
+      </div>
+      <div class="footer-right">
+        <p>MIT License &middot; Non-Commercial Open Source &middot; Not Affiliated with Electron or Mozilla</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const links = document.querySelectorAll('.sidebar-link');
+      const sections = [];
+
+      links.forEach(link => {
+        const id = link.getAttribute('href').slice(1);
+        const section = document.getElementById(id);
+        if (section) sections.push({ id, el: section, link });
+
+        link.addEventListener('click', (e) => {
+          links.forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+        });
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            links.forEach(l => l.classList.remove('active'));
+            const match = sections.find(s => s.el === entry.target);
+            if (match) match.link.classList.add('active');
+          }
+        });
+      }, { threshold: 0.3, rootMargin: '-80px 0px -60% 0px' });
+
+      sections.forEach(s => observer.observe(s.el));
+    });
+  </script>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

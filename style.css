@@ -45,10 +45,8 @@ body {
 code {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.9em;
-  background: var(--pastel-lavender);
-  color: var(--bg-code);
-  padding: 2px 8px;
-  border-radius: 6px;
+  color: var(--text);
+  font-weight: 500;
 }
 
 a {
@@ -121,7 +119,7 @@ a {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 24px;
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--text-muted);
@@ -260,9 +258,9 @@ a {
 }
 
 .comparison-card.highlight {
-  border-color: var(--pastel-purple);
+  border-color: var(--pastel-lavender);
   background: linear-gradient(135deg, #f5f3ff, #fdf2f8);
-  box-shadow: var(--shadow-lg), 0 0 0 1px var(--pastel-lavender);
+  box-shadow: var(--shadow-lg);
 }
 
 .comparison-label {
@@ -516,7 +514,7 @@ a {
 }
 
 .code-block.highlight {
-  box-shadow: var(--shadow-lg), 0 0 0 2px var(--pastel-purple);
+  box-shadow: var(--shadow-lg);
 }
 
 .code-header {
@@ -551,6 +549,13 @@ a {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.95rem;
   overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.code-block pre code {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
 }
 
 .code-note {
@@ -778,7 +783,7 @@ a {
 .roadmap-item.current .roadmap-marker {
   background: var(--pastel-lavender);
   border-color: var(--pastel-purple);
-  box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.2);
+  box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.1);
 }
 
 .roadmap-content {
@@ -937,6 +942,34 @@ a {
 .code-block.small pre {
   padding: 16px;
   font-size: 0.85rem;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 5px 14px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  z-index: 2;
+}
+
+.copy-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+
+.copy-btn.copied {
+  color: #86efac;
+  border-color: rgba(134, 239, 172, 0.3);
+  background: rgba(134, 239, 172, 0.1);
 }
 
 .install-requirements {
@@ -1416,6 +1449,8 @@ a {
 /* ── CTA Section ── */
 
 .cta-section {
+  max-width: 800px;
+  margin: 0 auto;
   padding: 0 32px 100px;
 }
 
@@ -1448,7 +1483,7 @@ a {
 
 footer {
   border-top: 1px solid var(--border);
-  padding: 24px 32px;
+  padding: 32px;
 }
 
 .footer-content {
@@ -1482,7 +1517,15 @@ footer {
 
 @media (max-width: 768px) {
   .nav-links {
-    gap: 16px;
+    gap: 12px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+  }
+
+  .nav-links::-webkit-scrollbar {
+    display: none;
   }
 
   .hero {
@@ -1586,6 +1629,11 @@ footer {
     font-size: 0.9rem;
   }
 
+  .step-content .code-block {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
   .modal-actions {
     flex-direction: column;
   }
@@ -1604,6 +1652,8 @@ footer {
   .warning-banner {
     font-size: 0.8rem;
     padding: 10px 16px;
+    flex-wrap: wrap;
+    gap: 8px;
   }
 
   .tech-grid {
