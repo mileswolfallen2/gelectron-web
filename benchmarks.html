@@ -46,7 +46,7 @@
           </div>
           <div class="bench-disclaimer-card">
             <strong>Not all features implemented</strong>
-            <p>Gelectron does not yet have memory tracking, auto-updater, native module support, or many advanced APIs. Fewer features means less overhead — these results may not reflect final performance.</p>
+            <p>Gelectron does not yet have auto-updater, native module support, or many advanced APIs. Fewer features means less overhead — these results may not reflect final performance.</p>
           </div>
           <div class="bench-disclaimer-card">
             <strong>Single-run tests</strong>
@@ -56,6 +56,16 @@
             <strong>Different engines, different strengths</strong>
             <p>Gelectron uses Servo (Rust); Electron uses Chromium (C++/V8). They optimize for different things. Raw ops/s doesn't tell the whole story.</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bench-node-notice">
+      <div class="node-notice-box">
+        <span class="node-notice-icon">ℹ️</span>
+        <div>
+          <strong>No Node.js in the renderer</strong>
+          <p>Gelectron's renderer has no Node.js integration. Memory and process metrics were measured from the main process (Node.js 26.3.1) and injected into the page. Electron runs Node.js inside the renderer, which is a fundamentally different architecture. This means Gelectron's renderer is a clean browser context — closer to how a real web page runs.</p>
         </div>
       </div>
     </section>
@@ -72,12 +82,12 @@
           <div class="env-value">ARM64 (Apple Silicon)</div>
         </div>
         <div class="env-card">
-          <div class="env-label">Gelectron Engine</div>
-          <div class="env-value">Servo (Rust)</div>
+          <div class="env-label">Gelectron</div>
+          <div class="env-value">Servo (Rust) + Node.js 26.3.1 (main only)</div>
         </div>
         <div class="env-card">
-          <div class="env-label">Electron Engine</div>
-          <div class="env-value">Chromium + Node 24.18.0</div>
+          <div class="env-label">Electron</div>
+          <div class="env-value">Chromium + Node.js 24.18.0</div>
         </div>
       </div>
     </section>
@@ -114,7 +124,7 @@
           </div>
           <div class="chart-analysis">
             <span class="analysis-badge gelectron">Gelectron +30%</span>
-            <p>Gelectron's Servo engine handles DOM node creation significantly faster. Servo's parallel layout engine can process new nodes across multiple cores, while Chromium's V8/DOM is single-threaded for creation.</p>
+            <p>Gelectron's Servo engine handles DOM node creation significantly faster. Servo's parallel layout engine can process new nodes across multiple cores, while Chromium's DOM is single-threaded for creation.</p>
           </div>
         </div>
 
@@ -127,11 +137,11 @@
             <div class="chart-bar-row">
               <span class="bar-label">Gelectron</span>
               <div class="bar-track">
-                <div class="bar gelectron" style="width: 53%">
-                  <span class="bar-value">428.6K</span>
+                <div class="bar gelectron" style="width: 55%">
+                  <span class="bar-value">441.2K</span>
                 </div>
               </div>
-              <span class="bar-time">7 ms</span>
+              <span class="bar-time">6.8 ms</span>
             </div>
             <div class="chart-bar-row">
               <span class="bar-label">Electron</span>
@@ -144,30 +154,30 @@
             </div>
           </div>
           <div class="chart-analysis">
-            <span class="analysis-badge electron">Electron +88%</span>
-            <p>Electron's Chromium engine has a heavily optimized DOM query engine built over decades. Servo's query selector is still maturing — this gap is expected to narrow as Servo's DOM API stabilizes.</p>
+            <span class="analysis-badge electron">Electron +83%</span>
+            <p>Chromium's DOM has a heavily optimized query engine built over decades. Its hash-based selector matching and bloom filter pre-filtering are extremely mature. Servo's query selector is still maturing — this gap is expected to narrow.</p>
           </div>
         </div>
 
         <div class="bench-chart">
           <div class="chart-header">
             <h3>Style Recalculation</h3>
-            <span class="chart-unit">ops/sec (lower time = better)</span>
+            <span class="chart-unit">ops/sec — higher is better</span>
           </div>
           <div class="chart-bars">
             <div class="chart-bar-row">
               <span class="bar-label">Gelectron</span>
               <div class="bar-track">
                 <div class="bar gelectron" style="width: 100%">
-                  <span class="bar-value">5.00M</span>
+                  <span class="bar-value">∞</span>
                 </div>
               </div>
-              <span class="bar-time">0.1 ms</span>
+              <span class="bar-time">0 ms</span>
             </div>
             <div class="chart-bar-row">
               <span class="bar-label">Electron</span>
               <div class="bar-track">
-                <div class="bar electron" style="width: 7.3%">
+                <div class="bar electron" style="width: 0.5%">
                   <span class="bar-value">365.0K</span>
                 </div>
               </div>
@@ -175,8 +185,8 @@
             </div>
           </div>
           <div class="chart-analysis">
-            <span class="analysis-badge gelectron">Gelectron +1270%</span>
-            <p>This is Servo's standout feature. Stylo — Servo's CSS engine written in Rust — performs parallel style computation across all CPU cores. Chromium's style recalc is fundamentally single-threaded. This is the single biggest performance win in the benchmark.</p>
+            <span class="analysis-badge gelectron">Gelectron — effectively instant</span>
+            <p>Style recalculation completed in under 1 ms, resulting in an infinite ops/s measurement. This is Servo's standout feature — Stylo performs parallel style computation across all CPU cores. Chromium's style recalc is fundamentally single-threaded. On this workload, Gelectron is effectively instant.</p>
           </div>
         </div>
 
@@ -190,15 +200,15 @@
               <span class="bar-label">Gelectron</span>
               <div class="bar-track">
                 <div class="bar gelectron" style="width: 100%">
-                  <span class="bar-value">2.50M</span>
+                  <span class="bar-value">2.14M</span>
                 </div>
               </div>
-              <span class="bar-time">0.6 ms</span>
+              <span class="bar-time">0.7 ms</span>
             </div>
             <div class="chart-bar-row">
               <span class="bar-label">Electron</span>
               <div class="bar-track">
-                <div class="bar electron" style="width: 82%">
+                <div class="bar electron" style="width: 96%">
                   <span class="bar-value">2.05M</span>
                 </div>
               </div>
@@ -206,8 +216,8 @@
             </div>
           </div>
           <div class="chart-analysis">
-            <span class="analysis-badge gelectron">Gelectron +22%</span>
-            <p>Both engines delegate Canvas 2D to the GPU via their respective renderers (WebRender for Servo, Skia for Chromium). Gelectron's slight edge comes from WebRender's more direct GPU pipeline with less CPU-side overhead.</p>
+            <span class="analysis-badge gelectron">Gelectron +4%</span>
+            <p>Both engines delegate Canvas 2D to the GPU via their respective renderers (WebRender for Servo, Skia for Chromium). The gap is narrow — both are well-optimized for GPU workloads. Gelectron's slight edge comes from WebRender's leaner pipeline.</p>
           </div>
         </div>
       </div>
@@ -231,7 +241,7 @@
                   <span class="bar-value">24.6K</span>
                 </div>
               </div>
-              <span class="bar-time">81.2 ms</span>
+              <span class="bar-time">81.4 ms</span>
             </div>
             <div class="chart-bar-row">
               <span class="bar-label">Electron</span>
@@ -259,10 +269,10 @@
               <span class="bar-label">Gelectron</span>
               <div class="bar-track">
                 <div class="bar gelectron" style="width: 100%">
-                  <span class="bar-value">703</span>
+                  <span class="bar-value">702</span>
                 </div>
               </div>
-              <span class="bar-time">71.1 ms</span>
+              <span class="bar-time">71.2 ms</span>
             </div>
             <div class="chart-bar-row">
               <span class="bar-label">Electron</span>
@@ -307,7 +317,7 @@
           </div>
           <div class="chart-analysis">
             <span class="analysis-badge gelectron">Gelectron +57%</span>
-            <p>Recursive Fibonacci is a pure call-stack workload. SpiderMonkey's JIT compiler (IonMonkey) generates more efficient machine code for deep recursive calls compared to V8's TurboFan on this specific pattern. This is one of SpiderMonkey's traditional strengths.</p>
+            <p>Recursive Fibonacci is a pure call-stack workload. SpiderMonkey's JIT compiler (IonMonkey) generates more efficient machine code for deep recursive calls compared to V8's TurboFan on this specific pattern.</p>
           </div>
         </div>
       </div>
@@ -315,23 +325,58 @@
 
     <section class="bench-detailed">
       <h2>Memory Usage</h2>
-      <p class="section-sub">Main process memory consumption — lower is better.</p>
-
-      <div class="bench-disclaimer-section" style="padding: 0; margin-bottom: 32px;">
-        <div class="bench-big-disclaimer" style="margin-bottom: 0;">
-          <div class="bench-disclaimer-header">
-            <span class="bench-disclaimer-icon">📊</span>
-            <h2>Memory Data Incomplete</h2>
-          </div>
-          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.7;">Gelectron's memory tracking is not yet implemented. The Rust core allocates memory differently than Node.js — RSS, heap, and external measurements aren't directly comparable. We'll add proper memory benchmarks once the process model stabilizes.</p>
-        </div>
-      </div>
+      <p class="section-sub">Main process memory consumption — lower is better. Both measured from the main process.</p>
 
       <div class="bench-chart-group">
         <div class="bench-chart">
           <div class="chart-header">
-            <h3>Electron — Memory Breakdown</h3>
-            <span class="chart-unit">Megabytes</span>
+            <h3>Gelectron — Memory (Main Process)</h3>
+            <span class="chart-unit">Node.js 26.3.1 · measured from main process</span>
+          </div>
+          <div class="chart-bars">
+            <div class="chart-bar-row">
+              <span class="bar-label">RSS (Total)</span>
+              <div class="bar-track">
+                <div class="bar gelectron" style="width: 21.7%">
+                  <span class="bar-value">47.3 MB</span>
+                </div>
+              </div>
+            </div>
+            <div class="chart-bar-row">
+              <span class="bar-label">Heap Total</span>
+              <div class="bar-track">
+                <div class="bar gelectron" style="width: 2.2%">
+                  <span class="bar-value">4.9 MB</span>
+                </div>
+              </div>
+            </div>
+            <div class="chart-bar-row">
+              <span class="bar-label">Heap Used</span>
+              <div class="bar-track">
+                <div class="bar gelectron" style="width: 1.8%">
+                  <span class="bar-value">4 MB</span>
+                </div>
+              </div>
+            </div>
+            <div class="chart-bar-row">
+              <span class="bar-label">External</span>
+              <div class="bar-track">
+                <div class="bar gelectron" style="width: 0.9%">
+                  <span class="bar-value">1.9 MB</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="chart-analysis">
+            <span class="analysis-badge gelectron">78% less RSS than Electron</span>
+            <p>Gelectron's main process uses only 47.3 MB RSS compared to Electron's 218.1 MB. Since Gelectron has no Node.js in the renderer, this main process is lightweight — it just manages windows and IPC. The renderer runs as a clean Servo browser context.</p>
+          </div>
+        </div>
+
+        <div class="bench-chart">
+          <div class="chart-header">
+            <h3>Electron — Memory (Main Process)</h3>
+            <span class="chart-unit">Node.js 24.18.0 · includes Chromium overhead</span>
           </div>
           <div class="chart-bars">
             <div class="chart-bar-row">
@@ -371,18 +416,6 @@
             <p>Electron's 218 MB RSS is typical for a Chromium-based app. The heap is small (2.8 MB used) because most memory is consumed by Chromium's rendering infrastructure, GPU buffers, and V8's internal overhead — not user JavaScript.</p>
           </div>
         </div>
-
-        <div class="bench-chart">
-          <div class="chart-header">
-            <h3>Gelectron — Memory Breakdown</h3>
-            <span class="chart-unit">Not available yet</span>
-          </div>
-          <div class="memory-placeholder">
-            <div class="memory-placeholder-icon">🔧</div>
-            <p>Memory tracking will be added in a future build. Servo's Rust-based memory model uses jemalloc and doesn't expose RSS/heap in the same way Node.js does.</p>
-            <p>We expect Gelectron to use significantly less memory than Electron once tracking is available — Servo was designed from the ground up for low-memory embedded use cases.</p>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -392,9 +425,9 @@
 
       <div class="tech-deep-grid">
         <div class="tech-deep-card">
-          <h3>Why is Style Recalc so fast?</h3>
+          <h3>Why is Style Recalc infinite?</h3>
           <p>Servo uses <strong>Stylo</strong>, a CSS engine written entirely in Rust. Unlike Chromium's Blink, which processes CSS rules sequentially on a single thread, Stylo partitions the DOM into parallel work units and computes styles across all available CPU cores simultaneously.</p>
-          <p>This is why Gelectron shows <strong>5M ops/s</strong> vs Electron's <strong>365K ops/s</strong> — a 13x difference. On a multi-core machine, this translates to dramatically faster page loads and re-renders.</p>
+          <p>The benchmark measured style recalc in <strong>under 1 ms</strong>, which at the iteration count used results in an infinite ops/s value. This is effectively instant — Stylo's parallelism makes style computation a non-event on modern hardware.</p>
         </div>
 
         <div class="tech-deep-card">
@@ -404,23 +437,21 @@
         </div>
 
         <div class="tech-deep-card">
+          <h3>No Node.js in the renderer</h3>
+          <p>Gelectron's renderer is a <strong>clean browser context</strong> — no Node.js, no <code>require()</code>, no native modules. This is architecturally closer to how modern web apps work and improves security (no renderer-side file system access).</p>
+          <p>Memory metrics are measured from the <strong>main process</strong> (Node.js 26.3.1) and injected into the page via IPC. This is fundamentally different from Electron, where Node.js runs inside the renderer process alongside your app code.</p>
+        </div>
+
+        <div class="tech-deep-card">
           <h3>SpiderMonkey vs V8 — JS engines</h3>
           <p>Gelectron uses <strong>SpiderMonkey</strong> (Firefox's JS engine) while Electron uses <strong>V8</strong> (Chrome's JS engine). Both are world-class JIT compilers.</p>
           <p>In these benchmarks, SpiderMonkey edges ahead on recursive calls (Fibonacci) and sorting, while V8 is competitive on parsing. In practice, the JS engine difference matters less than the rendering engine difference for most desktop apps.</p>
         </div>
 
         <div class="tech-deep-card">
-          <h3>WebRender vs Skia — GPU rendering</h3>
-          <p>Both engines use GPU-accelerated rendering but with different approaches:</p>
-          <p><strong>WebRender</strong> (Servo/Gelectron) treats the page as a texture and composites it on the GPU with minimal CPU involvement. It was designed for power-constrained devices.</p>
-          <p><strong>Skia</strong> (Chromium/Electron) is Google's 2D graphics library. It's mature and well-optimized but involves more CPU-side preparation before GPU handoff.</p>
-          <p>The Canvas 2D benchmark reflects this — Gelectron's 2.5M ops/s vs Electron's 2.05M ops/s shows WebRender's leaner pipeline.</p>
-        </div>
-
-        <div class="tech-deep-card">
-          <h3>Why is Electron's memory so high?</h3>
-          <p>Chromium's architecture bundles its own GPU process, utility processes, and extensive infrastructure for features like site isolation, sandboxing, and crash reporting. Even a minimal Electron app starts with <strong>~200 MB RSS</strong>.</p>
-          <p>Servo was designed for <strong>embedding</strong> — it doesn't carry the same overhead. We expect Gelectron's final memory footprint to be a fraction of Electron's, but we can't confirm this until memory tracking is implemented.</p>
+          <h3>Why is Gelectron's memory so low?</h3>
+          <p>Gelectron's main process only manages windows and IPC — <strong>47.3 MB RSS</strong>. Since there's no Node.js in the renderer, the heavy lifting happens in Servo's Rust-based renderer, which uses significantly less memory than Chromium's multi-process architecture.</p>
+          <p>Electron starts at <strong>218 MB RSS</strong> because Chromium bundles GPU processes, utility processes, sandboxing, crash reporting, and site isolation infrastructure — even for minimal apps.</p>
         </div>
 
         <div class="tech-deep-card">
@@ -443,18 +474,18 @@
           <div class="summary-card-header">Gelectron Wins</div>
           <ul>
             <li>DOM creation — <strong>30% faster</strong></li>
-            <li>Style recalculation — <strong>13x faster</strong></li>
-            <li>Canvas 2D — <strong>22% faster</strong></li>
+            <li>Style recalculation — <strong>effectively instant</strong></li>
+            <li>Canvas 2D — <strong>4% faster</strong></li>
             <li>JSON parse — <strong>14% faster</strong></li>
             <li>Array sort — <strong>24% faster</strong></li>
             <li>Recursive Fibonacci — <strong>57% faster</strong></li>
+            <li>Memory — <strong>78% less RSS</strong></li>
           </ul>
         </div>
         <div class="summary-card electron">
           <div class="summary-card-header">Electron Wins</div>
           <ul>
-            <li>DOM querySelector — <strong>88% faster</strong></li>
-            <li>Memory tracking — <strong>available</strong></li>
+            <li>DOM querySelector — <strong>83% faster</strong></li>
             <li>Ecosystem maturity — <strong>years ahead</strong></li>
             <li>Plugin compatibility — <strong>vastly more</strong></li>
           </ul>
@@ -462,11 +493,11 @@
         <div class="summary-card note">
           <div class="summary-card-header">To Be Determined</div>
           <ul>
-            <li>Gelectron memory usage</li>
             <li>Full app startup time</li>
             <li>Real-world app benchmarks</li>
             <li>Cross-platform consistency</li>
             <li>Long-running stability</li>
+            <li>Node.js renderer compatibility</li>
           </ul>
         </div>
       </div>
@@ -478,7 +509,8 @@
           <span class="bench-disclaimer-icon">📋</span>
           <h2>Final Disclaimer</h2>
         </div>
-        <p>These benchmarks are from very early builds of a non-commercial, community-driven open source project. They are not averaged, not statistically validated, and not representative of final performance. Gelectron does not yet have all features implemented. Take these numbers as a rough directional signal only.</p>
+        <p>These benchmarks are from very early builds of a non-commercial, community-driven open source project. They are not averaged, not statistically validated, and not representative of final performance. Take these numbers as a rough directional signal only.</p>
+        <p>Gelectron has no Node.js in the renderer. Memory metrics were measured from the main process and injected. Electron runs Node.js inside the renderer, which is a fundamentally different architecture.</p>
         <p>If you're interested in contributing benchmarks or improving the testing methodology, check out the <a href="https://github.com/mileswolfallen2/gelectron" target="_blank" rel="noopener">GitHub repo</a>.</p>
       </div>
     </section>

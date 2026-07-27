@@ -1018,6 +1018,30 @@ a {
   line-height: 1.6;
 }
 
+.benchmark-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: linear-gradient(135deg, #eff6ff, #f0f9ff);
+  border: 1.5px solid #bae6fd;
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin-bottom: 32px;
+}
+
+.benchmark-notice-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.benchmark-notice p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
 .benchmark-comparison {
   display: grid;
   grid-template-columns: 1fr 1fr;
