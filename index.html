@@ -28,6 +28,7 @@
         <a href="#features">Features</a>
         <a href="#how-it-works">How It Works</a>
         <a href="#install">Install</a>
+        <a href="#benchmarks">Benchmarks</a>
         <a href="#tech-stack">Tech Stack</a>
         <a href="#api-support">API Status</a>
         <a href="#roadmap">Roadmap</a>
@@ -449,6 +450,178 @@ cd gelectron</code></pre>
               <li>Documentation &amp; guides</li>
             </ul>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="benchmarks" class="benchmarks">
+      <div class="section-header">
+        <h2>Benchmarks</h2>
+        <p>Early performance comparisons between Gelectron and Electron.</p>
+      </div>
+
+      <div class="benchmark-disclaimer">
+        <div class="benchmark-disclaimer-icon">⚠</div>
+        <div>
+          <strong>Early benchmarks — not final.</strong>
+          <p>These results are from very early builds. Gelectron does not yet have all features implemented, memory tracking is incomplete, and both engines are not equally optimized. Take these numbers as a rough directional signal, not a final verdict. Real-world performance will vary.</p>
+        </div>
+      </div>
+
+      <div class="benchmark-comparison">
+        <div class="benchmark-column">
+          <div class="benchmark-header gelectron">
+            <span class="benchmark-engine-icon">⚡</span>
+            <div>
+              <h3>Gelectron</h3>
+              <span class="benchmark-meta">darwin arm64</span>
+            </div>
+          </div>
+          <div class="benchmark-time">Done in 1.8s</div>
+          <div class="benchmark-group">
+            <div class="benchmark-group-title">Renderer Performance</div>
+            <div class="benchmark-row winner">
+              <span class="bench-label">DOM create/append</span>
+              <span class="bench-value">5.00M ops/s</span>
+              <span class="bench-time">0.2 ms</span>
+            </div>
+            <div class="benchmark-row">
+              <span class="bench-label">DOM querySelector</span>
+              <span class="bench-value">428.6K ops/s</span>
+              <span class="bench-time">7 ms</span>
+            </div>
+            <div class="benchmark-row winner">
+              <span class="bench-label">Style recalc</span>
+              <span class="bench-value">5.00M ops/s</span>
+              <span class="bench-time">0.1 ms</span>
+            </div>
+            <div class="benchmark-row winner">
+              <span class="bench-label">Canvas 2D draw</span>
+              <span class="bench-value">2.50M ops/s</span>
+              <span class="bench-time">0.6 ms</span>
+            </div>
+            <div class="benchmark-row winner">
+              <span class="bench-label">JSON parse</span>
+              <span class="bench-value">24.6K ops/s</span>
+              <span class="bench-time">81.2 ms</span>
+            </div>
+            <div class="benchmark-row winner">
+              <span class="bench-label">Array sort (10k)</span>
+              <span class="bench-value">703 ops/s</span>
+              <span class="bench-time">71.1 ms</span>
+            </div>
+            <div class="benchmark-row winner">
+              <span class="bench-label">Fibonacci(25)</span>
+              <span class="bench-value">3.3K ops/s</span>
+              <span class="bench-time">0.9 ms</span>
+            </div>
+          </div>
+          <div class="benchmark-group">
+            <div class="benchmark-group-title">Memory (Main Process)</div>
+            <div class="benchmark-row note-row">
+              <span class="bench-label">Memory</span>
+              <span class="bench-note">Not available yet</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="benchmark-column">
+          <div class="benchmark-header electron">
+            <span class="benchmark-engine-icon">⚛</span>
+            <div>
+              <h3>Electron</h3>
+              <span class="benchmark-meta">darwin arm64 · Node 24.18.0</span>
+            </div>
+          </div>
+          <div class="benchmark-time">Done in 2.1s</div>
+          <div class="benchmark-group">
+            <div class="benchmark-group-title">Renderer Performance</div>
+            <div class="benchmark-row">
+              <span class="bench-label">DOM create/append</span>
+              <span class="bench-value">3.85M ops/s</span>
+              <span class="bench-time">0.26 ms</span>
+            </div>
+            <div class="benchmark-row winner">
+              <span class="bench-label">DOM querySelector</span>
+              <span class="bench-value">806.5K ops/s</span>
+              <span class="bench-time">3.72 ms</span>
+            </div>
+            <div class="benchmark-row">
+              <span class="bench-label">Style recalc</span>
+              <span class="bench-value">365.0K ops/s</span>
+              <span class="bench-time">1.37 ms</span>
+            </div>
+            <div class="benchmark-row">
+              <span class="bench-label">Canvas 2D draw</span>
+              <span class="bench-value">2.05M ops/s</span>
+              <span class="bench-time">0.73 ms</span>
+            </div>
+            <div class="benchmark-row">
+              <span class="bench-label">JSON parse</span>
+              <span class="bench-value">21.5K ops/s</span>
+              <span class="bench-time">92.89 ms</span>
+            </div>
+            <div class="benchmark-row">
+              <span class="bench-label">Array sort (10k)</span>
+              <span class="bench-value">565 ops/s</span>
+              <span class="bench-time">88.52 ms</span>
+            </div>
+            <div class="benchmark-row">
+              <span class="bench-label">Fibonacci(25)</span>
+              <span class="bench-value">2.1K ops/s</span>
+              <span class="bench-time">1.45 ms</span>
+            </div>
+          </div>
+          <div class="benchmark-group">
+            <div class="benchmark-group-title">Memory (Main Process)</div>
+            <div class="benchmark-row">
+              <span class="bench-label">RSS</span>
+              <span class="bench-value">218.1 MB</span>
+            </div>
+            <div class="benchmark-row">
+              <span class="bench-label">Heap used</span>
+              <span class="bench-value">2.8 MB</span>
+            </div>
+            <div class="benchmark-row">
+              <span class="bench-label">Heap total</span>
+              <span class="bench-value">37.5 MB</span>
+            </div>
+            <div class="benchmark-row">
+              <span class="bench-label">External</span>
+              <span class="bench-value">2.0 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="benchmark-summary">
+        <div class="summary-item">
+          <div class="summary-label">Overall Speed</div>
+          <div class="summary-result gelectron">Gelectron is ~14% faster</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">DOM Operations</div>
+          <div class="summary-result mixed">Mixed — Gelectron faster at creation, Electron faster at queries</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Rendering</div>
+          <div class="summary-result gelectron">Gelectron leads in style recalc and Canvas 2D</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">JavaScript</div>
+          <div class="summary-result gelectron">Gelectron faster across the board</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Memory</div>
+          <div class="summary-result note">Gelectron memory data not available yet — stay tuned</div>
+        </div>
+      </div>
+
+      <div class="benchmark-disclaimer bottom">
+        <div class="benchmark-disclaimer-icon">📋</div>
+        <div>
+          <strong>Methodology notes.</strong>
+          <p>Both benchmarks ran on the same machine (darwin arm64). Gelectron used a Servo-based renderer; Electron used Chromium via Node.js 24.18.0. Tests were single-run, not averaged. Memory tracking for Gelectron is not yet implemented. These numbers will change as both projects evolve.</p>
         </div>
       </div>
     </section>
