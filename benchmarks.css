@@ -556,3 +556,56 @@
     text-align: left;
   }
 }
+
+/* ── Run Your Own Benchmarks ── */
+
+.bench-run-own {
+  padding: 0 0 60px;
+}
+
+.bench-run-own h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 24px 0 12px;
+  color: var(--text);
+}
+
+.bench-run-own h3:first-of-type {
+  margin-top: 16px;
+}
+
+.run-bench-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 8px;
+}
+
+.run-bench-list li {
+  padding: 5px 0 5px 20px;
+  position: relative;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.run-bench-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--pastel-mint);
+  font-weight: 700;
+}
+
+.run-bench-list li strong {
+  color: var(--text);
+}
+
+.run-bench-list li a {
+  color: var(--pastel-purple);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.run-bench-list li a:hover {
+  color: #8b5cf6;
+}

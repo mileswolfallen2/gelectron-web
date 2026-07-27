@@ -504,6 +504,73 @@
       </div>
     </section>
 
+    <section class="bench-run-own">
+      <div class="bench-big-disclaimer">
+        <div class="bench-disclaimer-header">
+          <span class="bench-disclaimer-icon">🛠️</span>
+          <h2>Run Your Own Benchmarks</h2>
+        </div>
+        <p>The repo includes a benchmark script that runs 10 iterations, measures startup time and memory for both Gelectron and Electron, and saves raw JSON results.</p>
+
+        <h3>Prerequisites</h3>
+        <ul class="run-bench-list">
+          <li><strong>Rust</strong> — stable toolchain 1.75+ (<a href="https://rustup.rs" target="_blank">rustup.rs</a>)</li>
+          <li><strong>Node.js</strong> — 18 or newer</li>
+          <li><strong>Electron</strong> — <code>npm install electron</code> in the repo root</li>
+          <li><strong>Python 3</strong> — used by the script for timing</li>
+          <li><strong>macOS or Linux</strong> — the script uses <code>ps</code>, <code>kill</code>, and <code>killall</code></li>
+        </ul>
+
+        <h3>macOS / Linux</h3>
+        <div class="code-block small">
+          <div class="code-header">
+            <span class="code-dot red"></span>
+            <span class="code-dot yellow"></span>
+            <span class="code-dot green"></span>
+            <span class="code-title">Terminal</span>
+          </div>
+          <pre><code>git clone https://github.com/mileswolfallen2/gelectron.git
+cd gelectron
+npm install
+cargo build --release -p gelectron
+
+# Run the benchmark script (10 iterations)
+bash benchmark/bench.sh
+
+# Results are saved to benchmark/results/</code></pre>
+        </div>
+
+        <h3>Windows</h3>
+        <div class="code-block small">
+          <div class="code-header">
+            <span class="code-dot red"></span>
+            <span class="code-dot yellow"></span>
+            <span class="code-dot green"></span>
+            <span class="code-title">PowerShell / CMD</span>
+          </div>
+          <pre><code>git clone https://github.com/mileswolfallen2/gelectron.git
+cd gelectron
+npm install
+cargo build --release -p gelectron
+
+# Run the benchmark script
+bash benchmark/bench.sh
+
+# Or if using Git Bash / WSL
+./benchmark/bench.sh</code></pre>
+        </div>
+
+        <h3>What It Measures</h3>
+        <ul class="run-bench-list">
+          <li><strong>Startup time</strong> — launch to first paint, averaged over 10 runs</li>
+          <li><strong>Memory (RSS)</strong> — total RSS across parent + child processes</li>
+          <li><strong>Package size</strong> — runtime binary size comparison</li>
+          <li><strong>Min / max</strong> — variance across all runs</li>
+        </ul>
+        <p>Raw JSON results are saved to <code>benchmark/results/</code> with a timestamp. Open a <code>.json</code> file to see the full data including raw per-run timings.</p>
+      </div>
+    </section>
+
     <section class="bench-bottom-disclaimer">
       <div class="bench-big-disclaimer">
         <div class="bench-disclaimer-header">
