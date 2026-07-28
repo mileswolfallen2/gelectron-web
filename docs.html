@@ -48,7 +48,9 @@
           <div class="sidebar-title">API Reference</div>
           <a href="#api-main" class="sidebar-link">Main Process</a>
           <a href="#api-renderer" class="sidebar-link">Renderer Process</a>
-          <a href="#api-compat" class="sidebar-link">Compatibility Shims</a>
+          <a href="#api-compat" class="sidebar-link">Common Modules</a>
+          <a href="#api-deprecated" class="sidebar-link">Deprecated / Internal</a>
+          <a href="#api-missing" class="sidebar-link">Missing Modules</a>
         </div>
         <div class="sidebar-section">
           <div class="sidebar-title">Architecture</div>
@@ -343,7 +345,7 @@ gelectron-packager --dir ./my-app --name MyApp --platform linux --arch x64</code
         </section>
 
         <section id="api-main" class="docs-section">
-          <h2>Main Process APIs</h2>
+          <h2>Main Process Modules</h2>
           <p>These modules are available via <code>require('electron')</code> in the main process.</p>
           <div class="docs-table-wrapper">
             <table class="docs-table">
@@ -351,79 +353,114 @@ gelectron-packager --dir ./my-app --name MyApp --platform linux --arch x64</code
                 <tr>
                   <th>Module</th>
                   <th>Status</th>
-                  <th>What's Supported</th>
+                  <th>Notes</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td><code>app</code></td>
-                  <td><span class="status implemented">Working</span></td>
-                  <td>Full lifecycle, paths, command line, dock (macOS), <code>whenReady()</code></td>
-                </tr>
-                <tr>
-                  <td><code>BrowserWindow</code></td>
-                  <td><span class="status implemented">Working</span></td>
-                  <td>Create, show/hide, resize, loadURL, loadFile, events, webContents</td>
+                  <td><span class="status implemented">Full</span></td>
+                  <td>All methods, properties, events, quit lifecycle, dock, badge, GPU, about panel, secure keyboard, window tracking</td>
                 </tr>
                 <tr>
                   <td><code>ipcMain</code></td>
-                  <td><span class="status implemented">Working</span></td>
-                  <td><code>handle()</code>, <code>on()</code>, <code>removeHandler()</code>, event emission</td>
+                  <td><span class="status implemented">Full</span></td>
+                  <td><code>handle()</code>, <code>handleOnce()</code>, <code>on()</code>, <code>once()</code>, <code>removeHandler()</code>, full EventEmitter</td>
+                </tr>
+                <tr>
+                  <td><code>BrowserWindow</code></td>
+                  <td><span class="status partial">Partial</span></td>
+                  <td>create/show/hide/focus/min/max/close/destroy/setTitle/setSize/loadURL/loadFile. Missing: DevTools, navigation, capturePage, print, printToPDF</td>
                 </tr>
                 <tr>
                   <td><code>Menu</code></td>
-                  <td><span class="status implemented">Working</span></td>
-                  <td><code>buildFromTemplate()</code>, <code>popup()</code>, <code>setApplicationMenu()</code></td>
+                  <td><span class="status partial">Partial</span></td>
+                  <td>buildFromTemplate/append/insert/getMenuItemById, native setApplicationMenu via muda, _serialize. Missing: click events from native menu, role-based items</td>
                 </tr>
                 <tr>
                   <td><code>MenuItem</code></td>
-                  <td><span class="status implemented">Working</span></td>
-                  <td>All types (normal, checkbox, separator, submenu, role)</td>
-                </tr>
-                <tr>
-                  <td><code>Tray</code></td>
-                  <td><span class="status implemented">Working</span></td>
-                  <td>Create, tooltip, context menu, click events</td>
+                  <td><span class="status partial">Partial</span></td>
+                  <td>All properties (id/label/type/role/accelerator/enabled/visible/checked/submenu/click). Missing: role auto-behavior</td>
                 </tr>
                 <tr>
                   <td><code>dialog</code></td>
-                  <td><span class="status implemented">Working</span></td>
-                  <td><code>showOpenDialog()</code>, <code>showSaveDialog()</code>, <code>showMessageBox()</code>, <code>showErrorBox()</code></td>
+                  <td><span class="status partial">Partial</span></td>
+                  <td>showOpenDialog/showSaveDialog/showMessageBox/showErrorBox. Native dialogs not wired</td>
                 </tr>
                 <tr>
                   <td><code>shell</code></td>
-                  <td><span class="status implemented">Working</span></td>
-                  <td><code>openExternal()</code>, <code>showItemInFolder()</code>, <code>openPath()</code></td>
+                  <td><span class="status partial">Partial</span></td>
+                  <td><code>openExternal()</code>, <code>openPath()</code> (Node mode). Missing: moveItemToTrash deletes permanently, shortcut stubs</td>
                 </tr>
                 <tr>
                   <td><code>Notification</code></td>
-                  <td><span class="status implemented">Working</span></td>
-                  <td>Create, show, close, urgency levels</td>
+                  <td><span class="status partial">Partial</span></td>
+                  <td>API surface complete, show via browser Notification API if available. No native OS integration</td>
                 </tr>
                 <tr>
                   <td><code>nativeImage</code></td>
-                  <td><span class="status implemented">Working</span></td>
-                  <td>Create from path/buffer, resize, crop, PNG/JPEG export</td>
+                  <td><span class="status partial">Partial</span></td>
+                  <td>createFromPath/Buffer/DataURL, toDataURL, getSize. Missing: resize/crop pixel transform, proper toPNG/toJPEG</td>
                 </tr>
                 <tr>
-                  <td><code>safeStorage</code></td>
-                  <td><span class="status implemented">Working</span></td>
-                  <td>Encrypt/decrypt via system keyring</td>
+                  <td><code>net</code></td>
+                  <td><span class="status partial">Partial</span></td>
+                  <td>fetch delegates to globalThis.fetch. Missing: net.request(), ClientRequest API</td>
                 </tr>
                 <tr>
-                  <td><code>contextBridge</code></td>
-                  <td><span class="status implemented">Working</span></td>
-                  <td><code>exposeInMainWorld()</code> for secure preload</td>
+                  <td><code>process</code></td>
+                  <td><span class="status partial">Partial</span></td>
+                  <td>WebView mode polyfill: pid/argv/env/platform/versions/cwd/nextTick. Missing: memoryUsage/cpuUsage/uptime/kill</td>
                 </tr>
                 <tr>
                   <td><code>webContents</code></td>
-                  <td><span class="status implemented">Working</span></td>
-                  <td><code>send()</code>, <code>executeJavaScript()</code>, <code>openDevTools()</code>, navigation</td>
+                  <td><span class="status partial">Partial</span></td>
+                  <td>loadURL/loadFile/send/executeJavaScript/reload, session stub. Missing: navigation history, DevTools CDP, zoom, print, capturePage</td>
+                </tr>
+                <tr>
+                  <td><code>Tray</code></td>
+                  <td><span class="status stub">Stub</span></td>
+                  <td>API surface present, no native system tray</td>
+                </tr>
+                <tr>
+                  <td><code>safeStorage</code></td>
+                  <td><span class="status stub">Stub</span></td>
+                  <td>Base64 encoding, not real encryption</td>
                 </tr>
                 <tr>
                   <td><code>autoUpdater</code></td>
                   <td><span class="status stub">Stub</span></td>
-                  <td>No-op (reports "no update available")</td>
+                  <td>API surface for electron-updater compat, no actual updates</td>
+                </tr>
+                <tr>
+                  <td><code>session</code></td>
+                  <td><span class="status stub">Stub</span></td>
+                  <td>defaultSession + fromPartition stubs, all no-ops</td>
+                </tr>
+                <tr>
+                  <td><code>clipboard</code></td>
+                  <td><span class="status stub">Stub</span></td>
+                  <td>readText/writeText no-ops, missing readHTML/writeHTML/readBookmark etc.</td>
+                </tr>
+                <tr>
+                  <td><code>screen</code></td>
+                  <td><span class="status stub">Stub</span></td>
+                  <td>Hardcoded 1920×1080 primary display</td>
+                </tr>
+                <tr>
+                  <td><code>systemPreferences</code></td>
+                  <td><span class="status stub">Stub</span></td>
+                  <td>Hardcoded dark mode / accent color</td>
+                </tr>
+                <tr>
+                  <td><code>powerMonitor</code></td>
+                  <td><span class="status stub">Stub</span></td>
+                  <td>getSystemIdleState returns 'active', no real monitoring</td>
+                </tr>
+                <tr>
+                  <td><code>globalShortcut</code></td>
+                  <td><span class="status stub">Stub</span></td>
+                  <td><code>register()</code> always returns true, does nothing</td>
                 </tr>
               </tbody>
             </table>
@@ -431,21 +468,31 @@ gelectron-packager --dir ./my-app --name MyApp --platform linux --arch x64</code
         </section>
 
         <section id="api-renderer" class="docs-section">
-          <h2>Renderer Process APIs</h2>
+          <h2>Renderer Process Modules</h2>
           <div class="docs-table-wrapper">
             <table class="docs-table">
               <thead>
                 <tr>
                   <th>Module</th>
                   <th>Status</th>
-                  <th>What's Supported</th>
+                  <th>Notes</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td><code>ipcRenderer</code></td>
-                  <td><span class="status implemented">Working</span></td>
-                  <td><code>invoke()</code>, <code>send()</code>, <code>on()</code>, <code>removeListener()</code></td>
+                  <td><span class="status partial">Partial</span></td>
+                  <td><code>invoke()</code>, <code>send()</code>, <code>sendSync()</code>, <code>on()</code>, <code>once()</code>, <code>removeListener()</code>. Bridge not always wired, sendSync returns undefined</td>
+                </tr>
+                <tr>
+                  <td><code>contextBridge</code></td>
+                  <td><span class="status partial">Partial</span></td>
+                  <td>exposeInMainWorld with deep freeze. No real world isolation</td>
+                </tr>
+                <tr>
+                  <td><code>clipboard (renderer)</code></td>
+                  <td><span class="status stub">Stub</span></td>
+                  <td>Same as main process stub</td>
                 </tr>
               </tbody>
             </table>
@@ -460,8 +507,8 @@ gelectron-packager --dir ./my-app --name MyApp --platform linux --arch x64</code
         </section>
 
         <section id="api-compat" class="docs-section">
-          <h2>Compatibility Shims</h2>
-          <p>These modules exist as stubs or partial implementations for API compatibility.</p>
+          <h2>Common Modules</h2>
+          <p>These modules are available in both main and renderer processes.</p>
           <div class="docs-table-wrapper">
             <table class="docs-table">
               <thead>
@@ -473,42 +520,106 @@ gelectron-packager --dir ./my-app --name MyApp --platform linux --arch x64</code
               </thead>
               <tbody>
                 <tr>
-                  <td><code>screen</code></td>
-                  <td><span class="status stub">Stub</span></td>
-                  <td><code>getPrimaryDisplay()</code> returns basic info</td>
+                  <td><code>nativeImage</code></td>
+                  <td><span class="status partial">Partial</span></td>
+                  <td>createFromPath/Buffer/DataURL, toDataURL, getSize. Missing: resize/crop transform</td>
                 </tr>
                 <tr>
-                  <td><code>clipboard</code></td>
-                  <td><span class="status stub">Stub</span></td>
-                  <td><code>readText()</code>, <code>writeText()</code></td>
-                </tr>
-                <tr>
-                  <td><code>systemPreferences</code></td>
-                  <td><span class="status stub">Stub</span></td>
-                  <td>Basic stubs</td>
-                </tr>
-                <tr>
-                  <td><code>powerMonitor</code></td>
-                  <td><span class="status stub">Stub</span></td>
-                  <td>Event stubs</td>
-                </tr>
-                <tr>
-                  <td><code>globalShortcut</code></td>
-                  <td><span class="status stub">Stub</span></td>
-                  <td>Register/unregister stubs</td>
-                </tr>
-                <tr>
-                  <td><code>session</code></td>
-                  <td><span class="status stub">Stub</span></td>
-                  <td>Cookies, protocol, permissions (stub)</td>
-                </tr>
-                <tr>
-                  <td><code>net</code></td>
-                  <td><span class="status stub">Stub</span></td>
-                  <td><code>fetch()</code> proxy</td>
+                  <td><code>shell</code></td>
+                  <td><span class="status partial">Partial</span></td>
+                  <td>openExternal/openPath in Node mode</td>
                 </tr>
               </tbody>
             </table>
+          </div>
+        </section>
+
+        <section id="api-deprecated" class="docs-section">
+          <h2>Deprecated / Internal</h2>
+          <div class="docs-table-wrapper">
+            <table class="docs-table">
+              <thead>
+                <tr>
+                  <th>Module</th>
+                  <th>Status</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>BrowserView</code></td>
+                  <td><span class="status missing">Missing</span></td>
+                  <td>Deprecated, replaced by WebContentsView</td>
+                </tr>
+                <tr>
+                  <td><code>remote</code></td>
+                  <td><span class="status missing">Missing</span></td>
+                  <td>Removed in Electron 14+</td>
+                </tr>
+                <tr>
+                  <td><code>webviewTag</code></td>
+                  <td><span class="status missing">Missing</span></td>
+                  <td>Deprecated, replaced by BrowserView/WebContentsView</td>
+                </tr>
+                <tr>
+                  <td><code>process (polyfill)</code></td>
+                  <td><span class="status partial">Partial</span></td>
+                  <td>WebView mode polyfill: pid/argv/env/platform/versions/cwd/nextTick. Missing: memoryUsage/cpuUsage/uptime/kill</td>
+                </tr>
+                <tr>
+                  <td><code>contextIsolation</code></td>
+                  <td><span class="status stub">Stub</span></td>
+                  <td>webPreferences.contextIsolation stored but no actual V8 isolate separation</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="api-missing" class="docs-section">
+          <h2>Missing Modules</h2>
+          <p>These modules have not been started.</p>
+          <div class="missing-modules-grid">
+            <span class="missing-module-tag">BaseWindow</span>
+            <span class="missing-module-tag">BrowserView</span>
+            <span class="missing-module-tag">contentTracing</span>
+            <span class="missing-module-tag">crashReporter</span>
+            <span class="missing-module-tag">desktopCapturer</span>
+            <span class="missing-module-tag">ImageView</span>
+            <span class="missing-module-tag">inAppPurchase</span>
+            <span class="missing-module-tag">MessageChannelMain</span>
+            <span class="missing-module-tag">nativeTheme</span>
+            <span class="missing-module-tag">netLog</span>
+            <span class="missing-module-tag">powerSaveBlocker</span>
+            <span class="missing-module-tag">protocol</span>
+            <span class="missing-module-tag">pushNotifications</span>
+            <span class="missing-module-tag">ServiceWorkerMain</span>
+            <span class="missing-module-tag">sharedTexture</span>
+            <span class="missing-module-tag">ShareMenu</span>
+            <span class="missing-module-tag">TouchBar</span>
+            <span class="missing-module-tag">utilityProcess</span>
+            <span class="missing-module-tag">View</span>
+            <span class="missing-module-tag">WebContentsView</span>
+            <span class="missing-module-tag">webFrameMain</span>
+            <span class="missing-module-tag">crashReporter (renderer)</span>
+            <span class="missing-module-tag">sharedTexture (renderer)</span>
+            <span class="missing-module-tag">webFrame</span>
+            <span class="missing-module-tag">webUtils</span>
+            <span class="missing-module-tag">remote</span>
+            <span class="missing-module-tag">webviewTag</span>
+            <span class="missing-module-tag">navigation-history</span>
+            <span class="missing-module-tag">parent-port</span>
+            <span class="missing-module-tag">web-request</span>
+            <span class="missing-module-tag">web-socket</span>
+            <span class="missing-module-tag">window-open</span>
+            <span class="missing-module-tag">local-ai-handler</span>
+          </div>
+          <div class="docs-notice small" style="margin-top: 20px;">
+            <span class="docs-notice-icon">📋</span>
+            <div>
+              <strong>Additional missing APIs</strong>
+              <p>BaseWindow, ImageView, inAppPurchase, MessageChannelMain, powerSaveBlocker, ServiceWorkerMain, sharedTexture, View, WebContentsView, webFrameMain, webFrame, webUtils, navigation-history, parent-port, web-request, web-socket, window-open, local-ai-handler</p>
+            </div>
           </div>
         </section>
 

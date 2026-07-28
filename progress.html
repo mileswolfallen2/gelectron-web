@@ -51,37 +51,37 @@
         </div>
       </div>
       <div class="giant-bar-legend">
-        <span class="legend-item"><span class="legend-dot fully"></span> Fully Working — 4 modules</span>
-        <span class="legend-item"><span class="legend-dot partial"></span> Partially Working — 4 modules</span>
-        <span class="legend-item"><span class="legend-dot stub"></span> Stubs — 12 modules</span>
-        <span class="legend-item"><span class="legend-dot missing"></span> Missing — 28 modules</span>
+        <span class="legend-item"><span class="legend-dot fully"></span> Fully Working — 2 modules</span>
+        <span class="legend-item"><span class="legend-dot partial"></span> Partially Working — 12 modules</span>
+        <span class="legend-item"><span class="legend-dot stub"></span> Stubs — 9 modules</span>
+        <span class="legend-item"><span class="legend-dot missing"></span> Missing — 38 modules</span>
       </div>
     </section>
 
     <section class="progress-stats">
       <div class="stats-grid">
         <div class="stat-card">
-          <div class="stat-number fully">4</div>
+          <div class="stat-number fully">2</div>
           <div class="stat-label">Fully Working</div>
-          <div class="stat-sub">8% of modules</div>
+          <div class="stat-sub">3% of modules</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number partial">4</div>
+          <div class="stat-number partial">12</div>
           <div class="stat-label">Partially Working</div>
-          <div class="stat-sub">Need completing</div>
+          <div class="stat-sub">Core methods work, gaps remain</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number stub">12</div>
+          <div class="stat-number stub">9</div>
           <div class="stat-label">Stubs Only</div>
           <div class="stat-sub">API exists, does nothing</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number missing">28</div>
+          <div class="stat-number missing">38</div>
           <div class="stat-label">Missing Entirely</div>
           <div class="stat-sub">Not started</div>
         </div>
         <div class="stat-card total">
-          <div class="stat-number">48</div>
+          <div class="stat-number">61</div>
           <div class="stat-label">Total Electron Modules</div>
           <div class="stat-sub">Across all categories</div>
         </div>
@@ -100,20 +100,12 @@
         </div>
         <div class="module-grid">
           <div class="module-card fully">
+            <div class="module-name">app</div>
+            <div class="module-status">All methods, properties, events, quit lifecycle, dock, badge, GPU, about panel, secure keyboard entry, window tracking</div>
+          </div>
+          <div class="module-card fully">
             <div class="module-name">ipcMain</div>
-            <div class="module-status">Fully functional</div>
-          </div>
-          <div class="module-card fully">
-            <div class="module-name">ipcRenderer</div>
-            <div class="module-status">Fully functional</div>
-          </div>
-          <div class="module-card fully">
-            <div class="module-name">contextBridge</div>
-            <div class="module-status">Fully functional</div>
-          </div>
-          <div class="module-card fully">
-            <div class="module-name">shell</div>
-            <div class="module-status">5 / 7 methods work</div>
+            <div class="module-status">handle / handleOnce / on / once / removeHandler, full EventEmitter</div>
           </div>
         </div>
       </div>
@@ -129,58 +121,170 @@
         <div class="module-list">
           <div class="module-detail-card partial">
             <div class="module-detail-header">
-              <div class="module-name">app</div>
-              <div class="module-pct">~35%</div>
-            </div>
-            <div class="module-works">
-              <span class="works-label">Works:</span>
-              whenReady, quit, getVersion, getName, getPath, getLocale
-            </div>
-            <div class="module-missing">
-              <span class="missing-label">Missing:</span>
-              window-all-closed event, relaunch, dock.*, requestSingleInstanceLock, second-instance, activate events
-            </div>
-          </div>
-          <div class="module-detail-card partial">
-            <div class="module-detail-header">
               <div class="module-name">BrowserWindow</div>
-              <div class="module-pct">~45%</div>
+              <div class="module-pct">~60%</div>
             </div>
             <div class="module-works">
               <span class="works-label">Works:</span>
-              show, hide, close, focus, minimize, maximize, setTitle, loadURL, loadFile
+              create, show, hide, focus, min/max/close/destroy, setTitle, setSize, loadURL, loadFile
             </div>
             <div class="module-missing">
               <span class="missing-label">Missing:</span>
-              setPosition/getPosition, setBounds, capturePage, printToPDF, setFullScreen, setAlwaysOnTop
+              DevTools, navigation, capturePage, print, printToPDF
             </div>
           </div>
           <div class="module-detail-card partial">
             <div class="module-detail-header">
               <div class="module-name">Menu</div>
+              <div class="module-pct">~60%</div>
+            </div>
+            <div class="module-works">
+              <span class="works-label">Works:</span>
+              buildFromTemplate, append, insert, getMenuItemById, native setApplicationMenu via muda, _serialize
+            </div>
+            <div class="module-missing">
+              <span class="missing-label">Missing:</span>
+              Click events from native menu, role-based predefined items
+            </div>
+          </div>
+          <div class="module-detail-card partial">
+            <div class="module-detail-header">
+              <div class="module-name">MenuItem</div>
+              <div class="module-pct">~70%</div>
+            </div>
+            <div class="module-works">
+              <span class="works-label">Works:</span>
+              All properties: id, label, type, role, accelerator, enabled, visible, checked, submenu, click
+            </div>
+            <div class="module-missing">
+              <span class="missing-label">Missing:</span>
+              Role auto-behavior (copy/paste/undo etc.)
+            </div>
+          </div>
+          <div class="module-detail-card partial">
+            <div class="module-detail-header">
+              <div class="module-name">dialog</div>
+              <div class="module-pct">~40%</div>
+            </div>
+            <div class="module-works">
+              <span class="works-label">Works:</span>
+              showOpenDialog, showSaveDialog, showMessageBox, showErrorBox
+            </div>
+            <div class="module-missing">
+              <span class="missing-label">Missing:</span>
+              Native dialogs not wired — Rust has no dialog commands
+            </div>
+          </div>
+          <div class="module-detail-card partial">
+            <div class="module-detail-header">
+              <div class="module-name">shell</div>
+              <div class="module-pct">~50%</div>
+            </div>
+            <div class="module-works">
+              <span class="works-label">Works:</span>
+              openExternal, openPath (Node mode)
+            </div>
+            <div class="module-missing">
+              <span class="missing-label">Missing:</span>
+              moveItemToTrash deletes permanently, shortcut stubs
+            </div>
+          </div>
+          <div class="module-detail-card partial">
+            <div class="module-detail-header">
+              <div class="module-name">Notification</div>
               <div class="module-pct">~25%</div>
             </div>
             <div class="module-works">
               <span class="works-label">Works:</span>
-              buildFromTemplate, append, popup (no-op)
+              API surface complete, show via browser Notification API if available
             </div>
             <div class="module-missing">
               <span class="missing-label">Missing:</span>
-              Role execution, accelerator parsing, popup doesn't show menu
+              No native OS notification integration
             </div>
           </div>
           <div class="module-detail-card partial">
             <div class="module-detail-header">
               <div class="module-name">nativeImage</div>
-              <div class="module-pct">~40%</div>
+              <div class="module-pct">~45%</div>
             </div>
             <div class="module-works">
               <span class="works-label">Works:</span>
-              createFromPath/Buffer/DataURL, getSize, isEmpty, toDataURL
+              createFromPath/Buffer/DataURL, toDataURL, getSize
             </div>
             <div class="module-missing">
               <span class="missing-label">Missing:</span>
-              toPNG/toJPEG return raw data, resize/crop are no-ops
+              resize/crop pixel transform, proper toPNG/toJPEG
+            </div>
+          </div>
+          <div class="module-detail-card partial">
+            <div class="module-detail-header">
+              <div class="module-name">contextBridge</div>
+              <div class="module-pct">~50%</div>
+            </div>
+            <div class="module-works">
+              <span class="works-label">Works:</span>
+              exposeInMainWorld with deep freeze
+            </div>
+            <div class="module-missing">
+              <span class="missing-label">Missing:</span>
+              No real world isolation, no proxy serialization
+            </div>
+          </div>
+          <div class="module-detail-card partial">
+            <div class="module-detail-header">
+              <div class="module-name">webContents</div>
+              <div class="module-pct">~50%</div>
+            </div>
+            <div class="module-works">
+              <span class="works-label">Works:</span>
+              loadURL, loadFile, send, executeJavaScript, reload, session stub
+            </div>
+            <div class="module-missing">
+              <span class="missing-label">Missing:</span>
+              Navigation history, DevTools CDP, zoom, print, capturePage
+            </div>
+          </div>
+          <div class="module-detail-card partial">
+            <div class="module-detail-header">
+              <div class="module-name">ipcRenderer</div>
+              <div class="module-pct">~70%</div>
+            </div>
+            <div class="module-works">
+              <span class="works-label">Works:</span>
+              invoke, send, sendSync, on, once, removeListener
+            </div>
+            <div class="module-missing">
+              <span class="missing-label">Missing:</span>
+              Bridge not always wired, sendSync returns undefined
+            </div>
+          </div>
+          <div class="module-detail-card partial">
+            <div class="module-detail-header">
+              <div class="module-name">net</div>
+              <div class="module-pct">~30%</div>
+            </div>
+            <div class="module-works">
+              <span class="works-label">Works:</span>
+              fetch delegates to globalThis.fetch
+            </div>
+            <div class="module-missing">
+              <span class="missing-label">Missing:</span>
+              No net.request(), no ClientRequest API
+            </div>
+          </div>
+          <div class="module-detail-card partial">
+            <div class="module-detail-header">
+              <div class="module-name">process (polyfill)</div>
+              <div class="module-pct">~30%</div>
+            </div>
+            <div class="module-works">
+              <span class="works-label">Works:</span>
+              pid, argv, env, platform, versions, cwd, nextTick
+            </div>
+            <div class="module-missing">
+              <span class="missing-label">Missing:</span>
+              memoryUsage, cpuUsage, uptime, kill
             </div>
           </div>
         </div>
@@ -197,51 +301,39 @@
         <div class="module-grid">
           <div class="module-card stub">
             <div class="module-name">Tray</div>
-            <div class="module-status">Creates instance, no native icon</div>
-          </div>
-          <div class="module-card stub">
-            <div class="module-name">dialog</div>
-            <div class="module-status">Returns {canceled:true} for everything</div>
-          </div>
-          <div class="module-card stub">
-            <div class="module-name">clipboard</div>
-            <div class="module-status">readText returns '', writeText no-op</div>
-          </div>
-          <div class="module-card stub">
-            <div class="module-name">screen</div>
-            <div class="module-status">Returns hardcoded 1920×1080</div>
-          </div>
-          <div class="module-card stub">
-            <div class="module-name">Notification</div>
-            <div class="module-status">No native notification sent</div>
-          </div>
-          <div class="module-card stub">
-            <div class="module-name">session</div>
-            <div class="module-status">All methods no-op</div>
-          </div>
-          <div class="module-card stub">
-            <div class="module-name">systemPreferences</div>
-            <div class="module-status">Hardcoded defaults</div>
-          </div>
-          <div class="module-card stub">
-            <div class="module-name">powerMonitor</div>
-            <div class="module-status">All events are no-ops</div>
-          </div>
-          <div class="module-card stub">
-            <div class="module-name">globalShortcut</div>
-            <div class="module-status">register returns true but does nothing</div>
-          </div>
-          <div class="module-card stub">
-            <div class="module-name">autoUpdater</div>
-            <div class="module-status">Always returns "no update available"</div>
+            <div class="module-status">API surface present, no native system tray</div>
           </div>
           <div class="module-card stub">
             <div class="module-name">safeStorage</div>
-            <div class="module-status">Base64 encode/decode (not encryption)</div>
+            <div class="module-status">Base64 encoding, not real encryption</div>
           </div>
           <div class="module-card stub">
-            <div class="module-name">net</div>
-            <div class="module-status">Only delegates to globalFetch</div>
+            <div class="module-name">autoUpdater</div>
+            <div class="module-status">API surface for electron-updater compat, no actual updates</div>
+          </div>
+          <div class="module-card stub">
+            <div class="module-name">session</div>
+            <div class="module-status">defaultSession + fromPartition stubs, all no-ops</div>
+          </div>
+          <div class="module-card stub">
+            <div class="module-name">clipboard</div>
+            <div class="module-status">readText / writeText no-ops</div>
+          </div>
+          <div class="module-card stub">
+            <div class="module-name">screen</div>
+            <div class="module-status">Hardcoded 1920×1080 primary display</div>
+          </div>
+          <div class="module-card stub">
+            <div class="module-name">systemPreferences</div>
+            <div class="module-status">Hardcoded dark mode / accent color</div>
+          </div>
+          <div class="module-card stub">
+            <div class="module-name">powerMonitor</div>
+            <div class="module-status">getSystemIdleState returns 'active', no real monitoring</div>
+          </div>
+          <div class="module-card stub">
+            <div class="module-name">globalShortcut</div>
+            <div class="module-status">register always returns true, does nothing</div>
           </div>
         </div>
       </div>
@@ -251,38 +343,75 @@
           <div class="breakdown-icon">—</div>
           <div>
             <h2>Missing Entirely</h2>
-            <p>These 28 modules have not been started.</p>
+            <p>These 38 modules have not been started.</p>
           </div>
         </div>
         <div class="missing-modules">
           <span class="missing-tag">BaseWindow</span>
+          <span class="missing-tag">BrowserView</span>
           <span class="missing-tag">contentTracing</span>
           <span class="missing-tag">crashReporter</span>
           <span class="missing-tag">desktopCapturer</span>
-          <span class="missing-tag">nativeTheme</span>
-          <span class="missing-tag">protocol</span>
-          <span class="missing-tag">powerSaveBlocker</span>
-          <span class="missing-tag">utilityProcess</span>
-          <span class="missing-tag">WebContentsView</span>
-          <span class="missing-tag">webFrameMain</span>
+          <span class="missing-tag">ImageView</span>
+          <span class="missing-tag">inAppPurchase</span>
           <span class="missing-tag">MessageChannelMain</span>
-          <span class="missing-tag">MessagePortMain</span>
-          <span class="missing-tag">TouchBar</span>
-          <span class="missing-tag">pushNotifications</span>
+          <span class="missing-tag">nativeTheme</span>
           <span class="missing-tag">netLog</span>
-          <span class="missing-tag">process</span>
-          <span class="missing-tag">View</span>
+          <span class="missing-tag">powerSaveBlocker</span>
+          <span class="missing-tag">protocol</span>
+          <span class="missing-tag">pushNotifications</span>
+          <span class="missing-tag">ServiceWorkerMain</span>
           <span class="missing-tag">sharedTexture</span>
           <span class="missing-tag">ShareMenu</span>
-          <span class="missing-tag">inAppPurchase</span>
-          <span class="missing-tag">ImageView</span>
-          <span class="missing-tag">BrowserView</span>
-          <span class="missing-tag">webContents</span>
+          <span class="missing-tag">TouchBar</span>
+          <span class="missing-tag">utilityProcess</span>
+          <span class="missing-tag">View</span>
+          <span class="missing-tag">WebContentsView</span>
+          <span class="missing-tag">webFrameMain</span>
+          <span class="missing-tag">crashReporter (renderer)</span>
+          <span class="missing-tag">sharedTexture (renderer)</span>
           <span class="missing-tag">webFrame</span>
-          <span class="missing-tag">BackgroundThrottler</span>
-          <span class="missing-tag">Printing</span>
-          <span class="missing-tag">v8Util</span>
-          <span class="missing-tag">contextIsolation</span>
+          <span class="missing-tag">webUtils</span>
+          <span class="missing-tag">remote</span>
+          <span class="missing-tag">webviewTag</span>
+          <span class="missing-tag">navigation-history</span>
+          <span class="missing-tag">parent-port</span>
+          <span class="missing-tag">web-request</span>
+          <span class="missing-tag">web-socket</span>
+          <span class="missing-tag">window-open</span>
+          <span class="missing-tag">local-ai-handler</span>
+        </div>
+      </div>
+
+      <div class="breakdown-section">
+        <div class="breakdown-header missing">
+          <div class="breakdown-icon">!</div>
+          <div>
+            <h2>Known Gaps in Existing Modules</h2>
+            <p>Features that are missing from modules listed above.</p>
+          </div>
+        </div>
+        <div class="known-gaps">
+          <div class="gap-item">
+            <span class="gap-module">BrowserWindow</span>
+            <span class="gap-detail">DevTools, navigation, capturePage, print, printToPDF</span>
+          </div>
+          <div class="gap-item">
+            <span class="gap-module">Menu</span>
+            <span class="gap-detail">Native click events not wired back to JS, no role-based predefined items (copy/paste/undo)</span>
+          </div>
+          <div class="gap-item">
+            <span class="gap-module">MenuItem</span>
+            <span class="gap-detail">Role auto-behavior (copy/paste/undo etc.)</span>
+          </div>
+          <div class="gap-item">
+            <span class="gap-module">webContents</span>
+            <span class="gap-detail">Navigation history, DevTools CDP, zoom, print, capturePage</span>
+          </div>
+          <div class="gap-item">
+            <span class="gap-module">nativeImage</span>
+            <span class="gap-detail">resize/crop pixel transform, proper toPNG/toJPEG</span>
+          </div>
         </div>
       </div>
 
@@ -322,15 +451,15 @@
       const stubBar = document.getElementById('seg-stub');
       let animated = false;
 
-      // Actual progress: 48 total modules
-      // Fully working: 4 modules weighted at 100% = 8.33%
-      // Partially working: 4 modules weighted avg ~36% = 3.02%
-      // Stubs: 12 modules at ~2% = 0.5%
-      // Total real: ~11.85% — we show 12% as the honest number
-      const FULLY_PCT = 8.33;
-      const PARTIAL_PCT = 3.02;
-      const STUB_PCT = 0.5;
-      const TOTAL_PCT = FULLY_PCT + PARTIAL_PCT + STUB_PCT; // ~11.85
+      // 61 total modules
+      // Fully: 2 modules at 100% = 3.28%
+      // Partial: 12 modules weighted avg ~42% = 8.23%
+      // Stubs: 9 modules at ~2% = 0.30%
+      // Total: ~11.8%
+      const FULLY_PCT = 3.28;
+      const PARTIAL_PCT = 8.23;
+      const STUB_PCT = 0.30;
+      const TOTAL_PCT = FULLY_PCT + PARTIAL_PCT + STUB_PCT;
 
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
