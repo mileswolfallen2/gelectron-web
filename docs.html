@@ -439,13 +439,18 @@ gelectron-packager --dir ./my-app --name MyApp --platform linux --arch x64</code
                 </tr>
                 <tr>
                   <td><code>clipboard</code></td>
-                  <td><span class="status stub">Stub</span></td>
-                  <td>readText/writeText no-ops, missing readHTML/writeHTML/readBookmark etc.</td>
+                  <td><span class="status partial">Partial</span></td>
+                  <td>readText/writeText/readImage/writeImage/readHTML/writeHTML/readBookmark/writeBookmark/clear/has via Rust bridge (arboard). Missing: readFindText</td>
+                </tr>
+                <tr>
+                  <td><code>nativeTheme</code></td>
+                  <td><span class="status partial">Partial</span></td>
+                  <td>shouldUseDarkColors (getter + method), themeSource (getter/setter), shouldSystemUseDarkColors, queries Rust for system theme. Missing: theme change events</td>
                 </tr>
                 <tr>
                   <td><code>screen</code></td>
-                  <td><span class="status stub">Stub</span></td>
-                  <td>Hardcoded 1920×1080 primary display</td>
+                  <td><span class="status partial">Partial</span></td>
+                  <td>getPrimaryDisplay/getAllDisplays/getDisplayMatching/getCursorScreenPoint/getMenuBarHeight via Rust bridge (tao). Missing: display event listeners</td>
                 </tr>
                 <tr>
                   <td><code>systemPreferences</code></td>
@@ -491,8 +496,8 @@ gelectron-packager --dir ./my-app --name MyApp --platform linux --arch x64</code
                 </tr>
                 <tr>
                   <td><code>clipboard (renderer)</code></td>
-                  <td><span class="status stub">Stub</span></td>
-                  <td>Same as main process stub</td>
+                  <td><span class="status partial">Partial</span></td>
+                  <td>Same as main process: readText/writeText/readImage/writeImage/clear/has via bridge</td>
                 </tr>
               </tbody>
             </table>
@@ -588,7 +593,6 @@ gelectron-packager --dir ./my-app --name MyApp --platform linux --arch x64</code
             <span class="missing-module-tag">ImageView</span>
             <span class="missing-module-tag">inAppPurchase</span>
             <span class="missing-module-tag">MessageChannelMain</span>
-            <span class="missing-module-tag">nativeTheme</span>
             <span class="missing-module-tag">netLog</span>
             <span class="missing-module-tag">powerSaveBlocker</span>
             <span class="missing-module-tag">protocol</span>

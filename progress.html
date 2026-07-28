@@ -52,9 +52,9 @@
       </div>
       <div class="giant-bar-legend">
         <span class="legend-item"><span class="legend-dot fully"></span> Fully Working — 2 modules</span>
-        <span class="legend-item"><span class="legend-dot partial"></span> Partially Working — 12 modules</span>
-        <span class="legend-item"><span class="legend-dot stub"></span> Stubs — 9 modules</span>
-        <span class="legend-item"><span class="legend-dot missing"></span> Missing — 38 modules</span>
+        <span class="legend-item"><span class="legend-dot partial"></span> Partially Working — 15 modules</span>
+        <span class="legend-item"><span class="legend-dot stub"></span> Stubs — 7 modules</span>
+        <span class="legend-item"><span class="legend-dot missing"></span> Missing — 36 modules</span>
       </div>
     </section>
 
@@ -66,22 +66,22 @@
           <div class="stat-sub">3% of modules</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number partial">12</div>
+          <div class="stat-number partial">15</div>
           <div class="stat-label">Partially Working</div>
           <div class="stat-sub">Core methods work, gaps remain</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number stub">9</div>
+          <div class="stat-number stub">7</div>
           <div class="stat-label">Stubs Only</div>
           <div class="stat-sub">API exists, does nothing</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number missing">38</div>
+          <div class="stat-number missing">36</div>
           <div class="stat-label">Missing Entirely</div>
           <div class="stat-sub">Not started</div>
         </div>
         <div class="stat-card total">
-          <div class="stat-number">61</div>
+          <div class="stat-number">60</div>
           <div class="stat-label">Total Electron Modules</div>
           <div class="stat-sub">Across all categories</div>
         </div>
@@ -119,6 +119,48 @@
           </div>
         </div>
         <div class="module-list">
+          <div class="module-detail-card partial">
+            <div class="module-detail-header">
+              <div class="module-name">clipboard</div>
+              <div class="module-pct">~70%</div>
+            </div>
+            <div class="module-works">
+              <span class="works-label">Works:</span>
+              readText/writeText/readImage/writeImage/readHTML/writeHTML/readBookmark/writeBookmark/clear/has via Rust bridge (arboard)
+            </div>
+            <div class="module-missing">
+              <span class="missing-label">Missing:</span>
+              readFindText, native macOS pasteboard types
+            </div>
+          </div>
+          <div class="module-detail-card partial">
+            <div class="module-detail-header">
+              <div class="module-name">screen</div>
+              <div class="module-pct">~70%</div>
+            </div>
+            <div class="module-works">
+              <span class="works-label">Works:</span>
+              getPrimaryDisplay/getAllDisplays/getDisplayMatching/getCursorScreenPoint/getMenuBarHeight via Rust bridge (tao)
+            </div>
+            <div class="module-missing">
+              <span class="missing-label">Missing:</span>
+              Display event listeners (display-added/removed/metrics-changed)
+            </div>
+          </div>
+          <div class="module-detail-card partial">
+            <div class="module-detail-header">
+              <div class="module-name">nativeTheme</div>
+              <div class="module-pct">~60%</div>
+            </div>
+            <div class="module-works">
+              <span class="works-label">Works:</span>
+              shouldUseDarkColors (getter + method), themeSource (getter/setter), shouldSystemUseDarkColors, queries Rust for system theme
+            </div>
+            <div class="module-missing">
+              <span class="missing-label">Missing:</span>
+              Theme change events, accent color detection
+            </div>
+          </div>
           <div class="module-detail-card partial">
             <div class="module-detail-header">
               <div class="module-name">BrowserWindow</div>
@@ -316,14 +358,6 @@
             <div class="module-status">defaultSession + fromPartition stubs, all no-ops</div>
           </div>
           <div class="module-card stub">
-            <div class="module-name">clipboard</div>
-            <div class="module-status">readText / writeText no-ops</div>
-          </div>
-          <div class="module-card stub">
-            <div class="module-name">screen</div>
-            <div class="module-status">Hardcoded 1920×1080 primary display</div>
-          </div>
-          <div class="module-card stub">
             <div class="module-name">systemPreferences</div>
             <div class="module-status">Hardcoded dark mode / accent color</div>
           </div>
@@ -343,7 +377,7 @@
           <div class="breakdown-icon">—</div>
           <div>
             <h2>Missing Entirely</h2>
-            <p>These 38 modules have not been started.</p>
+            <p>These 36 modules have not been started.</p>
           </div>
         </div>
         <div class="missing-modules">
@@ -355,7 +389,6 @@
           <span class="missing-tag">ImageView</span>
           <span class="missing-tag">inAppPurchase</span>
           <span class="missing-tag">MessageChannelMain</span>
-          <span class="missing-tag">nativeTheme</span>
           <span class="missing-tag">netLog</span>
           <span class="missing-tag">powerSaveBlocker</span>
           <span class="missing-tag">protocol</span>
@@ -451,14 +484,14 @@
       const stubBar = document.getElementById('seg-stub');
       let animated = false;
 
-      // 61 total modules
-      // Fully: 2 modules at 100% = 3.28%
-      // Partial: 12 modules weighted avg ~42% = 8.23%
-      // Stubs: 9 modules at ~2% = 0.30%
-      // Total: ~11.8%
-      const FULLY_PCT = 3.28;
-      const PARTIAL_PCT = 8.23;
-      const STUB_PCT = 0.30;
+      // 60 total unique modules
+      // Fully: 2 modules at 100% = 3.33%
+      // Partial: 15 modules weighted avg ~42% = 10.50%
+      // Stubs: 7 modules at ~2% = 0.23%
+      // Total: ~14.1%
+      const FULLY_PCT = 3.33;
+      const PARTIAL_PCT = 10.50;
+      const STUB_PCT = 0.23;
       const TOTAL_PCT = FULLY_PCT + PARTIAL_PCT + STUB_PCT;
 
       const observer = new IntersectionObserver((entries) => {
