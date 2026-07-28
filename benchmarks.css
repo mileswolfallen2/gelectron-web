@@ -609,3 +609,38 @@
 .run-bench-list li a:hover {
   color: #8b5cf6;
 }
+
+/* ── Try It CTA ── */
+
+.bench-try-cta {
+  padding: 0 0 60px;
+}
+
+.bench-try-box {
+  text-align: center;
+  background: linear-gradient(135deg, #f5f3ff, #fdf2f8, #eff6ff);
+  border: 1.5px solid var(--pastel-lavender);
+  border-radius: var(--radius);
+  padding: 56px 40px;
+}
+
+.bench-try-box h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 10px;
+}
+
+.bench-try-box p {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  margin-bottom: 28px;
+  line-height: 1.7;
+}
+
+.bench-try-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}

@@ -17,7 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
     '.feature-card, .code-block, .comparison-card, .cta-content, .notice-content, ' +
     '.tech-card, .arch-layer, .api-table-wrapper, .roadmap-item, .faq-item, ' +
     '.install-warning-box, .install-step, .install-requirements, .logo-explain-content, ' +
-    '.benchmark-column, .benchmark-disclaimer, .summary-item'
+    '.benchmark-column, .benchmark-disclaimer, .summary-item, ' +
+    '.stat-card, .module-card, .module-detail-card, .breakdown-section, .progress-cta-box'
   ).forEach((el) => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';

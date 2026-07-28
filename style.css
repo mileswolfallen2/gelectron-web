@@ -238,6 +238,43 @@ a {
   font-size: 1.05rem;
 }
 
+.btn-small {
+  padding: 8px 18px;
+  font-size: 0.85rem;
+}
+
+.hero-secondary-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 48px;
+}
+
+.hero-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 22px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: 50px;
+  transition: all 0.2s;
+}
+
+.hero-link:hover {
+  border-color: var(--pastel-lavender);
+  color: var(--text);
+  background: #f5f3ff;
+  transform: translateY(-1px);
+}
+
+.hero-link-sep {
+  display: none;
+}
+
 /* ── Comparison Cards ── */
 
 .hero-comparison {
@@ -1535,6 +1572,12 @@ footer {
   .hero-actions {
     flex-direction: column;
     align-items: center;
+  }
+
+  .hero-secondary-actions {
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 32px;
   }
 
   .hero-comparison {

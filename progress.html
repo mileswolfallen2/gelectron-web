@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Progress — Gelectron</title>
+  <meta name="description" content="Track Gelectron's progress toward full Electron API compatibility.">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="progress.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-content">
+      <a href="index.html" class="logo">
+        <img src="logo.png" alt="Gelectron logo" class="logo-img">
+        <span class="logo-text">gelectron</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">← Back to Home</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="progress-page">
+
+    <section class="progress-hero">
+      <div class="progress-badge">Non-Commercial Open Source — Early Development</div>
+      <h1>Electron API <span class="gradient-text">Compatibility</span></h1>
+      <p class="progress-hero-sub">How close is Gelectron to being a full drop-in replacement for Electron? Here's the honest answer.</p>
+    </section>
+
+    <section class="progress-giant">
+      <div class="giant-bar-container">
+        <div class="giant-bar-label-left">
+          <span class="giant-pct" id="giant-pct">0%</span>
+          <span class="giant-label">compatible</span>
+        </div>
+        <div class="giant-bar-track" id="giant-bar">
+          <div class="giant-bar-segment fully" id="seg-fully"></div>
+          <div class="giant-bar-segment partial" id="seg-partial"></div>
+          <div class="giant-bar-segment stub" id="seg-stub"></div>
+        </div>
+        <div class="giant-bar-label-right">
+          <span class="giant-target">100%</span>
+          <span class="giant-label">target</span>
+        </div>
+      </div>
+      <div class="giant-bar-legend">
+        <span class="legend-item"><span class="legend-dot fully"></span> Fully Working — 4 modules</span>
+        <span class="legend-item"><span class="legend-dot partial"></span> Partially Working — 4 modules</span>
+        <span class="legend-item"><span class="legend-dot stub"></span> Stubs — 12 modules</span>
+        <span class="legend-item"><span class="legend-dot missing"></span> Missing — 28 modules</span>
+      </div>
+    </section>
+
+    <section class="progress-stats">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number fully">4</div>
+          <div class="stat-label">Fully Working</div>
+          <div class="stat-sub">8% of modules</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number partial">4</div>
+          <div class="stat-label">Partially Working</div>
+          <div class="stat-sub">Need completing</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number stub">12</div>
+          <div class="stat-label">Stubs Only</div>
+          <div class="stat-sub">API exists, does nothing</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number missing">28</div>
+          <div class="stat-label">Missing Entirely</div>
+          <div class="stat-sub">Not started</div>
+        </div>
+        <div class="stat-card total">
+          <div class="stat-number">48</div>
+          <div class="stat-label">Total Electron Modules</div>
+          <div class="stat-sub">Across all categories</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="progress-breakdown">
+
+      <div class="breakdown-section">
+        <div class="breakdown-header fully">
+          <div class="breakdown-icon">✓</div>
+          <div>
+            <h2>Fully Working</h2>
+            <p>These modules are fully functional and ready to use.</p>
+          </div>
+        </div>
+        <div class="module-grid">
+          <div class="module-card fully">
+            <div class="module-name">ipcMain</div>
+            <div class="module-status">Fully functional</div>
+          </div>
+          <div class="module-card fully">
+            <div class="module-name">ipcRenderer</div>
+            <div class="module-status">Fully functional</div>
+          </div>
+          <div class="module-card fully">
+            <div class="module-name">contextBridge</div>
+            <div class="module-status">Fully functional</div>
+          </div>
+          <div class="module-card fully">
+            <div class="module-name">shell</div>
+            <div class="module-status">5 / 7 methods work</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="breakdown-section">
+        <div class="breakdown-header partial">
+          <div class="breakdown-icon">◐</div>
+          <div>
+            <h2>Partially Working</h2>
+            <p>Core functionality exists but key features are missing.</p>
+          </div>
+        </div>
+        <div class="module-list">
+          <div class="module-detail-card partial">
+            <div class="module-detail-header">
+              <div class="module-name">app</div>
+              <div class="module-pct">~35%</div>
+            </div>
+            <div class="module-works">
+              <span class="works-label">Works:</span>
+              whenReady, quit, getVersion, getName, getPath, getLocale
+            </div>
+            <div class="module-missing">
+              <span class="missing-label">Missing:</span>
+              window-all-closed event, relaunch, dock.*, requestSingleInstanceLock, second-instance, activate events
+            </div>
+          </div>
+          <div class="module-detail-card partial">
+            <div class="module-detail-header">
+              <div class="module-name">BrowserWindow</div>
+              <div class="module-pct">~45%</div>
+            </div>
+            <div class="module-works">
+              <span class="works-label">Works:</span>
+              show, hide, close, focus, minimize, maximize, setTitle, loadURL, loadFile
+            </div>
+            <div class="module-missing">
+              <span class="missing-label">Missing:</span>
+              setPosition/getPosition, setBounds, capturePage, printToPDF, setFullScreen, setAlwaysOnTop
+            </div>
+          </div>
+          <div class="module-detail-card partial">
+            <div class="module-detail-header">
+              <div class="module-name">Menu</div>
+              <div class="module-pct">~25%</div>
+            </div>
+            <div class="module-works">
+              <span class="works-label">Works:</span>
+              buildFromTemplate, append, popup (no-op)
+            </div>
+            <div class="module-missing">
+              <span class="missing-label">Missing:</span>
+              Role execution, accelerator parsing, popup doesn't show menu
+            </div>
+          </div>
+          <div class="module-detail-card partial">
+            <div class="module-detail-header">
+              <div class="module-name">nativeImage</div>
+              <div class="module-pct">~40%</div>
+            </div>
+            <div class="module-works">
+              <span class="works-label">Works:</span>
+              createFromPath/Buffer/DataURL, getSize, isEmpty, toDataURL
+            </div>
+            <div class="module-missing">
+              <span class="missing-label">Missing:</span>
+              toPNG/toJPEG return raw data, resize/crop are no-ops
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="breakdown-section">
+        <div class="breakdown-header stub">
+          <div class="breakdown-icon">○</div>
+          <div>
+            <h2>Stubs Only</h2>
+            <p>The API exists but does nothing useful.</p>
+          </div>
+        </div>
+        <div class="module-grid">
+          <div class="module-card stub">
+            <div class="module-name">Tray</div>
+            <div class="module-status">Creates instance, no native icon</div>
+          </div>
+          <div class="module-card stub">
+            <div class="module-name">dialog</div>
+            <div class="module-status">Returns {canceled:true} for everything</div>
+          </div>
+          <div class="module-card stub">
+            <div class="module-name">clipboard</div>
+            <div class="module-status">readText returns '', writeText no-op</div>
+          </div>
+          <div class="module-card stub">
+            <div class="module-name">screen</div>
+            <div class="module-status">Returns hardcoded 1920×1080</div>
+          </div>
+          <div class="module-card stub">
+            <div class="module-name">Notification</div>
+            <div class="module-status">No native notification sent</div>
+          </div>
+          <div class="module-card stub">
+            <div class="module-name">session</div>
+            <div class="module-status">All methods no-op</div>
+          </div>
+          <div class="module-card stub">
+            <div class="module-name">systemPreferences</div>
+            <div class="module-status">Hardcoded defaults</div>
+          </div>
+          <div class="module-card stub">
+            <div class="module-name">powerMonitor</div>
+            <div class="module-status">All events are no-ops</div>
+          </div>
+          <div class="module-card stub">
+            <div class="module-name">globalShortcut</div>
+            <div class="module-status">register returns true but does nothing</div>
+          </div>
+          <div class="module-card stub">
+            <div class="module-name">autoUpdater</div>
+            <div class="module-status">Always returns "no update available"</div>
+          </div>
+          <div class="module-card stub">
+            <div class="module-name">safeStorage</div>
+            <div class="module-status">Base64 encode/decode (not encryption)</div>
+          </div>
+          <div class="module-card stub">
+            <div class="module-name">net</div>
+            <div class="module-status">Only delegates to globalFetch</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="breakdown-section">
+        <div class="breakdown-header missing">
+          <div class="breakdown-icon">—</div>
+          <div>
+            <h2>Missing Entirely</h2>
+            <p>These 28 modules have not been started.</p>
+          </div>
+        </div>
+        <div class="missing-modules">
+          <span class="missing-tag">BaseWindow</span>
+          <span class="missing-tag">contentTracing</span>
+          <span class="missing-tag">crashReporter</span>
+          <span class="missing-tag">desktopCapturer</span>
+          <span class="missing-tag">nativeTheme</span>
+          <span class="missing-tag">protocol</span>
+          <span class="missing-tag">powerSaveBlocker</span>
+          <span class="missing-tag">utilityProcess</span>
+          <span class="missing-tag">WebContentsView</span>
+          <span class="missing-tag">webFrameMain</span>
+          <span class="missing-tag">MessageChannelMain</span>
+          <span class="missing-tag">MessagePortMain</span>
+          <span class="missing-tag">TouchBar</span>
+          <span class="missing-tag">pushNotifications</span>
+          <span class="missing-tag">netLog</span>
+          <span class="missing-tag">process</span>
+          <span class="missing-tag">View</span>
+          <span class="missing-tag">sharedTexture</span>
+          <span class="missing-tag">ShareMenu</span>
+          <span class="missing-tag">inAppPurchase</span>
+          <span class="missing-tag">ImageView</span>
+          <span class="missing-tag">BrowserView</span>
+          <span class="missing-tag">webContents</span>
+          <span class="missing-tag">webFrame</span>
+          <span class="missing-tag">BackgroundThrottler</span>
+          <span class="missing-tag">Printing</span>
+          <span class="missing-tag">v8Util</span>
+          <span class="missing-tag">contextIsolation</span>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="progress-cta">
+      <div class="progress-cta-box">
+        <h2>Want to help?</h2>
+        <p>Gelectron is a non-commercial, community-driven open source project. Every contribution helps close the gap.</p>
+        <div class="progress-cta-actions">
+          <a href="https://github.com/mileswolfallen2/gelectron" target="_blank" rel="noopener" class="btn btn-primary btn-large">Contribute on GitHub →</a>
+          <a href="docs.html" class="btn btn-secondary">Read the Docs</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-left">
+        <img src="logo.png" alt="Gelectron" class="footer-logo-img">
+        <span>gelectron</span>
+      </div>
+      <div class="footer-right">
+        <p>MIT License &middot; Non-Commercial Open Source &middot; Not Affiliated with Electron or Mozilla</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const pctEl = document.getElementById('giant-pct');
+      const fullyBar = document.getElementById('seg-fully');
+      const partialBar = document.getElementById('seg-partial');
+      const stubBar = document.getElementById('seg-stub');
+      let animated = false;
+
+      // Actual progress: 48 total modules
+      // Fully working: 4 modules weighted at 100% = 8.33%
+      // Partially working: 4 modules weighted avg ~36% = 3.02%
+      // Stubs: 12 modules at ~2% = 0.5%
+      // Total real: ~11.85% — we show 12% as the honest number
+      const FULLY_PCT = 8.33;
+      const PARTIAL_PCT = 3.02;
+      const STUB_PCT = 0.5;
+      const TOTAL_PCT = FULLY_PCT + PARTIAL_PCT + STUB_PCT; // ~11.85
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !animated) {
+            animated = true;
+            animateBar();
+          }
+        });
+      }, { threshold: 0.2 });
+
+      observer.observe(document.getElementById('giant-bar'));
+
+      function animateBar() {
+        const duration = 1800;
+        const start = performance.now();
+
+        function step(now) {
+          const elapsed = now - start;
+          const t = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - t, 3);
+
+          fullyBar.style.width = (eased * FULLY_PCT) + '%';
+          partialBar.style.width = (eased * PARTIAL_PCT) + '%';
+          stubBar.style.width = (eased * STUB_PCT) + '%';
+          pctEl.textContent = Math.round(eased * TOTAL_PCT) + '%';
+
+          if (t < 1) requestAnimationFrame(step);
+        }
+
+        requestAnimationFrame(step);
+      }
+    });
+  </script>
+
+</body>
+</html>
