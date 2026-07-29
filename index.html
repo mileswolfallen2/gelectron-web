@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gelectron — Electron, Reimagined with Gecko</title>
-  <meta name="description" content="A lighter, faster alternative to Electron powered by Servo and the Gecko engine. Non-commercial open source project — early development.">
+  <title>Gelectron — Electron, Reimagined with Rust</title>
+  <meta name="description" content="Drop-in Electron replacement using Rust + Platform WebView. Smaller binaries (3 MB vs 296 MB), less memory (131 MB vs 586 MB). Non-commercial open source — early development.">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,6 +34,7 @@
         <a href="#roadmap">Roadmap</a>
         <a href="#faq">FAQ</a>
         <a href="docs.html">Docs</a>
+        <a href="for-developers.html" class="nav-link-accent">For Developers</a>
         <a href="https://github.com/mileswolfallen2/gelectron" target="_blank" rel="noopener" class="nav-cta">GitHub →</a>
       </div>
     </div>
@@ -43,8 +44,8 @@
 
     <section class="hero">
       <div class="hero-badge">Early Development — Non-Commercial Open Source Project</div>
-      <h1>Electron, reimagined<br>with <span class="gradient-text">Gecko &amp; Servo</span></h1>
-      <p class="hero-subtitle">A lighter, faster alternative to Electron. Drop-in compatible, powered by Rust, and built for the modern web.</p>
+      <h1>Electron, reimagined<br>with <span class="gradient-text">Rust &amp; WebView</span></h1>
+      <p class="hero-subtitle">A drop-in Electron replacement built on Rust and the OS platform WebView. Same JavaScript APIs, 99% smaller binary, 78% less memory — but still early.</p>
       <div class="hero-actions">
         <a href="https://github.com/mileswolfallen2/gelectron" target="_blank" rel="noopener" class="btn btn-primary">View on GitHub</a>
         <a href="#features" class="btn btn-secondary">Learn More</a>
@@ -55,18 +56,20 @@
         <a href="progress.html" class="hero-link">Progress</a>
         <span class="hero-link-sep">·</span>
         <a href="benchmarks.html" class="hero-link">Benchmarks</a>
+        <span class="hero-link-sep">·</span>
+        <a href="for-developers.html" class="hero-link">For Developers</a>
       </div>
       <div class="hero-comparison">
         <div class="comparison-card">
           <div class="comparison-label">Electron</div>
-          <div class="comparison-value">~300 MB</div>
-          <div class="comparison-note">bundles Chromium</div>
+          <div class="comparison-value">296 MB</div>
+          <div class="comparison-note">ships Chromium + Node.js</div>
         </div>
         <div class="comparison-vs">vs</div>
         <div class="comparison-card highlight">
           <div class="comparison-label">Gelectron</div>
-          <div class="comparison-value">much smaller</div>
-          <div class="comparison-note">uses Servo</div>
+          <div class="comparison-value">3 MB</div>
+          <div class="comparison-note">compiled Rust binary</div>
         </div>
       </div>
     </section>
@@ -91,8 +94,8 @@
           </div>
         </div>
         <div class="logo-explain-text">
-          <p>The Gelectron logo is a visual mashup of what the project actually is: <strong>Electron's developer experience</strong> wrapped in <strong>Firefox's rendering engine</strong>.</p>
-          <p>The atom-like orbital rings pay homage to Electron's iconic branding — because at its core, Gelectron aims to be a drop-in replacement. The warm orange gradient and flame-inspired tones are a nod to Firefox and the Gecko engine that powers Servo.</p>
+          <p>The Gelectron logo is a visual mashup of what the project actually is: <strong>Electron's developer experience</strong> wrapped in <strong>Firefox-inspired</strong> technology.</p>
+          <p>The atom-like orbital rings pay homage to Electron's iconic branding — because at its core, Gelectron aims to be a drop-in replacement. The warm orange gradient and flame-inspired tones nod to Firefox and the rendering technology that inspired the project.</p>
           <p class="logo-tagline">It's Electron's shape, Firefox's soul. Or at least, that's the idea.</p>
         </div>
       </div>
@@ -108,38 +111,38 @@
     <section id="features" class="features">
       <div class="section-header">
         <h2>Why Gelectron?</h2>
-        <p>The best parts of Electron, minus the bloat.</p>
+        <p>The pitch that convinced us to build it.</p>
       </div>
       <div class="features-grid">
         <div class="feature-card">
           <div class="feature-icon">🪶</div>
-          <h3>Lightweight</h3>
-          <p>Servo is designed for embedding. Smaller binaries, lower memory usage, and faster startup compared to Chromium-based Electron.</p>
+          <h3>3 MB Binary</h3>
+          <p>A compiled Rust binary vs Chromium at 296 MB. Changes how you ship — Docker images, CI pipelines, and downloads all get dramatically smaller.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🧠</div>
+          <h3>78% Less Memory</h3>
+          <p>131 MB total RSS vs 586 MB for Electron. No Chromium multi-process overhead means your app uses less than a quarter of the RAM.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🔧</div>
-          <h3>Drop-in Replacement</h3>
-          <p>Run <code>gelectron .</code> instead of <code>electron .</code>. Existing Electron apps should work without code changes.</p>
+          <h3>Same API Surface</h3>
+          <p>Run <code>gelectron .</code> instead of <code>electron .</code>. The familiar <code>BrowserWindow</code>, <code>ipcMain</code>, <code>Menu</code>, <code>dialog</code> APIs you already know. 17 modules partially working today.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🦀</div>
           <h3>Rust-Powered Core</h3>
-          <p>Native rendering via Servo, CSS via Stylo, GPU compositing via WebRender — all written in Rust for safety and performance.</p>
+          <p>Window management, native bindings, clipboard, file dialogs, shell operations — all in Rust. Memory-safe, no GC, and fast interop via NAPI-RS bridges.</p>
         </div>
         <div class="feature-card">
-          <div class="feature-icon">📦</div>
-          <h3>Familiar APIs</h3>
-          <p>Supports <code>BrowserWindow</code>, <code>ipcMain</code>, <code>ipcRenderer</code>, <code>Menu</code>, <code>Tray</code>, <code>dialog</code>, and more. A JavaScript compatibility layer on top.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🌐</div>
-          <h3>Modern Web Engine</h3>
-          <p>Built on Servo — a next-generation browser engine from Mozilla. Better web standards support from day one.</p>
+          <div class="feature-icon">🖥️</div>
+          <h3>Platform WebView</h3>
+          <p>Uses the OS native WebView (WebKit on macOS, WebView2 on Windows) for rendering. Stable, hardware-accelerated, and doesn't bundle a browser engine. Long-term goal is Servo.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🔓</div>
           <h3>Open Source</h3>
-          <p>MIT licensed. Contributions welcome. Built in the open on GitHub.</p>
+          <p>MIT licensed. Non-commercial, community-driven. Contributions welcome. Built in the open on GitHub.</p>
         </div>
       </div>
     </section>
@@ -166,10 +169,10 @@
             <span class="code-dot green"></span>
             <span class="code-title">After (Gelectron)</span>
           </div>
-          <pre><code>npx gelectron .</code></pre>
+          <pre><code>gelectron /path/to/app</code></pre>
         </div>
       </div>
-      <p class="code-note">That's it. Same codebase, different engine.</p>
+      <p class="code-note">Same codebase, different engine under the hood.</p>
     </section>
 
     <section id="install" class="install-guide">
@@ -228,7 +231,7 @@ cd gelectron</code></pre>
                 </div>
                 <pre><code>cargo build --release -p gelectron</code></pre>
               </div>
-              <p class="step-note">First build takes a while — Servo has many dependencies. Subsequent builds are much faster.</p>
+              <p class="step-note">First build takes a while. Subsequent builds are much faster.</p>
             </div>
           </div>
           <div class="install-step">
@@ -264,28 +267,28 @@ cd gelectron</code></pre>
     <section id="tech-stack" class="tech-stack">
       <div class="section-header">
         <h2>Built on Proven Technology</h2>
-        <p>Gelectron stands on the shoulders of giants.</p>
+        <p>Gelectron stands on the shoulders of giants — with honesty about what's actually in use today.</p>
       </div>
       <div class="tech-grid">
         <div class="tech-card">
           <div class="tech-logo">🦀</div>
           <h3>Rust</h3>
-          <p>Memory-safe systems language powering the entire native layer. No garbage collector, no runtime overhead.</p>
+          <p>Memory-safe systems language powering the entire native layer. Window management, IPC bridges, native dialogs, clipboard, file dialogs — all Rust.</p>
+        </div>
+        <div class="tech-card">
+          <div class="tech-logo">🖥️</div>
+          <h3>Platform WebView</h3>
+          <p><strong>Current renderer.</strong> Uses the OS native WebView (WebKit on macOS, WebView2 on Windows). Stable, zero-bundle rendering. Long-term target is Servo.</p>
         </div>
         <div class="tech-card">
           <div class="tech-logo">🦁</div>
-          <h3>Servo</h3>
-          <p>Mozilla's next-gen browser engine designed for embedding. Parallel CSS layout, GPU-accelerated rendering.</p>
+          <h3>Servo <span style="font-size:0.7rem;color:var(--text-light);font-weight:400;">(target)</span></h3>
+          <p>Mozilla's next-gen browser engine, designed for embedding. Parallel CSS layout, GPU-accelerated rendering. The long-term vision for Gelectron's rendering.</p>
         </div>
         <div class="tech-card">
-          <div class="tech-logo">🎨</div>
-          <h3>WebRender</h3>
-          <p>GPU-based renderer used in Firefox. Converts the web page into a texture for efficient compositing.</p>
-        </div>
-        <div class="tech-card">
-          <div class="tech-logo">🧩</div>
-          <h3>Stylo</h3>
-          <p>Rust-powered CSS engine. Parallel style computation directly from Rust, replacing Gecko's old C++ CSS parser.</p>
+          <div class="tech-logo">🔌</div>
+          <h3>NAPI-RS</h3>
+          <p>Native Rust bindings for Node.js. Powers clipboard (arboard), screen (tao), file dialogs (rfd), shell (open/trash), and nativeTheme detection.</p>
         </div>
       </div>
       <div class="architecture-diagram">
@@ -296,17 +299,22 @@ cd gelectron</code></pre>
         <div class="arch-arrow">↓</div>
         <div class="arch-layer">
           <div class="arch-label">Gelectron JS Layer</div>
-          <div class="arch-code">Electron API compatibility (BrowserWindow, IPC, Menu...)</div>
+          <div class="arch-code">Electron API compatibility (BrowserWindow, IPC, Menu, dialog...)</div>
         </div>
         <div class="arch-arrow">↓</div>
         <div class="arch-layer">
           <div class="arch-label">Gelectron Core (Rust)</div>
-          <div class="arch-code">Window management, process model, native bindings</div>
+          <div class="arch-code">Window management (tao), native bindings (NAPI-RS), IPC bridge</div>
         </div>
         <div class="arch-arrow">↓</div>
         <div class="arch-layer">
+          <div class="arch-label">Platform WebView</div>
+          <div class="arch-code">WebKit (macOS) / WebView2 (Windows) — hardware-accelerated</div>
+        </div>
+        <div class="arch-arrow" style="font-size:0.75rem;color:var(--text-light);">↓ future</div>
+        <div class="arch-layer" style="opacity:0.5;">
           <div class="arch-label">Servo Engine</div>
-          <div class="arch-code">Stylo (CSS) + WebRender (GPU) + SpiderMonkey (JS)</div>
+          <div class="arch-code">Stylo (CSS) + WebRender (GPU) — long-term target</div>
         </div>
       </div>
     </section>
@@ -314,13 +322,13 @@ cd gelectron</code></pre>
     <section id="api-support" class="api-support">
       <div class="section-header">
         <h2>API Support Status</h2>
-        <p>Many Electron APIs are already implemented. Some are stubs.</p>
+        <p>Real status of Electron API compatibility — no overpromising.</p>
       </div>
       <div class="api-table-wrapper">
         <table class="api-table">
           <thead>
             <tr>
-              <th>API</th>
+              <th>Module</th>
               <th>Status</th>
               <th>Notes</th>
             </tr>
@@ -328,88 +336,92 @@ cd gelectron</code></pre>
           <tbody>
             <tr>
               <td><code>app</code></td>
-              <td><span class="status implemented">Working</span></td>
-              <td>Core lifecycle management</td>
-            </tr>
-            <tr>
-              <td><code>BrowserWindow</code></td>
-              <td><span class="status implemented">Working</span></td>
-              <td>Window creation and management</td>
+              <td><span class="status implemented">Full</span></td>
+              <td>Lifecycle, dock, badge, GPU info, about panel, window tracking</td>
             </tr>
             <tr>
               <td><code>ipcMain</code></td>
-              <td><span class="status implemented">Working</span></td>
-              <td>Main process message handling</td>
+              <td><span class="status implemented">Full</span></td>
+              <td>handle, handleOnce, on, once, removeHandler, full EventEmitter</td>
             </tr>
             <tr>
-              <td><code>ipcRenderer</code></td>
-              <td><span class="status implemented">Working</span></td>
-              <td>Renderer process messaging</td>
+              <td><code>BrowserWindow</code></td>
+              <td><span class="status implemented">Partial</span></td>
+              <td>Create, show, hide, loadURL, loadFile. Missing: DevTools, print, capturePage</td>
             </tr>
             <tr>
               <td><code>Menu</code></td>
-              <td><span class="status implemented">Working</span></td>
-              <td>Native menu creation</td>
+              <td><span class="status implemented">Partial</span></td>
+              <td>buildFromTemplate, native setApplicationMenu. Missing: native click events</td>
             </tr>
             <tr>
-              <td><code>Tray</code></td>
-              <td><span class="status implemented">Working</span></td>
-              <td>System tray integration</td>
+              <td><code>clipboard</code></td>
+              <td><span class="status implemented">Partial</span></td>
+              <td>readText/writeText/readImage/writeImage via Rust bridge (arboard)</td>
+            </tr>
+            <tr>
+              <td><code>screen</code></td>
+              <td><span class="status implemented">Partial</span></td>
+              <td>getPrimaryDisplay/getAllDisplays/getCursorScreenPoint via tao bridge</td>
+            </tr>
+            <tr>
+              <td><code>nativeTheme</code></td>
+              <td><span class="status implemented">Partial</span></td>
+              <td>shouldUseDarkColors, themeSource, shouldSystemUseDarkColors via Rust</td>
             </tr>
             <tr>
               <td><code>dialog</code></td>
-              <td><span class="status implemented">Working</span></td>
-              <td>Native file/message dialogs</td>
+              <td><span class="status implemented">Partial</span></td>
+              <td>Open/save/message/error dialogs via rfd (Rust)</td>
             </tr>
             <tr>
               <td><code>shell</code></td>
-              <td><span class="status implemented">Working</span></td>
-              <td>OS shell interactions</td>
+              <td><span class="status implemented">Partial</span></td>
+              <td>openExternal, openPath, showItemInFolder via Rust bridge</td>
             </tr>
             <tr>
-              <td><code>Notification</code></td>
-              <td><span class="status implemented">Working</span></td>
-              <td>Desktop notifications</td>
+              <td><code>ipcRenderer</code></td>
+              <td><span class="status implemented">Partial</span></td>
+              <td>invoke/send/sendSync/on/once. Bridge not always wired</td>
             </tr>
             <tr>
-              <td><code>nativeImage</code></td>
-              <td><span class="status implemented">Working</span></td>
-              <td>Image handling</td>
+              <td><code>net</code></td>
+              <td><span class="status implemented">Partial</span></td>
+              <td>fetch delegates to globalThis.fetch. Missing: net.request()</td>
             </tr>
             <tr>
-              <td><code>contextBridge</code></td>
-              <td><span class="status implemented">Working</span></td>
-              <td>Context isolation bridge</td>
+              <td><code>Tray</code></td>
+              <td><span class="status stub">Stub</span></td>
+              <td>API exists, does nothing</td>
             </tr>
             <tr>
               <td><code>autoUpdater</code></td>
               <td><span class="status stub">Stub</span></td>
-              <td>Placeholder — not yet implemented</td>
+              <td>Always returns "no update available"</td>
             </tr>
             <tr>
-              <td><code>protocol</code></td>
+              <td><code>session</code></td>
               <td><span class="status stub">Stub</span></td>
-              <td>Placeholder — not yet implemented</td>
-            </tr>
-            <tr>
-              <td><code>net</code></td>
-              <td><span class="status stub">Stub</span></td>
-              <td>Placeholder — not yet implemented</td>
+              <td>All methods are no-ops</td>
             </tr>
             <tr>
               <td><code>powerMonitor</code></td>
               <td><span class="status stub">Stub</span></td>
-              <td>Placeholder — not yet implemented</td>
+              <td>getSystemIdleState always returns 'active'</td>
             </tr>
           </tbody>
         </table>
       </div>
+      <p style="text-align:center;margin-top:20px;color:var(--text-muted);font-size:0.85rem;">
+        2 fully working · 13 partially working · 7 stubs · 36 not started
+        — <a href="progress.html" style="color:var(--pastel-purple);font-weight:600;">see full progress</a>
+      </p>
     </section>
 
     <section id="roadmap" class="roadmap">
       <div class="section-header">
         <h2>Roadmap</h2>
-        <p>Where Gelectron is headed (very early stages).</p>
+        <p>Where Gelectron is headed — with realistic expectations.</p>
       </div>
       <div class="roadmap-timeline">
         <div class="roadmap-item done">
@@ -417,9 +429,10 @@ cd gelectron</code></pre>
           <div class="roadmap-content">
             <h3>Phase 1 — Foundation</h3>
             <ul>
-              <li>Basic window creation via Servo</li>
-              <li>Core Electron API compatibility layer</li>
+              <li>Basic window creation via Platform WebView</li>
+              <li>Core Electron API compatibility layer (17 modules)</li>
               <li>IPC between main and renderer</li>
+              <li>Rust bridge for clipboard, screen, nativeTheme</li>
               <li>CLI entry point (<code>gelectron .</code>)</li>
             </ul>
           </div>
@@ -429,10 +442,10 @@ cd gelectron</code></pre>
           <div class="roadmap-content">
             <h3>Phase 2 — Core APIs</h3>
             <ul>
-              <li>Menu, Tray, Dialog, Shell</li>
-              <li>Notification support</li>
-              <li>nativeImage handling</li>
-              <li>contextBridge for security</li>
+              <li>Flesh out partial modules to full</li>
+              <li>Native OS notifications</li>
+              <li>BrowserWindow feature parity (DevTools, navigation)</li>
+              <li>Proper session and webRequest support</li>
             </ul>
           </div>
         </div>
@@ -455,6 +468,7 @@ cd gelectron</code></pre>
             <ul>
               <li>Full API parity with Electron</li>
               <li>Performance optimization</li>
+              <li>Servo rendering integration</li>
               <li>Cross-platform CI/CD</li>
               <li>Documentation &amp; guides</li>
             </ul>
@@ -466,7 +480,7 @@ cd gelectron</code></pre>
     <section id="benchmarks" class="benchmarks">
       <div class="section-header">
         <h2>Benchmarks</h2>
-        <p>Early performance comparisons between Gelectron and Electron.</p>
+        <p>Performance comparisons between Gelectron and Electron — from the bench page. Full methodology and caveats on the <a href="benchmarks.html" style="color:var(--pastel-purple);font-weight:600;">detailed benchmarks page</a>.</p>
         <a href="benchmarks.html" class="btn btn-secondary" style="margin-top: 16px;">View Detailed Benchmarks →</a>
       </div>
 
@@ -474,13 +488,13 @@ cd gelectron</code></pre>
         <div class="benchmark-disclaimer-icon">⚠</div>
         <div>
           <strong>Early benchmarks — not final.</strong>
-          <p>These results are from very early builds. Both engines are not equally optimized. Take these numbers as a rough directional signal, not a final verdict. Real-world performance will vary.</p>
+          <p>Results are 10-run averages. Gelectron uses Platform WebView + Node.js in main process only. Electron uses Chromium + Node.js in renderer. Take these as directional signals.</p>
         </div>
       </div>
 
       <div class="benchmark-notice">
         <span class="benchmark-notice-icon">ℹ️</span>
-        <p><strong>No Node.js in the renderer.</strong> Gelectron's renderer has no Node.js integration. Memory and process metrics are measured from the main process and injected into the page. This is fundamentally different from Electron, where Node.js runs inside the renderer.</p>
+        <p><strong>No Node.js in the renderer.</strong> Gelectron's renderer has no Node.js integration. Memory and process metrics are measured from the main process (Node.js 26.3.1) and the platform WebView. This is fundamentally different from Electron, where Node.js runs inside the renderer.</p>
       </div>
 
       <div class="benchmark-comparison">
@@ -489,10 +503,10 @@ cd gelectron</code></pre>
             <span class="benchmark-engine-icon">⚡</span>
             <div>
               <h3>Gelectron</h3>
-              <span class="benchmark-meta">darwin arm64 · Node.js 26.3.1 (main process only)</span>
+              <span class="benchmark-meta">darwin arm64 · Rust + Node.js 26.3.1 (main only) · Platform WebView</span>
             </div>
           </div>
-          <div class="benchmark-time">Done in 1.8s</div>
+          <div class="benchmark-time">Built from <code>benchmarks.html</code> — 10-run averages</div>
           <div class="benchmark-group">
             <div class="benchmark-group-title">Renderer Performance</div>
             <div class="benchmark-row winner">
@@ -532,22 +546,23 @@ cd gelectron</code></pre>
             </div>
           </div>
           <div class="benchmark-group">
-            <div class="benchmark-group-title">Memory (Main Process)</div>
+            <div class="benchmark-group-title">Startup &amp; Binary</div>
             <div class="benchmark-row">
-              <span class="bench-label">RSS</span>
-              <span class="bench-value">47.3 MB</span>
+              <span class="bench-label">Startup (10-run avg)</span>
+              <span class="bench-value">5.601s</span>
+              <span class="bench-time">5.598–5.604</span>
             </div>
             <div class="benchmark-row">
-              <span class="bench-label">Heap used</span>
-              <span class="bench-value">4 MB</span>
+              <span class="bench-label">Binary size</span>
+              <span class="bench-value">3 MB</span>
             </div>
+          </div>
+          <div class="benchmark-group">
+            <div class="benchmark-group-title">Memory (Total RSS)</div>
             <div class="benchmark-row">
-              <span class="bench-label">Heap total</span>
-              <span class="bench-value">4.9 MB</span>
-            </div>
-            <div class="benchmark-row">
-              <span class="bench-label">External</span>
-              <span class="bench-value">1.9 MB</span>
+              <span class="bench-label">Average</span>
+              <span class="bench-value">131.4 MB</span>
+              <span class="bench-time">131.0–131.7</span>
             </div>
           </div>
         </div>
@@ -557,10 +572,10 @@ cd gelectron</code></pre>
             <span class="benchmark-engine-icon">⚛</span>
             <div>
               <h3>Electron</h3>
-              <span class="benchmark-meta">darwin arm64 · Node 24.18.0</span>
+              <span class="benchmark-meta">darwin arm64 · Chromium v43.2.0</span>
             </div>
           </div>
-          <div class="benchmark-time">Done in 2.1s</div>
+          <div class="benchmark-time">Built from <code>benchmarks.html</code> — 10-run averages</div>
           <div class="benchmark-group">
             <div class="benchmark-group-title">Renderer Performance</div>
             <div class="benchmark-row">
@@ -600,22 +615,23 @@ cd gelectron</code></pre>
             </div>
           </div>
           <div class="benchmark-group">
-            <div class="benchmark-group-title">Memory (Main Process)</div>
+            <div class="benchmark-group-title">Startup &amp; Binary</div>
             <div class="benchmark-row">
-              <span class="bench-label">RSS</span>
-              <span class="bench-value">218.1 MB</span>
+              <span class="bench-label">Startup (10-run avg)</span>
+              <span class="bench-value">5.671s</span>
+              <span class="bench-time">5.668–5.674</span>
             </div>
             <div class="benchmark-row">
-              <span class="bench-label">Heap used</span>
-              <span class="bench-value">2.8 MB</span>
+              <span class="bench-label">Binary size</span>
+              <span class="bench-value">296 MB</span>
             </div>
+          </div>
+          <div class="benchmark-group">
+            <div class="benchmark-group-title">Memory (Total RSS)</div>
             <div class="benchmark-row">
-              <span class="bench-label">Heap total</span>
-              <span class="bench-value">37.5 MB</span>
-            </div>
-            <div class="benchmark-row">
-              <span class="bench-label">External</span>
-              <span class="bench-value">2.0 MB</span>
+              <span class="bench-label">Average</span>
+              <span class="bench-value">585.9 MB</span>
+              <span class="bench-time">583.3–587.4</span>
             </div>
           </div>
         </div>
@@ -623,28 +639,36 @@ cd gelectron</code></pre>
 
       <div class="benchmark-summary">
         <div class="summary-item">
-          <div class="summary-label">Overall Speed</div>
-          <div class="summary-result gelectron">Gelectron is ~14% faster overall</div>
+          <div class="summary-label">Binary Size</div>
+          <div class="summary-result gelectron">Gelectron 99% smaller — 3 MB vs 296 MB</div>
         </div>
         <div class="summary-item">
-          <div class="summary-label">Memory</div>
-          <div class="summary-result gelectron">Gelectron uses ~78% less memory (47 MB vs 218 MB RSS)</div>
+          <div class="summary-label">Memory (Total RSS)</div>
+          <div class="summary-result gelectron">Gelectron ~78% less — 131 MB vs 586 MB</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Startup</div>
+          <div class="summary-result gelectron">Gelectron ~1.2% faster — 5.60s vs 5.67s</div>
         </div>
         <div class="summary-item">
           <div class="summary-label">Style Recalc</div>
-          <div class="summary-result gelectron">Effectively instant — Stylo parallelism</div>
+          <div class="summary-result gelectron">Effectively instant — < 1ms</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">DOM querySelector</div>
+          <div class="summary-result mixed" style="color:#dc2626;">Electron +83% — 806.5K vs 441.2K</div>
         </div>
         <div class="summary-item">
           <div class="summary-label">Node.js</div>
-          <div class="summary-result note">Gelectron has no Node.js in the renderer — measured from main process only</div>
+          <div class="summary-result note">Gelectron has no Node.js in the renderer — secure but less flexible</div>
         </div>
       </div>
 
       <div class="benchmark-disclaimer bottom">
         <div class="benchmark-disclaimer-icon">📋</div>
         <div>
-          <strong>Methodology notes.</strong>
-          <p>Both benchmarks ran on the same machine (darwin arm64). Gelectron used a Servo-based renderer with no Node.js in the renderer; memory metrics were measured from the main process (Node.js 26.3.1) and injected. Electron used Chromium with Node.js 24.18.0 in the renderer. Tests were single-run, not averaged. These numbers will change as both projects evolve.</p>
+          <strong>Methodology.</strong>
+          <p>Both benchmarks ran on the same machine (darwin arm64). Gelectron used Platform WebView + Node.js 26.3.1 (main process only). Electron used Chromium v43.2.0 with Node.js in the renderer. Results are 10-run averages with min/max reported. These numbers will change as both projects evolve. Full details on the <a href="benchmarks.html" style="color:var(--pastel-purple);font-weight:600;">benchmarks page</a>.</p>
         </div>
       </div>
     </section>
@@ -652,7 +676,7 @@ cd gelectron</code></pre>
     <section id="faq" class="faq">
       <div class="section-header">
         <h2>Frequently Asked Questions</h2>
-        <p>Got questions? We've got answers (and more questions).</p>
+        <p>Got questions? We've got answers — candid ones.</p>
       </div>
       <div class="faq-list">
         <div class="faq-item">
@@ -661,7 +685,7 @@ cd gelectron</code></pre>
             <span class="faq-chevron">›</span>
           </button>
           <div class="faq-answer">
-            <p>Gelectron is an experimental, open-source alternative to Electron that uses Mozilla's Servo browser engine instead of Chromium. It aims to be a drop-in replacement — you run <code>gelectron .</code> instead of <code>electron .</code> and your existing app should work.</p>
+            <p>Gelectron is an experimental, open-source alternative to Electron that replaces Chromium with the OS Platform WebView and adds a Rust core for native operations. It aims to be a drop-in replacement — you run <code>gelectron .</code> instead of <code>electron .</code> — but it's still early and many APIs are incomplete.</p>
           </div>
         </div>
         <div class="faq-item">
@@ -670,7 +694,7 @@ cd gelectron</code></pre>
             <span class="faq-chevron">›</span>
           </button>
           <div class="faq-answer">
-            <p>Electron bundles a full copy of Chromium (~150–300 MB) and consumes significant memory. Gelectron aims to provide the same developer experience with much lighter resource usage by leveraging Servo, which was designed from the ground up for embedding.</p>
+            <p>Electron bundles a full copy of Chromium (~296 MB) and consumes significant memory (~586 MB total RSS). Gelectron aims to provide the same developer experience with a 3 MB binary and 131 MB memory footprint. The trade-off: fewer APIs work, no Node.js in the renderer, and a less mature ecosystem.</p>
           </div>
         </div>
         <div class="faq-item">
@@ -679,7 +703,16 @@ cd gelectron</code></pre>
             <span class="faq-chevron">›</span>
           </button>
           <div class="faq-answer">
-            <p><strong>No.</strong> Gelectron is a non-commercial, community-driven open source project in very early development. Many APIs are stubs or incomplete. It is experimental and will break. We will announce when it reaches a more usable state.</p>
+            <p><strong>No.</strong> Gelectron is a non-commercial, community-driven open source project in very early development. 36 out of 60 Electron modules haven't been started. The project is experimental and will break. We'll announce when it reaches a more usable state.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Does it use Servo or WebView?</span>
+            <span class="faq-chevron">›</span>
+          </button>
+          <div class="faq-answer">
+            <p><strong>Currently: Platform WebView.</strong> Gelectron uses the OS native WebView (WebKit on macOS, WebView2 on Windows) for rendering. <strong>Long-term target: Servo.</strong> The Rust-native rendering engine from Mozilla is the vision, but it's not ready for embedding in production apps yet. The Platform WebView gives us a stable, zero-bundle rendering layer in the meantime.</p>
           </div>
         </div>
         <div class="faq-item">
@@ -688,7 +721,7 @@ cd gelectron</code></pre>
             <span class="faq-chevron">›</span>
           </button>
           <div class="faq-answer">
-            <p>Eventually, yes — that's the goal. Simple apps that use only pure HTML, CSS, and JavaScript may already work. Apps using Node.js modules, native APIs, or advanced Electron features will likely need to wait for fuller implementation.</p>
+            <p>Eventually, yes — that's the goal. Simple apps that use only <code>BrowserWindow</code>, <code>ipcMain</code>, <code>Menu</code>, and <code>dialog</code> may work today. Apps using <code>Tray</code>, <code>autoUpdater</code>, <code>session</code>, native Node.js modules, or calling <code>require()</code> in the renderer will not work.</p>
           </div>
         </div>
         <div class="faq-item">
@@ -697,7 +730,7 @@ cd gelectron</code></pre>
             <span class="faq-chevron">›</span>
           </button>
           <div class="faq-answer">
-            <p>The core is written in <strong>Rust</strong>, using Servo for rendering and Stylo for CSS. On top of that sits a JavaScript compatibility layer that maps Electron's familiar API surface to Gelectron's Rust internals.</p>
+            <p>The core is written in <strong>Rust</strong>, using NAPI-RS bindings for Node.js interop, tao for window management, and a JavaScript compatibility layer that maps Electron's API surface to Gelectron's Rust internals. The renderer is the OS Platform WebView.</p>
           </div>
         </div>
         <div class="faq-item">
@@ -706,7 +739,7 @@ cd gelectron</code></pre>
             <span class="faq-chevron">›</span>
           </button>
           <div class="faq-answer">
-            <p>Currently, Gelectron targets macOS, Linux, and Windows. Cross-platform support is a core goal, leveraging Rust's excellent cross-compilation story and Servo's platform-agnostic design.</p>
+            <p>Currently, Gelectron targets macOS, Linux, and Windows. Cross-platform support leverages Rust's cross-compilation story and each platform's native WebView.</p>
           </div>
         </div>
         <div class="faq-item">
@@ -724,16 +757,16 @@ cd gelectron</code></pre>
             <span class="faq-chevron">›</span>
           </button>
           <div class="faq-answer">
-            <p>While benchmarks are still early, Servo's architecture offers significant advantages: parallel CSS layout, GPU-accelerated rendering via WebRender, and lower memory overhead from not bundling Chromium. Real-world comparisons will come as the project matures.</p>
+            <p>On current benchmarks (10-run averages): Gelectron is 99% smaller (3 MB vs 296 MB), uses 78% less memory (131 MB vs 586 MB), and is ~14% faster on renderer operations (DOM, Canvas, JSON, sort, recursion). However, Electron is 83% faster on DOM querySelector, has a mature DevTools experience, and supports far more APIs. See the <a href="benchmarks.html" style="color:var(--pastel-purple);font-weight:600;">full benchmarks page</a> for details.</p>
           </div>
         </div>
         <div class="faq-item">
           <button class="faq-question" aria-expanded="false">
-            <span>Does it support Node.js?</span>
+            <span>Does it support Node.js in the renderer?</span>
             <span class="faq-chevron">›</span>
           </button>
           <div class="faq-answer">
-            <p>Gelectron includes a JavaScript compatibility layer, but native Node.js module support is planned for a later phase. For now, pure JavaScript modules and many npm packages should work, but native addons (anything with C++ bindings) will not.</p>
+            <p><strong>No.</strong> Gelectron's renderer has no Node.js integration — no <code>require()</code>, no <code>fs</code>, no native modules. All Node.js interaction goes through IPC to the main process. This is more secure (no Node.js injection attacks) but requires restructuring preload scripts for existing Electron apps.</p>
           </div>
         </div>
         <div class="faq-item">
@@ -742,7 +775,7 @@ cd gelectron</code></pre>
             <span class="faq-chevron">›</span>
           </button>
           <div class="faq-answer">
-            <p>Gelectron is a non-commercial passion project with no firm timeline. The roadmap outlines the major phases, but progress depends on contributor interest and Servo's own development. Follow the repo for updates.</p>
+            <p>Gelectron is a non-commercial passion project with no firm timeline. The roadmap outlines the major phases, but progress depends on contributor interest. Follow the repo for updates. If you'd like to help accelerate it, contributions are welcome.</p>
           </div>
         </div>
       </div>

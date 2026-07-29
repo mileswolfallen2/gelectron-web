@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Developers — Gelectron</title>
+  <meta name="description" content="An honest developer sales pitch for Gelectron — what we have, what we don't, and where we win and lose.">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .pitch-page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 32px 80px;
+    }
+
+    .pitch-hero {
+      text-align: center;
+      padding: 80px 0 60px;
+    }
+
+    .pitch-hero h1 {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      letter-spacing: -0.03em;
+    }
+
+    .pitch-hero p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 24px;
+      line-height: 1.7;
+    }
+
+    .pitch-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--pastel-peach), var(--pastel-yellow));
+      color: var(--text);
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 32px;
+      letter-spacing: 0.02em;
+    }
+
+    .pitch-section {
+      margin-bottom: 60px;
+    }
+
+    .pitch-section h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .pitch-section > p {
+      color: var(--text-muted);
+      margin-bottom: 28px;
+      max-width: 650px;
+    }
+
+    .pitch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .pitch-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 20px 24px;
+      box-shadow: var(--shadow);
+      transition: all 0.2s;
+    }
+
+    .pitch-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .pitch-card h3 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .pitch-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .pitch-card code {
+      font-size: 0.8rem;
+    }
+
+    .pitch-card .win {
+      color: #16a34a;
+    }
+
+    .pitch-card .loss {
+      color: #dc2626;
+    }
+
+    .pitch-card .neutral {
+      color: var(--text-muted);
+    }
+
+    .pitch-card .stat-large {
+      font-size: 1.6rem;
+      font-weight: 800;
+    }
+
+    .pitch-card .stat-sub {
+      font-size: 0.75rem;
+      color: var(--text-light);
+    }
+
+    .pitch-card.highlight-win {
+      border-color: #86efac;
+      background: linear-gradient(135deg, #f0fdf4, #faf9ff);
+    }
+
+    .pitch-card.highlight-loss {
+      border-color: #fda4af;
+      background: linear-gradient(135deg, #fef2f2, #faf9ff);
+    }
+
+    .pitch-card.highlight-neutral {
+      border-color: var(--pastel-lavender);
+      background: linear-gradient(135deg, #f5f3ff, #faf9ff);
+    }
+
+    .pitch-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    @media (max-width: 700px) {
+      .pitch-two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pitch-quote {
+      background: #f5f3ff;
+      border-left: 4px solid var(--pastel-purple);
+      padding: 20px 24px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin: 24px 0;
+    }
+
+    .pitch-quote p {
+      font-style: italic;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    .pitch-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      background: var(--bg-card);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .pitch-table th {
+      text-align: left;
+      padding: 12px 16px;
+      background: #f5f3ff;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+    }
+
+    .pitch-table td {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .pitch-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .pitch-table .status-full {
+      color: #16a34a;
+      font-weight: 600;
+    }
+
+    .pitch-table .status-partial {
+      color: #ca8a04;
+      font-weight: 600;
+    }
+
+    .pitch-table .status-stub {
+      color: #dc2626;
+      font-weight: 600;
+    }
+
+    .pitch-table .status-missing {
+      color: var(--text-light);
+      font-weight: 600;
+    }
+
+    .pitch-verdict {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 700px) {
+      .pitch-verdict {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .verdict-card {
+      padding: 24px;
+      border-radius: var(--radius);
+      text-align: center;
+    }
+
+    .verdict-card h3 {
+      font-size: 1rem;
+      margin-bottom: 12px;
+    }
+
+    .verdict-card ul {
+      list-style: none;
+      text-align: left;
+      font-size: 0.85rem;
+      line-height: 1.7;
+    }
+
+    .verdict-card ul li::before {
+      content: "→ ";
+    }
+
+    .verdict-yes {
+      background: linear-gradient(135deg, #f0fdf4, #faf9ff);
+      border: 1.5px solid #86efac;
+    }
+
+    .verdict-yes h3 { color: #16a34a; }
+
+    .verdict-no {
+      background: linear-gradient(135deg, #fef2f2, #faf9ff);
+      border: 1.5px solid #fda4af;
+    }
+
+    .verdict-no h3 { color: #dc2626; }
+
+    .verdict-maybe {
+      background: linear-gradient(135deg, #f5f3ff, #faf9ff);
+      border: 1.5px solid var(--pastel-lavender);
+    }
+
+    .verdict-maybe h3 { color: var(--pastel-purple); }
+  </style>
+</head>
+<body>
+
+  <div class="warning-banner">
+    <span class="warning-icon">⚠</span>
+    <p><strong>Early Development</strong> — Gelectron is a non-commercial, open source project in early development. APIs are unstable and many features are incomplete.</p>
+  </div>
+
+  <nav class="navbar">
+    <div class="nav-content">
+      <a href="index.html" class="logo">
+        <img src="logo.png" alt="Gelectron logo" class="logo-img">
+        <span class="logo-text">gelectron</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="progress.html">Progress</a>
+        <a href="benchmarks.html">Benchmarks</a>
+        <a href="docs.html">Docs</a>
+        <a href="for-developers.html" style="opacity:0.5;pointer-events:none;">For Developers</a>
+        <a href="https://github.com/mileswolfallen2/gelectron" target="_blank" rel="noopener" class="nav-cta">GitHub →</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pitch-page">
+
+    <section class="pitch-hero">
+      <div class="pitch-badge">Non-Commercial Open Source — Early Development</div>
+      <h1>Gelectron for <span class="gradient-text">Developers</span></h1>
+      <p>An honest look at what Gelectron is, what it isn't, and whether it makes sense for your next project. No fluff, no overpromising.</p>
+    </section>
+
+    <div class="pitch-quote">
+      <p>"Gelectron is a drop-in Electron replacement built on Servo (Rust) instead of Chromium. Same JavaScript APIs, smaller binary, lower memory. But it's early — not everything works yet."</p>
+    </div>
+
+    <section class="pitch-section">
+      <h2>What We Have</h2>
+      <p>These modules work today. Some are fully functional, others have gaps — we're transparent about what's missing.</p>
+
+      <table class="pitch-table">
+        <thead>
+          <tr>
+            <th>Module</th>
+            <th>Status</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>app</code></td>
+            <td><span class="status-full">Full</span></td>
+            <td>Full lifecycle, dock, badge, GPU info, about panel, window tracking</td>
+          </tr>
+          <tr>
+            <td><code>ipcMain</code></td>
+            <td><span class="status-full">Full</span></td>
+            <td>handle, handleOnce, on, once, removeHandler, full EventEmitter</td>
+          </tr>
+          <tr>
+            <td><code>BrowserWindow</code></td>
+            <td><span class="status-partial">Partial</span></td>
+            <td>Create, show, hide, resize, loadURL, loadFile. Missing: DevTools, navigation, capturePage, print</td>
+          </tr>
+          <tr>
+            <td><code>Menu / MenuItem</code></td>
+            <td><span class="status-partial">Partial</span></td>
+            <td>buildFromTemplate, native setApplicationMenu via muda. Missing: native click events, role auto-behavior</td>
+          </tr>
+          <tr>
+            <td><code>dialog</code></td>
+            <td><span class="status-partial">Partial</span></td>
+            <td>Open/save/message/error dialogs wired via rfd (Rust). Native dialogs work</td>
+          </tr>
+          <tr>
+            <td><code>clipboard</code></td>
+            <td><span class="status-partial">Partial</span></td>
+            <td>readText/writeText/readImage/writeImage/readHTML/writeHTML via arboard bridge</td>
+          </tr>
+          <tr>
+            <td><code>screen</code></td>
+            <td><span class="status-partial">Partial</span></td>
+            <td>getPrimaryDisplay/getAllDisplays/getCursorScreenPoint via tao bridge. Missing: display event listeners</td>
+          </tr>
+          <tr>
+            <td><code>nativeTheme</code></td>
+            <td><span class="status-partial">Partial</span></td>
+            <td>shouldUseDarkColors, themeSource, shouldSystemUseDarkColors via Rust bridge</td>
+          </tr>
+          <tr>
+            <td><code>shell</code></td>
+            <td><span class="status-partial">Partial</span></td>
+            <td>openExternal, openPath, showItemInFolder, moveItemToTrash, beep via bridge (open crate, trash crate)</td>
+          </tr>
+          <tr>
+            <td><code>Notification</code></td>
+            <td><span class="status-partial">Partial</span></td>
+            <td>API surface complete, shows via browser Notification API. No native OS integration yet</td>
+          </tr>
+          <tr>
+            <td><code>nativeImage</code></td>
+            <td><span class="status-partial">Partial</span></td>
+            <td>createFromPath/Buffer/DataURL, toDataURL, getSize. Missing: resize/crop pixel transform</td>
+          </tr>
+          <tr>
+            <td><code>webContents</code></td>
+            <td><span class="status-partial">Partial</span></td>
+            <td>loadURL/loadFile/send/executeJavaScript/reload. Missing: navigation history, DevTools CDP, zoom</td>
+          </tr>
+          <tr>
+            <td><code>ipcRenderer</code></td>
+            <td><span class="status-partial">Partial</span></td>
+            <td>invoke/send/sendSync/on/once/removeListener. Bridge not always wired</td>
+          </tr>
+          <tr>
+            <td><code>contextBridge</code></td>
+            <td><span class="status-partial">Partial</span></td>
+            <td>exposeInMainWorld with deep freeze. No real world isolation</td>
+          </tr>
+          <tr>
+            <td><code>net</code></td>
+            <td><span class="status-partial">Partial</span></td>
+            <td>fetch delegates to globalThis.fetch. Missing: net.request(), ClientRequest API</td>
+          </tr>
+          <tr>
+            <td><code>process</code></td>
+            <td><span class="status-partial">Partial</span></td>
+            <td>pid/argv/env/platform/versions/cwd/nextTick. Missing: memoryUsage/cpuUsage/uptime/kill</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="pitch-section">
+      <h2>What We Don't Have</h2>
+      <p>These modules exist as stubs (API calls do nothing) or haven't been started at all.</p>
+
+      <div class="pitch-two-col">
+        <div>
+          <h3 style="font-size:1rem; font-weight:600; margin-bottom:12px;">Stubs (API exists, does nothing)</h3>
+          <table class="pitch-table">
+            <thead>
+              <tr><th>Module</th><th>Why It's a Stub</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>Tray</code></td><td>No native system tray support yet</td></tr>
+              <tr><td><code>safeStorage</code></td><td>Base64 encoding, not real encryption</td></tr>
+              <tr><td><code>autoUpdater</code></td><td>Always returns "no update available"</td></tr>
+              <tr><td><code>session</code></td><td>All methods are no-ops</td></tr>
+              <tr><td><code>systemPreferences</code></td><td>isDarkMode linked to nativeTheme, rest no-ops</td></tr>
+              <tr><td><code>powerMonitor</code></td><td>getSystemIdleState always returns 'active'</td></tr>
+              <tr><td><code>globalShortcut</code></td><td>register() always returns true</td></tr>
+              <tr><td><code>contextIsolation</code></td><td>Stored but no real V8 isolate separation</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <h3 style="font-size:1rem; font-weight:600; margin-bottom:12px;">Missing (not started)</h3>
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:8px;">33 modules haven't been touched yet:</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:4px 10px;background:rgba(148,144,163,0.06);border:1px solid rgba(148,144,163,0.15);border-radius:6px;color:var(--text-light);">BaseWindow</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:4px 10px;background:rgba(148,144,163,0.06);border:1px solid rgba(148,144,163,0.15);border-radius:6px;color:var(--text-light);">contentTracing</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:4px 10px;background:rgba(148,144,163,0.06);border:1px solid rgba(148,144,163,0.15);border-radius:6px;color:var(--text-light);">crashReporter</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:4px 10px;background:rgba(148,144,163,0.06);border:1px solid rgba(148,144,163,0.15);border-radius:6px;color:var(--text-light);">desktopCapturer</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:4px 10px;background:rgba(148,144,163,0.06);border:1px solid rgba(148,144,163,0.15);border-radius:6px;color:var(--text-light);">ImageView</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:4px 10px;background:rgba(148,144,163,0.06);border:1px solid rgba(148,144,163,0.15);border-radius:6px;color:var(--text-light);">inAppPurchase</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:4px 10px;background:rgba(148,144,163,0.06);border:1px solid rgba(148,144,163,0.15);border-radius:6px;color:var(--text-light);">netLog</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:4px 10px;background:rgba(148,144,163,0.06);border:1px solid rgba(148,144,163,0.15);border-radius:6px;color:var(--text-light);">powerSaveBlocker</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:4px 10px;background:rgba(148,144,163,0.06);border:1px solid rgba(148,144,163,0.15);border-radius:6px;color:var(--text-light);">protocol</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:4px 10px;background:rgba(148,144,163,0.06);border:1px solid rgba(148,144,163,0.15);border-radius:6px;color:var(--text-light);">pushNotifications</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:4px 10px;background:rgba(148,144,163,0.06);border:1px solid rgba(148,144,163,0.15);border-radius:6px;color:var(--text-light);">TouchBar</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:4px 10px;background:rgba(148,144,163,0.06);border:1px solid rgba(148,144,163,0.15);border-radius:6px;color:var(--text-light);">utilityProcess</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:4px 10px;background:rgba(148,144,163,0.06);border:1px solid rgba(148,144,163,0.15);border-radius:6px;color:var(--text-light);">webFrame</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:4px 10px;background:rgba(148,144,163,0.06);border:1px solid rgba(148,144,163,0.15);border-radius:6px;color:var(--text-light);">ShareMenu</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:4px 10px;background:rgba(148,144,163,0.06);border:1px solid rgba(148,144,163,0.15);border-radius:6px;color:var(--text-light);">remote</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:4px 10px;background:rgba(148,144,163,0.06);border:1px solid rgba(148,144,163,0.15);border-radius:6px;color:var(--text-light);">webviewTag</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:4px 10px;background:rgba(148,144,163,0.06);border:1px solid rgba(148,144,163,0.15);border-radius:6px;color:var(--text-light);">navigation-history</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:4px 10px;background:rgba(148,144,163,0.06);border:1px solid rgba(148,144,163,0.15);border-radius:6px;color:var(--text-light);">web-request</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:4px 10px;background:rgba(148,144,163,0.06);border:1px solid rgba(148,144,163,0.15);border-radius:6px;color:var(--text-light);">web-socket</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:4px 10px;background:rgba(148,144,163,0.06);border:1px solid rgba(148,144,163,0.15);border-radius:6px;color:var(--text-light);">window-open</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:4px 10px;background:rgba(148,144,163,0.06);border:1px solid rgba(148,144,163,0.15);border-radius:6px;color:var(--text-light);">local-ai-handler</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:4px 10px;border-radius:6px;color:var(--text-light);">…and 12 more</span>
+          </div>
+          <p style="font-size:0.8rem;color:var(--text-light);margin-top:10px;">Check the <a href="progress.html" style="color:var(--pastel-purple);font-weight:500;">full progress page</a> for the complete list.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pitch-section">
+      <h2>Where We Win</h2>
+      <p>Gelectron beats Electron on the metrics that matter most for shipping and scaling.</p>
+
+      <div class="pitch-grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
+        <div class="pitch-card highlight-win">
+          <div class="stat-large win">78%</div>
+          <div class="stat-sub">less memory</div>
+          <p>131 MB vs 586 MB total RSS. No Chromium multi-process overhead.</p>
+        </div>
+        <div class="pitch-card highlight-win">
+          <div class="stat-large win">99%</div>
+          <div class="stat-sub">smaller binary</div>
+          <p>3 MB vs 296 MB on disk. Changes how you ship software.</p>
+        </div>
+        <div class="pitch-card highlight-win">
+          <div class="stat-large win">∞</div>
+          <div class="stat-sub">style recalc</div>
+          <p>Servo's Stylo engine computes CSS in parallel. Effectively instant.</p>
+        </div>
+        <div class="pitch-card highlight-win">
+          <div class="stat-large win">30%</div>
+          <div class="stat-sub">faster DOM creation</div>
+          <p>Servo's parallel layout engine handles new DOM nodes faster.</p>
+        </div>
+        <div class="pitch-card highlight-win">
+          <div class="stat-large win">57%</div>
+          <div class="stat-sub">faster recursion</div>
+          <p>SpiderMonkey's IonMonkey JIT beats V8 on deep call stacks.</p>
+        </div>
+        <div class="pitch-card highlight-win">
+          <div class="stat-large win">1.2%</div>
+          <div class="stat-sub">faster startup</div>
+          <p>Gelectron 5.60s vs Electron 5.67s. Close, but consistently ahead.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pitch-section">
+      <h2>Where We Lose</h2>
+      <p>Honest admissions about where Electron is still the better choice.</p>
+
+      <div class="pitch-grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
+        <div class="pitch-card highlight-loss">
+          <div class="stat-large loss">−83%</div>
+          <div class="stat-sub">querySelector</div>
+          <p>Chromium's hash-based selector matching is decades mature. Servo's will catch up.</p>
+        </div>
+        <div class="pitch-card highlight-loss">
+          <div class="stat-large loss">Years</div>
+          <div class="stat-sub">ecosystem gap</div>
+          <p>Electron has ~143k npm packages, decades of Stack Overflow answers, and enterprise tooling.</p>
+        </div>
+        <div class="pitch-card highlight-loss">
+          <div class="stat-large loss">Limited</div>
+          <div class="stat-sub">plugin compat</div>
+          <p>Native Node.js modules (node-canvas, node-webgpu, better-sqlite3) may not compile against Gelectron's Node.js runtime.</p>
+        </div>
+        <div class="pitch-card highlight-loss">
+          <div class="stat-large loss">No</div>
+          <div class="stat-sub">auto-updater</div>
+          <p>autoUpdater is a stub — you can't ship automatic updates yet. No crash reporter either.</p>
+        </div>
+        <div class="pitch-card highlight-loss">
+          <div class="stat-large loss">No</div>
+          <div class="stat-sub">renderer Node.js</div>
+          <p>No require(), no fs, no native modules in the renderer. Secure by default, but less flexible.</p>
+        </div>
+        <div class="pitch-card highlight-loss">
+          <div class="stat-large loss">Small</div>
+          <div class="stat-sub">community</div>
+          <p>Early stage. Fewer contributors, fewer third-party tools, less documentation.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pitch-section">
+      <h2>The Trade-Offs</h2>
+      <p>Architectural decisions that cut both ways.</p>
+
+      <div class="pitch-grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));">
+        <div class="pitch-card highlight-neutral">
+          <h3>No Node.js in the renderer</h3>
+          <p><span class="win">Pro:</span> Dramatically smaller attack surface. No require() injection, no fs access from page scripts. Closer to how modern web apps run.</p>
+          <p><span class="loss">Con:</span> Can't use Node.js libraries directly in the renderer. Must use IPC for everything. Porting existing Electron apps may require restructuring preload scripts.</p>
+        </div>
+        <div class="pitch-card highlight-neutral">
+          <h3>Rust core, not C++</h3>
+          <p><span class="win">Pro:</span> Memory safe by default. No buffer overflows, use-after-free, or dangling pointers. Servo's parallel style engine is a genuine innovation.</p>
+          <p><span class="loss">Con:</span> Rust has a steeper learning curve and smaller contributor pool than C++. Fewer existing native modules to draw from.</p>
+        </div>
+        <div class="pitch-card highlight-neutral">
+          <h3>Platform WebView (for now)</h3>
+          <p><span class="win">Pro:</span> Uses the OS native WebView (WebKit on macOS, WebView2 on Windows). Stable, well-tested, hardware-accelerated.</p>
+          <p><span class="loss">Con:</span> Not Servo in the actual window yet. The Rust rendering engine is the long-term goal; today you get the system WebView with Gelectron's API layer on top.</p>
+        </div>
+        <div class="pitch-card highlight-neutral">
+          <h3>Smaller community</h3>
+          <p><span class="win">Pro:</span> More opportunity to make a real impact. Architecture decisions are still flexible — your contributions shape the project.</p>
+          <p><span class="loss">Con:</span> Fewer bug reports, less documentation, slower issue resolution. You'll likely need to read source code to solve problems.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pitch-section">
+      <h2>Should You Use Gelectron?</h2>
+      <p>An honest verdict based on what we know today.</p>
+
+      <div class="pitch-verdict">
+        <div class="verdict-card verdict-yes">
+          <h3>✅ Yes</h3>
+          <ul>
+            <li>You're building a new desktop app from scratch</li>
+            <li>Binary size and download speed matter (Docker, CI, distribution)</li>
+            <li>You want minimal memory overhead</li>
+            <li>You're building a kiosk, utility, or single-purpose app</li>
+            <li>You're excited about Rust and Servo</li>
+            <li>You don't need auto-update or crash reporting</li>
+          </ul>
+        </div>
+        <div class="verdict-card verdict-no">
+          <h3>❌ No</h3>
+          <ul>
+            <li>You need production-grade auto-updates and crash reporting</li>
+            <li>Your app depends on native Node.js modules in the renderer</li>
+            <li>You need mature DevTools and debugging</li>
+            <li>You can't afford API instability</li>
+            <li>You need multi-window management with complex session handling</li>
+            <li>You rely on Chromium-specific rendering features</li>
+          </ul>
+        </div>
+        <div class="verdict-card verdict-maybe">
+          <h3>🤷 Maybe</h3>
+          <ul>
+            <li>You want to experiment and contribute to an early-stage project</li>
+            <li>You're building internal tools where stability isn't critical</li>
+            <li>You value memory safety and Rust's security guarantees</li>
+            <li>You're tired of 300 MB download sizes and want something leaner</li>
+            <li>You're willing to work around missing APIs with IPC workarounds</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="pitch-section" style="text-align:center;padding:40px 0;border-top:1px solid var(--border);">
+      <p style="color:var(--text-muted);max-width:500px;margin:0 auto 24px;">Gelectron is non-commercial, community-driven, and not affiliated with Electron or Mozilla. If this sounds like your kind of project, we'd love your help.</p>
+      <a href="https://github.com/mileswolfallen2/gelectron" target="_blank" rel="noopener" class="btn btn-primary btn-large">Contribute on GitHub →</a>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-left">
+        <img src="logo.png" alt="Gelectron" class="footer-logo-img">
+        <span>gelectron</span>
+      </div>
+      <div class="footer-right">
+        <p>MIT License &middot; Non-Commercial Open Source &middot; Not Affiliated with Electron or Mozilla</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
