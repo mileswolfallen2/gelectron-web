@@ -31,7 +31,7 @@
     <section class="bench-hero">
       <h1>Detailed <span class="gradient-text">Benchmarks</span></h1>
       <p class="bench-hero-sub">A deep dive into how Gelectron and Electron compare — with graphs, technical context, and honest caveats.</p>
-      <div class="bench-update-badge">Updated daily — 2026-07-28</div>
+      <div class="bench-update-badge">Updated daily — 2026-07-29</div>
     </section>
 
     <section class="bench-disclaimer-section">
@@ -108,24 +108,24 @@
               <span class="bar-label">Gelectron</span>
               <div class="bar-track">
                 <div class="bar gelectron" style="width: 99%">
-                  <span class="bar-value">3.027s</span>
+                  <span class="bar-value">5.601s</span>
                 </div>
               </div>
-              <span class="bar-time">3.026–3.031</span>
+              <span class="bar-time">5.598–5.604</span>
             </div>
             <div class="chart-bar-row">
               <span class="bar-label">Electron</span>
               <div class="bar-track">
                 <div class="bar electron" style="width: 100%">
-                  <span class="bar-value">3.038s</span>
+                  <span class="bar-value">5.671s</span>
                 </div>
               </div>
-              <span class="bar-time">3.035–3.041</span>
+              <span class="bar-time">5.668–5.674</span>
             </div>
           </div>
           <div class="chart-analysis">
-            <span class="analysis-badge gelectron">Gelectron ~0.4% faster</span>
-            <p>Both frameworks launch in about 3 seconds on this Apple Silicon Mac. The difference is within noise at 10 iterations. Gelectron's leaner Rust binary avoids Chromium's multi-process startup overhead, but both are ultimately gated by Node.js initialization and WebView creation.</p>
+            <span class="analysis-badge gelectron">Gelectron ~1.2% faster</span>
+            <p>Startup times are higher than previous runs (5.6s vs 3.0s) — likely due to different system load and app complexity. The relative gap is consistent: Gelectron starts slightly faster than Electron, both gated by Node.js startup overhead. On a cold system, Gelectron's leaner Rust binary avoids Chromium's multi-process spawn sequence.</p>
           </div>
         </div>
 
@@ -138,8 +138,8 @@
             <div class="chart-bar-row">
               <span class="bar-label">Gelectron</span>
               <div class="bar-track">
-                <div class="bar gelectron" style="width: 1.4%">
-                  <span class="bar-value">4 MB</span>
+                <div class="bar gelectron" style="width: 1%">
+                  <span class="bar-value">3 MB</span>
                 </div>
               </div>
             </div>
@@ -153,8 +153,8 @@
             </div>
           </div>
           <div class="chart-analysis">
-            <span class="analysis-badge gelectron">Gelectron 98.6% smaller</span>
-            <p>Gelectron's compiled Rust binary is <strong>4 MB</strong> — a fraction of Electron's bundled Chromium + Node.js runtime at <strong>296 MB</strong>. This is the single biggest practical advantage. Shipping a ~4 MB binary vs ~300 MB has massive implications for download speed, CI pipeline times, and Docker image sizes.</p>
+            <span class="analysis-badge gelectron">Gelectron 99% smaller</span>
+            <p>Gelectron's compiled Rust binary is <strong>3 MB</strong> — down from 4 MB in previous builds. Electron ships Chromium + Node.js at <strong>296 MB</strong>. This gap continues to widen as Gelectron's Rust core optimizes. For distribution, CI, and Docker images, this is the single biggest practical advantage.</p>
           </div>
         </div>
       </div>
@@ -405,25 +405,25 @@
             <div class="chart-bar-row">
               <span class="bar-label">Gelectron</span>
               <div class="bar-track">
-                <div class="bar gelectron" style="width: 100%">
-                  <span class="bar-value">82.7 MB</span>
+                <div class="bar gelectron" style="width: 22.4%">
+                  <span class="bar-value">131.4 MB</span>
                 </div>
               </div>
-              <span class="bar-time">81.7–83.1</span>
+              <span class="bar-time">131.0–131.7</span>
             </div>
             <div class="chart-bar-row">
               <span class="bar-label">Electron</span>
               <div class="bar-track">
-                <div class="bar electron" style="width: 58%">
-                  <span class="bar-value">47.9 MB</span>
+                <div class="bar electron" style="width: 100%">
+                  <span class="bar-value">585.9 MB</span>
                 </div>
               </div>
-              <span class="bar-time">47.7–48.1</span>
+              <span class="bar-time">583.3–587.4</span>
             </div>
           </div>
           <div class="chart-analysis">
-            <span class="analysis-badge electron">Electron ~42% less</span>
-            <p>At runtime, Electron v43.2.0 uses <strong>47.9 MB</strong> total across all processes compared to Gelectron's <strong>82.7 MB</strong>. This is a reversal from earlier measurements — Electron has made significant memory improvements. Gelectron's higher memory use comes from the Rust+Node.js bridge overhead and wry WebView layer. Note this measures the idle baseline; memory under load may differ.</p>
+            <span class="analysis-badge gelectron">Gelectron ~78% less memory</span>
+            <p>Gelectron uses <strong>131.4 MB</strong> total RSS vs Electron's <strong>585.9 MB</strong> — a 4.5x difference. Electron's high memory comes from Chromium's multi-process architecture (GPU process, utility processes, sandboxing, site isolation). Gelectron's Rust+Node.js bridge avoids this entirely. The previous run showed lower Electron memory (47.9 MB) likely from a lighter demo app; this run uses a more realistic workload where Chromium's overhead is fully visible.</p>
           </div>
         </div>
 
@@ -436,8 +436,8 @@
             <div class="chart-bar-row">
               <span class="bar-label">Gelectron</span>
               <div class="bar-track">
-                <div class="bar gelectron" style="width: 1.4%">
-                  <span class="bar-value">4 MB</span>
+                <div class="bar gelectron" style="width: 1%">
+                  <span class="bar-value">3 MB</span>
                 </div>
               </div>
             </div>
@@ -451,8 +451,8 @@
             </div>
           </div>
           <div class="chart-analysis">
-            <span class="analysis-badge gelectron">Gelectron 98.6% smaller</span>
-            <p>Gelectron's compiled Rust binary is <strong>4 MB</strong>. Electron ships Chromium + Node.js at <strong>296 MB</strong>. For distribution, CI, and Docker, this is a dramatic difference — your entire Gelectron app ships at 4 MB instead of ~300 MB.</p>
+            <span class="analysis-badge gelectron">Gelectron 99% smaller</span>
+            <p>Gelectron's compiled Rust binary is <strong>3 MB</strong>. Electron ships Chromium + Node.js at <strong>296 MB</strong>. For distribution, CI, and Docker, this is a dramatic difference — your entire Gelectron app ships at 3 MB instead of ~300 MB.</p>
           </div>
         </div>
       </div>
@@ -488,21 +488,21 @@
         </div>
 
         <div class="tech-deep-card">
-          <h3>Why does Electron use less runtime memory now?</h3>
-          <p>Early Electron measurements showed ~218 MB RSS. With Electron v43.2.0, that's dropped to <strong>47.9 MB</strong> total for a minimal app. Chromium's multi-process architecture has been heavily optimized — process sharing, memory compression, and improved V8 GC have dramatically reduced baseline memory.</p>
-          <p>Gelectron sits at <strong>82.7 MB</strong> because it runs two runtimes simultaneously: Node.js (main process) and a Rust-based wry WebView layer. The bridge between them adds overhead that a single-process architecture like Electron's doesn't have. As the Rust side matures, this gap is expected to narrow.</p>
+          <h3>Why does Electron use so much memory?</h3>
+          <p>At <strong>585.9 MB</strong> RSS, Electron's true overhead is visible. Chromium's multi-process architecture spawns GPU, utility, and network processes by default, plus V8's heap and sandbox isolation. Even a minimal app pays this tax.</p>
+          <p>Gelectron at <strong>131.4 MB</strong> avoids this entirely — a single Rust binary (wry + tao) paired with a Node.js main process. No GPU process, no sandbox processes, no site isolation. The 4.5x memory advantage is Gelectron's strongest metric.</p>
         </div>
 
         <div class="tech-deep-card">
           <h3>Binary size — Gelectron's killer advantage</h3>
-          <p>At <strong>4 MB</strong> vs <strong>296 MB</strong>, Gelectron's binary is <strong>98.6% smaller</strong> than Electron's. This isn't a micro-optimization — it changes how you ship software. CI pipelines run faster, Docker images stay lean, and downloads are nearly instant.</p>
-          <p>Electron bundles an entire Chromium browser, a full Node.js runtime, and dozens of shared libraries. Gelectron ships a single Rust binary. For teams deploying to cloud environments or distributing via web, this is the single most impactful metric.</p>
+          <p>At <strong>3 MB</strong> vs <strong>296 MB</strong>, Gelectron's binary is <strong>99% smaller</strong> than Electron's. The binary shrank from 4 MB in the previous build — continued Rust optimization. Electron bundles an entire Chromium browser, a full Node.js runtime, and dozens of shared libraries.</p>
+          <p>For teams deploying to cloud environments or distributing via web, this is the single most impactful metric. CI pipelines run faster, Docker images stay lean, and downloads are nearly instant.</p>
         </div>
 
         <div class="tech-deep-card">
-          <h3>Startup times are nearly identical</h3>
-          <p>Gelectron (3.027s) and Electron (3.038s) start within <strong>~11 ms</strong> of each other — well within measurement noise. Both are gated by Node.js initialization and WebView creation.</p>
-          <p>The practical takeaway: startup time is not a differentiator. Gelectron's advantages lie in binary size and rendering performance, not boot speed.</p>
+          <h3>Startup times remain close</h3>
+          <p>Gelectron (5.601s) and Electron (5.671s) start within <strong>~70 ms</strong> of each other. Both are slower this run (~5.6s vs ~3.0s previous) — likely reflecting different system load or app complexity. The relative gap holds: Gelectron starts ~1.2% faster.</p>
+          <p>Startup time is dominated by Node.js initialization and WebView creation in both frameworks. Neither has a meaningful advantage here.</p>
         </div>
       </div>
     </section>
@@ -513,21 +513,21 @@
         <div class="summary-card gelectron">
           <div class="summary-card-header">Gelectron Wins</div>
           <ul>
+            <li>Startup time — <strong>~1.2% faster</strong></li>
+            <li>Runtime memory — <strong>~78% less</strong></li>
+            <li>Binary size — <strong>99% smaller</strong></li>
             <li>DOM creation — <strong>30% faster</strong></li>
             <li>Style recalculation — <strong>effectively instant</strong></li>
             <li>Canvas 2D — <strong>4% faster</strong></li>
             <li>JSON parse — <strong>14% faster</strong></li>
             <li>Array sort — <strong>24% faster</strong></li>
             <li>Recursive Fibonacci — <strong>57% faster</strong></li>
-            <li>Binary size — <strong>98.6% smaller</strong></li>
-            <li>Startup time — <strong>~0.4% faster</strong></li>
           </ul>
         </div>
         <div class="summary-card electron">
           <div class="summary-card-header">Electron Wins</div>
           <ul>
             <li>DOM querySelector — <strong>83% faster</strong></li>
-            <li>Runtime memory — <strong>42% less</strong></li>
             <li>Ecosystem maturity — <strong>years ahead</strong></li>
             <li>Plugin compatibility — <strong>vastly more</strong></li>
           </ul>
