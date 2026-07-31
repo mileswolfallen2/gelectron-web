@@ -215,7 +215,7 @@ cd gelectron</code></pre>
                 </div>
                 <pre><code>npm install</code></pre>
               </div>
-              <p class="step-note">Requires Rust 1.75+ and Node.js 18+. Install Rust via <a href="https://rustup.rs" target="_blank">rustup.rs</a>.</p>
+              <p class="step-note">Requires Node.js 18+. For the native binary you'll also need Rust 1.75+ — install via <a href="https://rustup.rs" target="_blank">rustup.rs</a>.</p>
             </div>
           </div>
           <div class="install-step">
@@ -230,11 +230,26 @@ cd gelectron</code></pre>
                 </div>
                 <pre><code>cargo build --release -p gelectron</code></pre>
               </div>
-              <p class="step-note">First build takes a while. Subsequent builds are much faster.</p>
+              <p class="step-note">Produces <code>target/release/gelectron</code> (~3 MB). Uses tao (windowing) + wry (WebView) — no Chromium, no Servo. First build takes a while; subsequent builds are fast.</p>
             </div>
           </div>
           <div class="install-step">
             <div class="step-number">4</div>
+            <div class="step-content">
+              <h4>Run the demo app</h4>
+              <div class="code-block small">
+                <div class="code-header">
+                  <span class="code-dot red"></span>
+                  <span class="code-dot yellow"></span>
+                  <span class="code-dot green"></span>
+                </div>
+                <pre><code>cargo run --release -p gelectron -- demo/</code></pre>
+              </div>
+              <p class="step-note">Opens a real window with an interactive demo: DOM counter, live clock, animated canvas, CSS grid and flexbox.</p>
+            </div>
+          </div>
+          <div class="install-step">
+            <div class="step-number">5</div>
             <div class="step-content">
               <h4>Run your Electron app</h4>
               <div class="code-block small">
@@ -245,17 +260,46 @@ cd gelectron</code></pre>
                 </div>
                 <pre><code>cargo run --release -p gelectron -- /path/to/your/electron-app</code></pre>
               </div>
-              <p class="step-note">Or run the built binary directly: <code>./target/release/gelectron &lt;path&gt;</code></p>
+              <p class="step-note">Gelectron reads your app's <code>package.json</code>, patches <code>require('electron')</code> to its compatibility layer, and spawns a Node.js child process with a wry WebView window.</p>
             </div>
+          </div>
+          <div class="install-step">
+            <div class="step-number">6</div>
+            <div class="step-content">
+              <h4>Optional: WebView-only mode</h4>
+              <div class="code-block small">
+                <div class="code-header">
+                  <span class="code-dot red"></span>
+                  <span class="code-dot yellow"></span>
+                  <span class="code-dot green"></span>
+                </div>
+                <pre><code>cargo run --release -p gelectron -- demo/ --no-node</code></pre>
+              </div>
+              <p class="step-note">Skips spawning Node.js entirely — the JS compatibility layer runs inside the WebView. Saves ~50 MB RSS. Native dialogs, clipboard, and screen info still work via <code>window.ipc.postMessage()</code>.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="install-requirements">
+          <h4>No Rust? Use the Node.js fallback</h4>
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:14px;">Don't want to build the native binary? The CLI can run in a pure Node.js shim mode (no real window — API layer only):</p>
+          <div class="code-block small">
+            <div class="code-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+            </div>
+            <pre><code>node cli/gelectron.js /path/to/electron-app</code></pre>
           </div>
         </div>
 
         <div class="install-requirements">
           <h4>Requirements</h4>
           <ul>
-            <li><strong>Rust</strong> — stable toolchain 1.75+</li>
             <li><strong>Node.js</strong> — 18 or newer</li>
+            <li><strong>Rust</strong> — stable toolchain 1.75+ (native binary only)</li>
             <li><strong>OS</strong> — macOS, Linux, or Windows</li>
+            <li><strong>Rendering</strong> — WKWebView (macOS) / WebView2 (Windows) / WebKitGTK (Linux)</li>
             <li><strong>Disk</strong> — ~2 GB for build dependencies</li>
             <li><strong>Patience</strong> — first build can take 10–20 minutes</li>
           </ul>

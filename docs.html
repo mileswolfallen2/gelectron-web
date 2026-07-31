@@ -79,7 +79,7 @@
             </div>
           </div>
           <h1>Introduction</h1>
-          <p>Gelectron is a drop-in replacement for Electron that uses Mozilla's <strong>Servo</strong> engine instead of Chromium. The goal is to provide the same developer experience with smaller binaries and lower memory usage.</p>
+          <p>Gelectron is a drop-in replacement for Electron that uses the OS platform WebView (WKWebView / WebView2 / WebKitGTK) instead of Chromium, with a Rust core for native operations. The goal is to provide the same developer experience with smaller binaries and lower memory usage.</p>
           <div class="docs-table-wrapper">
             <table class="docs-table">
               <thead>
@@ -93,7 +93,7 @@
                 <tr>
                   <td>Rendering Engine</td>
                   <td>Chromium</td>
-                  <td>Servo (Gecko CSS / WebRender GPU)</td>
+                  <td>Platform WebView (WKWebView / WebView2 / WebKitGTK)</td>
                 </tr>
                 <tr>
                   <td>Language</td>
@@ -103,12 +103,12 @@
                 <tr>
                   <td>API Compatibility</td>
                   <td>Native</td>
-                  <td>Drop-in replacement</td>
+                  <td>Drop-in replacement (in progress)</td>
                 </tr>
                 <tr>
                   <td>Memory Usage</td>
-                  <td>High (~218 MB)</td>
-                  <td>Lower (~47 MB)</td>
+                  <td>High (~586 MB total RSS)</td>
+                  <td>Lower (~131 MB total RSS)</td>
                 </tr>
                 <tr>
                   <td>Node.js in Renderer</td>
@@ -163,7 +163,7 @@ npm install</code></pre>
             </div>
             <pre><code>cargo build --release -p gelectron</code></pre>
           </div>
-          <p class="docs-note">The first build will take a while — Servo has many dependencies. Subsequent builds are much faster.</p>
+          <p class="docs-note">The first build will take a while — the Rust toolchain compiles tao and wry. Subsequent builds are much faster.</p>
         </section>
 
         <section id="quick-start" class="docs-section">
