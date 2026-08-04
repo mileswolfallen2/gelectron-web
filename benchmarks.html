@@ -34,7 +34,7 @@
     <section class="bench-hero">
       <h1>Detailed <span class="gradient-text">Benchmarks</span></h1>
       <p class="bench-hero-sub">A deep dive into how Gelectron and Electron compare — with graphs, technical context, and honest caveats.</p>
-      <div class="bench-update-badge">Updated daily — 2026-07-29</div>
+      <div class="bench-update-badge">Updated daily — 2026-08-04</div>
     </section>
 
     <section class="bench-disclaimer-section">
@@ -111,23 +111,23 @@
               <span class="bar-label">Gelectron</span>
               <div class="bar-track">
                 <div class="bar gelectron" style="width: 99%">
-                  <span class="bar-value">5.601s</span>
+                  <span class="bar-value">5.596s</span>
                 </div>
               </div>
-              <span class="bar-time">5.598–5.604</span>
+              <span class="bar-time">5.594–5.598</span>
             </div>
             <div class="chart-bar-row">
               <span class="bar-label">Electron</span>
               <div class="bar-track">
                 <div class="bar electron" style="width: 100%">
-                  <span class="bar-value">5.671s</span>
+                  <span class="bar-value">5.657s</span>
                 </div>
               </div>
-              <span class="bar-time">5.668–5.674</span>
+              <span class="bar-time">5.648–5.672</span>
             </div>
           </div>
           <div class="chart-analysis">
-            <span class="analysis-badge gelectron">Gelectron ~1.2% faster</span>
+            <span class="analysis-badge gelectron">Gelectron ~1.1% faster</span>
             <p>Startup times are higher than previous runs (5.6s vs 3.0s) — likely due to different system load and app complexity. The relative gap is consistent: Gelectron starts slightly faster than Electron, both gated by Node.js startup overhead. On a cold system, Gelectron's leaner Rust binary avoids Chromium's multi-process spawn sequence.</p>
           </div>
         </div>
@@ -408,25 +408,25 @@
             <div class="chart-bar-row">
               <span class="bar-label">Gelectron</span>
               <div class="bar-track">
-                <div class="bar gelectron" style="width: 22.4%">
-                  <span class="bar-value">131.4 MB</span>
+                <div class="bar gelectron" style="width: 24.8%">
+                  <span class="bar-value">144.4 MB</span>
                 </div>
               </div>
-              <span class="bar-time">131.0–131.7</span>
+              <span class="bar-time">144.0–144.6</span>
             </div>
             <div class="chart-bar-row">
               <span class="bar-label">Electron</span>
               <div class="bar-track">
                 <div class="bar electron" style="width: 100%">
-                  <span class="bar-value">585.9 MB</span>
+                  <span class="bar-value">582.9 MB</span>
                 </div>
               </div>
-              <span class="bar-time">583.3–587.4</span>
+              <span class="bar-time">579.0–590.4</span>
             </div>
           </div>
           <div class="chart-analysis">
-            <span class="analysis-badge gelectron">Gelectron ~78% less memory</span>
-            <p>Gelectron uses <strong>131.4 MB</strong> total RSS vs Electron's <strong>585.9 MB</strong> — a 4.5x difference. Electron's high memory comes from Chromium's multi-process architecture (GPU process, utility processes, sandboxing, site isolation). Gelectron's Rust+Node.js bridge avoids this entirely. The previous run showed lower Electron memory (47.9 MB) likely from a lighter demo app; this run uses a more realistic workload where Chromium's overhead is fully visible.</p>
+            <span class="analysis-badge gelectron">Gelectron ~75% less memory</span>
+            <p>Gelectron uses <strong>144.4 MB</strong> total RSS vs Electron's <strong>582.9 MB</strong> — a 4.0x difference. Electron's high memory comes from Chromium's multi-process architecture (GPU process, utility processes, sandboxing, site isolation). Gelectron's Rust+Node.js bridge avoids this entirely. The previous run showed lower Electron memory (47.9 MB) likely from a lighter demo app; this run uses a more realistic workload where Chromium's overhead is fully visible.</p>
           </div>
         </div>
 
@@ -492,8 +492,8 @@
 
         <div class="tech-deep-card">
           <h3>Why does Electron use so much memory?</h3>
-          <p>At <strong>585.9 MB</strong> RSS, Electron's true overhead is visible. Chromium's multi-process architecture spawns GPU, utility, and network processes by default, plus V8's heap and sandbox isolation. Even a minimal app pays this tax.</p>
-          <p>Gelectron at <strong>131.4 MB</strong> avoids this entirely — a single Rust binary (wry + tao) paired with a Node.js main process. No GPU process, no sandbox processes, no site isolation. The 4.5x memory advantage is Gelectron's strongest metric.</p>
+          <p>At <strong>582.9 MB</strong> RSS, Electron's true overhead is visible. Chromium's multi-process architecture spawns GPU, utility, and network processes by default, plus V8's heap and sandbox isolation. Even a minimal app pays this tax.</p>
+          <p>Gelectron at <strong>144.4 MB</strong> avoids this entirely — a single Rust binary (wry + tao) paired with a Node.js main process. No GPU process, no sandbox processes, no site isolation. The 4.0x memory advantage is Gelectron's strongest metric.</p>
         </div>
 
         <div class="tech-deep-card">
@@ -504,7 +504,7 @@
 
         <div class="tech-deep-card">
           <h3>Startup times remain close</h3>
-          <p>Gelectron (5.601s) and Electron (5.671s) start within <strong>~70 ms</strong> of each other. Both are slower this run (~5.6s vs ~3.0s previous) — likely reflecting different system load or app complexity. The relative gap holds: Gelectron starts ~1.2% faster.</p>
+          <p>Gelectron (5.596s) and Electron (5.657s) start within <strong>~60 ms</strong> of each other. Both are slower this run (~5.6s vs ~3.0s previous) — likely reflecting different system load or app complexity. The relative gap holds: Gelectron starts ~1.1% faster.</p>
           <p>Startup time is dominated by Node.js initialization and WebView creation in both frameworks. Neither has a meaningful advantage here.</p>
         </div>
       </div>
@@ -516,8 +516,8 @@
         <div class="summary-card gelectron">
           <div class="summary-card-header">Gelectron Wins</div>
           <ul>
-            <li>Startup time — <strong>~1.2% faster</strong></li>
-            <li>Runtime memory — <strong>~78% less</strong></li>
+            <li>Startup time — <strong>~1.1% faster</strong></li>
+            <li>Runtime memory — <strong>~75% less</strong></li>
             <li>Binary size — <strong>99% smaller</strong></li>
             <li>DOM creation — <strong>30% faster</strong></li>
             <li>Style recalculation — <strong>effectively instant</strong></li>
