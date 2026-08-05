@@ -345,6 +345,13 @@ gelectron-packager --dir ./my-app --name MyApp --platform linux --arch x64</code
               </tbody>
             </table>
           </div>
+          <div class="docs-notice small" style="margin-top: 20px;">
+            <span class="docs-notice-icon">🔄</span>
+            <div>
+              <strong>Auto-update artifacts</strong>
+              <p>Every package also generates an <code>update/</code> folder with a full-bundle <code>.tar.gz</code> and a <code>latest.yml</code> manifest (version, path, sha512). Upload both to a GitHub release and point the app's <code>autoUpdater.setFeedURL()</code> at <code>latest.yml</code>. Launcher scripts on macOS/Linux/Windows apply staged updates atomically before the app starts.</p>
+            </div>
+          </div>
         </section>
 
         <section id="api-main" class="docs-section">
@@ -432,8 +439,8 @@ gelectron-packager --dir ./my-app --name MyApp --platform linux --arch x64</code
                 </tr>
                 <tr>
                   <td><code>autoUpdater</code></td>
-                  <td><span class="status stub">Stub</span></td>
-                  <td>API surface for electron-updater compat, no actual updates</td>
+                  <td><span class="status partial">Partial</span></td>
+                  <td>Real implementation: setFeedURL/checkForUpdates/downloadUpdate/quitAndInstall/checkForAndNotifyIfAvailable, full event set, sha512-verified download, staged atomic apply on relaunch. Packaged apps only, requires a hosted latest.yml feed</td>
                 </tr>
                 <tr>
                   <td><code>session</code></td>
@@ -700,7 +707,7 @@ gelectron-packager --dir ./my-app --name MyApp --platform linux --arch x64</code
 │   ├── notification.js          # Notifications
 │   ├── native-image.js          # Image handling
 │   ├── context-bridge.js        # contextBridge
-│   └── auto-updater.js          # autoUpdater stub
+│   └── auto-updater.js          # autoUpdater (real implementation)
 ├── crates/
 │   ├── gelectron-core/          # N-API addon (Rust → Node.js)
 │   └── gelectron-app/           # Standalone native binary
@@ -759,7 +766,7 @@ gelectron-packager --dir ./my-app --name MyApp --platform linux --arch x64</code
           <ul class="docs-list">
             <li><strong>Servo not fully embedded</strong> — current WebView uses platform native (WebKit on macOS, WebView2 on Windows, webkit2gtk on Linux)</li>
             <li><strong>No Node.js in renderer</strong> — all Node.js code runs in the main process only</li>
-            <li><strong>Auto-updater is a no-op</strong> — returns "no update available"</li>
+            <li><strong>Auto-updater is packaged-app only</strong> — real checks/downloads/installs for packaged apps with a hosted feed; no-op in development and Node.js fallback mode</li>
             <li><strong>Single-window only</strong> in the standalone binary</li>
             <li><strong>Preload scripts</strong> are injected via WebView init scripts, not true Electron preload isolation</li>
             <li><strong>Some APIs are stubs</strong> — see the API reference for details</li>

@@ -126,7 +126,7 @@
         <div class="feature-card">
           <div class="feature-icon">🔧</div>
           <h3>Same API Surface</h3>
-          <p>Run <code>gelectron .</code> instead of <code>electron .</code>. The familiar <code>BrowserWindow</code>, <code>ipcMain</code>, <code>Menu</code>, <code>dialog</code> APIs you already know. 17 modules partially working today.</p>
+          <p>Run <code>gelectron .</code> instead of <code>electron .</code>. The familiar <code>BrowserWindow</code>, <code>ipcMain</code>, <code>Menu</code>, <code>dialog</code> APIs you already know. 18 modules working today.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🦀</div>
@@ -439,8 +439,8 @@ cd gelectron</code></pre>
             </tr>
             <tr>
               <td><code>autoUpdater</code></td>
-              <td><span class="status stub">Stub</span></td>
-              <td>Always returns "no update available"</td>
+              <td><span class="status implemented">Partial</span></td>
+              <td>setFeedURL/checkForUpdates/downloadUpdate/quitAndInstall; staged apply on relaunch. Packaged apps only</td>
             </tr>
             <tr>
               <td><code>session</code></td>
@@ -456,7 +456,7 @@ cd gelectron</code></pre>
         </table>
       </div>
       <p style="text-align:center;margin-top:20px;color:var(--text-muted);font-size:0.85rem;">
-        2 fully working · 13 partially working · 7 stubs · 36 not started
+        2 fully working · 16 partially working · 6 stubs · 36 not started
         — <a href="progress.html" style="color:var(--pastel-purple);font-weight:600;">see full progress</a>
       </p>
     </section>
@@ -497,10 +497,10 @@ cd gelectron</code></pre>
           <div class="roadmap-content">
             <h3>Phase 3 — Ecosystem</h3>
             <ul>
-              <li>autoUpdater integration</li>
+              <li>autoUpdater integration <span style="color:var(--pastel-mint);font-weight:600;">✓ shipped</span></li>
               <li>Protocol handler registration</li>
               <li>Native Node.js module support</li>
-              <li>Packaging &amp; distribution tools</li>
+              <li>Packaging &amp; distribution tools <span style="color:var(--pastel-mint);font-weight:600;">✓ shipped</span></li>
             </ul>
           </div>
         </div>
@@ -764,7 +764,7 @@ cd gelectron</code></pre>
             <span class="faq-chevron">›</span>
           </button>
           <div class="faq-answer">
-            <p>Eventually, yes — that's the goal. Simple apps that use only <code>BrowserWindow</code>, <code>ipcMain</code>, <code>Menu</code>, and <code>dialog</code> may work today. Apps using <code>Tray</code>, <code>autoUpdater</code>, <code>session</code>, native Node.js modules, or calling <code>require()</code> in the renderer will not work.</p>
+            <p>Eventually, yes — that's the goal. Simple apps that use only <code>BrowserWindow</code>, <code>ipcMain</code>, <code>Menu</code>, and <code>dialog</code> may work today. Apps using <code>Tray</code>, <code>session</code>, native Node.js modules, or calling <code>require()</code> in the renderer will not work. <code>autoUpdater</code> works for packaged apps with a hosted update feed.</p>
           </div>
         </div>
         <div class="faq-item">

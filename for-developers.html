@@ -421,7 +421,6 @@
             <tbody>
               <tr><td><code>Tray</code></td><td>No native system tray support yet</td></tr>
               <tr><td><code>safeStorage</code></td><td>Base64 encoding, not real encryption</td></tr>
-              <tr><td><code>autoUpdater</code></td><td>Always returns "no update available"</td></tr>
               <tr><td><code>session</code></td><td>All methods are no-ops</td></tr>
               <tr><td><code>systemPreferences</code></td><td>isDarkMode linked to nativeTheme, rest no-ops</td></tr>
               <tr><td><code>powerMonitor</code></td><td>getSystemIdleState always returns 'active'</td></tr>
@@ -522,8 +521,8 @@
         </div>
         <div class="pitch-card highlight-loss">
           <div class="stat-large loss">No</div>
-          <div class="stat-sub">auto-updater</div>
-          <p>autoUpdater is a stub — you can't ship automatic updates yet. No crash reporter either.</p>
+          <div class="stat-sub">crash reporting</div>
+          <p>autoUpdater now works for packaged apps (hosted feed + atomic swap on relaunch), but there's still no crash reporter.</p>
         </div>
         <div class="pitch-card highlight-loss">
           <div class="stat-large loss">No</div>
@@ -579,13 +578,13 @@
             <li>You want minimal memory overhead</li>
             <li>You're building a kiosk, utility, or single-purpose app</li>
             <li>You're excited about Rust and Servo</li>
-            <li>You don't need auto-update or crash reporting</li>
+            <li>You don't need crash reporting or guaranteed update infrastructure</li>
           </ul>
         </div>
         <div class="verdict-card verdict-no">
           <h3>❌ No</h3>
           <ul>
-            <li>You need production-grade auto-updates and crash reporting</li>
+            <li>You need production-grade crash reporting and enterprise update infrastructure</li>
             <li>Your app depends on native Node.js modules in the renderer</li>
             <li>You need mature DevTools and debugging</li>
             <li>You can't afford API instability</li>

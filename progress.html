@@ -55,8 +55,8 @@
       </div>
       <div class="giant-bar-legend">
         <span class="legend-item"><span class="legend-dot fully"></span> Fully Working — 2 modules</span>
-        <span class="legend-item"><span class="legend-dot partial"></span> Partially Working — 15 modules</span>
-        <span class="legend-item"><span class="legend-dot stub"></span> Stubs — 7 modules</span>
+        <span class="legend-item"><span class="legend-dot partial"></span> Partially Working — 16 modules</span>
+        <span class="legend-item"><span class="legend-dot stub"></span> Stubs — 6 modules</span>
         <span class="legend-item"><span class="legend-dot missing"></span> Missing — 36 modules</span>
       </div>
     </section>
@@ -69,12 +69,12 @@
           <div class="stat-sub">3% of modules</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number partial">15</div>
+          <div class="stat-number partial">16</div>
           <div class="stat-label">Partially Working</div>
           <div class="stat-sub">Core methods work, gaps remain</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number stub">7</div>
+          <div class="stat-number stub">6</div>
           <div class="stat-label">Stubs Only</div>
           <div class="stat-sub">API exists, does nothing</div>
         </div>
@@ -332,6 +332,20 @@
               memoryUsage, cpuUsage, uptime, kill
             </div>
           </div>
+          <div class="module-detail-card partial">
+            <div class="module-detail-header">
+              <div class="module-name">autoUpdater</div>
+              <div class="module-pct">~70%</div>
+            </div>
+            <div class="module-works">
+              <span class="works-label">Works:</span>
+              setFeedURL, checkForUpdates, downloadUpdate, quitAndInstall, checkForAndNotifyIfAvailable; events (update-available, download-progress, update-downloaded, error, before-quit-for-update); sha512-verified download, staged atomic apply on relaunch
+            </div>
+            <div class="module-missing">
+              <span class="missing-label">Missing:</span>
+              Packaged-mode only (native binary + launcher), needs a hosted latest.yml feed; no differential updates, no-op in dev/Node fallback
+            </div>
+          </div>
         </div>
       </div>
 
@@ -351,10 +365,6 @@
           <div class="module-card stub">
             <div class="module-name">safeStorage</div>
             <div class="module-status">Base64 encoding, not real encryption</div>
-          </div>
-          <div class="module-card stub">
-            <div class="module-name">autoUpdater</div>
-            <div class="module-status">API surface for electron-updater compat, no actual updates</div>
           </div>
           <div class="module-card stub">
             <div class="module-name">session</div>
@@ -489,12 +499,12 @@
 
       // 60 total unique modules
       // Fully: 2 modules at 100% = 3.33%
-      // Partial: 15 modules weighted avg ~42% = 10.50%
-      // Stubs: 7 modules at ~2% = 0.23%
-      // Total: ~14.1%
+      // Partial: 16 modules weighted avg ~42% = 11.20%
+      // Stubs: 6 modules at ~2% = 0.20%
+      // Total: ~14.7%
       const FULLY_PCT = 3.33;
-      const PARTIAL_PCT = 10.50;
-      const STUB_PCT = 0.23;
+      const PARTIAL_PCT = 11.20;
+      const STUB_PCT = 0.20;
       const TOTAL_PCT = FULLY_PCT + PARTIAL_PCT + STUB_PCT;
 
       const observer = new IntersectionObserver((entries) => {
