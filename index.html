@@ -126,7 +126,7 @@
         <div class="feature-card">
           <div class="feature-icon">🔧</div>
           <h3>Same API Surface</h3>
-          <p>Run <code>gelectron .</code> instead of <code>electron .</code>. The familiar <code>BrowserWindow</code>, <code>ipcMain</code>, <code>Menu</code>, <code>dialog</code> APIs you already know. 18 modules working today.</p>
+          <p>Run <code>gelectron .</code> instead of <code>electron .</code>. The familiar <code>BrowserWindow</code>, <code>ipcMain</code>, <code>Menu</code>, <code>dialog</code> APIs you already know. 19 modules working today.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🦀</div>
@@ -399,8 +399,8 @@ cd gelectron</code></pre>
             </tr>
             <tr>
               <td><code>clipboard</code></td>
-              <td><span class="status implemented">Partial</span></td>
-              <td>readText/writeText/readImage/writeImage via Rust bridge (arboard)</td>
+              <td><span class="status implemented">Full</span></td>
+              <td>Full API: text/HTML/RTF/image/bookmark/find-text, clear, availableFormats, has. Sync FIFO or async bridge</td>
             </tr>
             <tr>
               <td><code>screen</code></td>
@@ -456,7 +456,7 @@ cd gelectron</code></pre>
         </table>
       </div>
       <p style="text-align:center;margin-top:20px;color:var(--text-muted);font-size:0.85rem;">
-        2 fully working · 16 partially working · 6 stubs · 36 not started
+        3 fully working · 15 partially working · 6 stubs · 36 not started
         — <a href="progress.html" style="color:var(--pastel-purple);font-weight:600;">see full progress</a>
       </p>
     </section>
