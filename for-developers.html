@@ -370,8 +370,8 @@
           </tr>
           <tr>
             <td><code>Notification</code></td>
-            <td><span class="status-partial">Partial</span></td>
-            <td>API surface complete, shows via browser Notification API. No native OS integration yet</td>
+            <td><span class="status-full">Full</span></td>
+            <td>Full Electron API (title/subtitle/body/silent/icon/urgency/timeoutType/actions/hasReply/replyPlaceholder/sound/closeButtonText/toastXml). Native OS integration via notify-rust — macOS Notification Center, Windows Toasts, Linux D-Bus. Events: show/click/action/reply/close/failed</td>
           </tr>
           <tr>
             <td><code>nativeImage</code></td>
@@ -467,9 +467,9 @@
 
       <div class="pitch-grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
         <div class="pitch-card highlight-win">
-          <div class="stat-large win">78%</div>
+          <div class="stat-large win">76%</div>
           <div class="stat-sub">less memory</div>
-          <p>131 MB vs 586 MB total RSS. No Chromium multi-process overhead.</p>
+          <p>143 MB vs 586 MB total RSS. No Chromium multi-process overhead.</p>
         </div>
         <div class="pitch-card highlight-win">
           <div class="stat-large win">99%</div>

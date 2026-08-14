@@ -54,8 +54,8 @@
         </div>
       </div>
       <div class="giant-bar-legend">
-        <span class="legend-item"><span class="legend-dot fully"></span> Fully Working — 3 modules</span>
-        <span class="legend-item"><span class="legend-dot partial"></span> Partially Working — 15 modules</span>
+        <span class="legend-item"><span class="legend-dot fully"></span> Fully Working — 4 modules</span>
+        <span class="legend-item"><span class="legend-dot partial"></span> Partially Working — 14 modules</span>
         <span class="legend-item"><span class="legend-dot stub"></span> Stubs — 6 modules</span>
         <span class="legend-item"><span class="legend-dot missing"></span> Missing — 36 modules</span>
       </div>
@@ -64,12 +64,12 @@
     <section class="progress-stats">
       <div class="stats-grid">
         <div class="stat-card">
-          <div class="stat-number fully">3</div>
+          <div class="stat-number fully">4</div>
           <div class="stat-label">Fully Working</div>
-          <div class="stat-sub">5% of modules</div>
+          <div class="stat-sub">7% of modules</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number partial">15</div>
+          <div class="stat-number partial">14</div>
           <div class="stat-label">Partially Working</div>
           <div class="stat-sub">Core methods work, gaps remain</div>
         </div>
@@ -113,6 +113,10 @@
           <div class="module-card fully">
             <div class="module-name">clipboard</div>
             <div class="module-status">readText/writeText/readHTML/writeHTML/readRTF/writeRTF/readImage/writeImage/readBookmark/writeBookmark/readFindText/writeFindText/clear/availableFormats/has. Sync via Unix FIFO channel (macOS/Linux) or async bridge (Windows). RTF/bookmark/find-text/formats via NSPasteboard on macOS</div>
+          </div>
+          <div class="module-card fully">
+            <div class="module-name">Notification</div>
+            <div class="module-status">Full Electron API (title/subtitle/body/silent/icon/urgency/timeoutType/actions/hasReply/replyPlaceholder/sound/closeButtonText/toastXml). Native OS integration via notify-rust — macOS Notification Center, Windows Toasts, Linux D-Bus. Events: show/click/action/reply/close/failed</div>
           </div>
         </div>
       </div>
@@ -222,20 +226,6 @@
             <div class="module-missing">
               <span class="missing-label">Missing:</span>
               moveItemToTrash deletes permanently, shortcut stubs
-            </div>
-          </div>
-          <div class="module-detail-card partial">
-            <div class="module-detail-header">
-              <div class="module-name">Notification</div>
-              <div class="module-pct">~25%</div>
-            </div>
-            <div class="module-works">
-              <span class="works-label">Works:</span>
-              API surface complete, show via browser Notification API if available
-            </div>
-            <div class="module-missing">
-              <span class="missing-label">Missing:</span>
-              No native OS notification integration
             </div>
           </div>
           <div class="module-detail-card partial">
@@ -488,12 +478,12 @@
       let animated = false;
 
       // 60 total unique modules
-      // Fully: 3 modules at 100% = 5.00%
-      // Partial: 15 modules weighted avg ~42% = 10.50%
+      // Fully: 4 modules at 100% = 6.67%
+      // Partial: 14 modules weighted avg ~42% = 9.80%
       // Stubs: 6 modules at ~2% = 0.20%
-      // Total: ~15.7%
-      const FULLY_PCT = 5.00;
-      const PARTIAL_PCT = 10.50;
+      // Total: ~16.7%
+      const FULLY_PCT = 6.67;
+      const PARTIAL_PCT = 9.80;
       const STUB_PCT = 0.20;
       const TOTAL_PCT = FULLY_PCT + PARTIAL_PCT + STUB_PCT;
 

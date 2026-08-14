@@ -108,7 +108,7 @@
                 <tr>
                   <td>Memory Usage</td>
                   <td>High (~586 MB total RSS)</td>
-                  <td>Lower (~131 MB total RSS)</td>
+                  <td>Lower (~143 MB total RSS)</td>
                 </tr>
                 <tr>
                   <td>Node.js in Renderer</td>
@@ -404,8 +404,8 @@ gelectron-packager --dir ./my-app --name MyApp --platform linux --arch x64</code
                 </tr>
                 <tr>
                   <td><code>Notification</code></td>
-                  <td><span class="status partial">Partial</span></td>
-                  <td>API surface complete, show via browser Notification API if available. No native OS integration</td>
+                  <td><span class="status implemented">Full</span></td>
+                  <td>Full Electron API (title/subtitle/body/silent/icon/urgency/timeoutType/actions/hasReply/replyPlaceholder/sound/closeButtonText/toastXml). Native OS integration via notify-rust — macOS Notification Center, Windows Toasts, Linux D-Bus. Events: show/click/action/reply/close/failed</td>
                 </tr>
                 <tr>
                   <td><code>nativeImage</code></td>

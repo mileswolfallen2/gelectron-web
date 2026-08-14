@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gelectron — Electron, Reimagined with Rust</title>
-  <meta name="description" content="Drop-in Electron replacement using Rust + Platform WebView. Smaller binaries (3 MB vs 296 MB), less memory (131 MB vs 586 MB). Non-commercial open source — early development.">
+  <meta name="description" content="Drop-in Electron replacement using Rust + Platform WebView. Smaller binaries (3 MB vs 296 MB), less memory (143 MB vs 586 MB). Non-commercial open source — early development.">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,7 +44,7 @@
     <section class="hero">
       <div class="hero-badge">Early Development — Non-Commercial Open Source Project</div>
       <h1>Electron, reimagined<br>with <span class="gradient-text">Rust &amp; WebView</span></h1>
-      <p class="hero-subtitle">A drop-in Electron replacement built on Rust and the OS platform WebView. Same JavaScript APIs, 99% smaller binary, 78% less memory — but still early.</p>
+      <p class="hero-subtitle">A drop-in Electron replacement built on Rust and the OS platform WebView. Same JavaScript APIs, 99% smaller binary, 76% less memory — but still early.</p>
       <div class="hero-actions">
         <a href="https://github.com/mileswolfallen2/gelectron" target="_blank" rel="noopener" class="btn btn-primary">View on GitHub</a>
         <a href="#features" class="btn btn-secondary">Learn More</a>
@@ -120,8 +120,8 @@
         </div>
         <div class="feature-card">
           <div class="feature-icon">🧠</div>
-          <h3>78% Less Memory</h3>
-          <p>131 MB total RSS vs 586 MB for Electron. No Chromium multi-process overhead means your app uses less than a quarter of the RAM.</p>
+          <h3>76% Less Memory</h3>
+          <p>143 MB total RSS vs 586 MB for Electron. No Chromium multi-process overhead means your app uses less than a quarter of the RAM.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🔧</div>
@@ -403,6 +403,11 @@ cd gelectron</code></pre>
               <td>Full API: text/HTML/RTF/image/bookmark/find-text, clear, availableFormats, has. Sync FIFO or async bridge</td>
             </tr>
             <tr>
+              <td><code>Notification</code></td>
+              <td><span class="status implemented">Full</span></td>
+              <td>Full Electron API (title/subtitle/body/silent/icon/urgency/timeoutType/actions/hasReply/replyPlaceholder/sound/closeButtonText/toastXml). Native OS integration via notify-rust — macOS Notification Center, Windows Toasts, Linux D-Bus. Events: show/click/action/reply/close/failed</td>
+            </tr>
+            <tr>
               <td><code>screen</code></td>
               <td><span class="status implemented">Partial</span></td>
               <td>getPrimaryDisplay/getAllDisplays/getCursorScreenPoint via tao bridge</td>
@@ -456,7 +461,7 @@ cd gelectron</code></pre>
         </table>
       </div>
       <p style="text-align:center;margin-top:20px;color:var(--text-muted);font-size:0.85rem;">
-        3 fully working · 15 partially working · 6 stubs · 36 not started
+        4 fully working · 14 partially working · 6 stubs · 36 not started
         — <a href="progress.html" style="color:var(--pastel-purple);font-weight:600;">see full progress</a>
       </p>
     </section>
@@ -592,8 +597,8 @@ cd gelectron</code></pre>
             <div class="benchmark-group-title">Startup &amp; Binary</div>
             <div class="benchmark-row">
               <span class="bench-label">Startup (10-run avg)</span>
-              <span class="bench-value">5.596s</span>
-              <span class="bench-time">5.594–5.598</span>
+              <span class="bench-value">5.603s</span>
+              <span class="bench-time">5.601–5.606</span>
             </div>
             <div class="benchmark-row">
               <span class="bench-label">Binary size</span>
@@ -604,8 +609,8 @@ cd gelectron</code></pre>
             <div class="benchmark-group-title">Memory (Total RSS)</div>
             <div class="benchmark-row">
               <span class="bench-label">Average</span>
-              <span class="bench-value">144.4 MB</span>
-              <span class="bench-time">144.0–144.6</span>
+              <span class="bench-value">142.6 MB</span>
+              <span class="bench-time">142.3–142.9</span>
             </div>
           </div>
         </div>
@@ -661,8 +666,8 @@ cd gelectron</code></pre>
             <div class="benchmark-group-title">Startup &amp; Binary</div>
             <div class="benchmark-row">
               <span class="bench-label">Startup (10-run avg)</span>
-              <span class="bench-value">5.657s</span>
-              <span class="bench-time">5.648–5.672</span>
+              <span class="bench-value">5.670s</span>
+              <span class="bench-time">5.651–5.676</span>
             </div>
             <div class="benchmark-row">
               <span class="bench-label">Binary size</span>
@@ -673,8 +678,8 @@ cd gelectron</code></pre>
             <div class="benchmark-group-title">Memory (Total RSS)</div>
             <div class="benchmark-row">
               <span class="bench-label">Average</span>
-              <span class="bench-value">582.9 MB</span>
-              <span class="bench-time">579.0–590.4</span>
+              <span class="bench-value">586.3 MB</span>
+              <span class="bench-time">574.0–590.7</span>
             </div>
           </div>
         </div>
@@ -687,11 +692,11 @@ cd gelectron</code></pre>
         </div>
         <div class="summary-item">
           <div class="summary-label">Memory (Total RSS)</div>
-          <div class="summary-result gelectron">Gelectron ~75% less — 144 MB vs 583 MB</div>
+          <div class="summary-result gelectron">Gelectron ~76% less — 143 MB vs 586 MB</div>
         </div>
         <div class="summary-item">
           <div class="summary-label">Startup</div>
-          <div class="summary-result gelectron">Gelectron ~1.1% faster — 5.60s vs 5.66s</div>
+          <div class="summary-result gelectron">Gelectron ~1.2% faster — 5.60s vs 5.67s</div>
         </div>
         <div class="summary-item">
           <div class="summary-label">Style Recalc</div>
@@ -737,7 +742,7 @@ cd gelectron</code></pre>
             <span class="faq-chevron">›</span>
           </button>
           <div class="faq-answer">
-            <p>Electron bundles a full copy of Chromium (~296 MB) and consumes significant memory (~586 MB total RSS). Gelectron aims to provide the same developer experience with a 3 MB binary and 131 MB memory footprint. The trade-off: fewer APIs work, no Node.js in the renderer, and a less mature ecosystem.</p>
+            <p>Electron bundles a full copy of Chromium (~296 MB) and consumes significant memory (~586 MB total RSS). Gelectron aims to provide the same developer experience with a 3 MB binary and 143 MB memory footprint. The trade-off: fewer APIs work, no Node.js in the renderer, and a less mature ecosystem.</p>
           </div>
         </div>
         <div class="faq-item">
@@ -800,7 +805,7 @@ cd gelectron</code></pre>
             <span class="faq-chevron">›</span>
           </button>
           <div class="faq-answer">
-            <p>On current benchmarks (10-run averages): Gelectron is 99% smaller (3 MB vs 296 MB), uses 78% less memory (131 MB vs 586 MB), and is ~14% faster on renderer operations (DOM, Canvas, JSON, sort, recursion). However, Electron is 83% faster on DOM querySelector, has a mature DevTools experience, and supports far more APIs. See the <a href="benchmarks.html" style="color:var(--pastel-purple);font-weight:600;">full benchmarks page</a> for details.</p>
+            <p>On current benchmarks (10-run averages): Gelectron is 99% smaller (3 MB vs 296 MB), uses 76% less memory (143 MB vs 586 MB), and is ~14% faster on renderer operations (DOM, Canvas, JSON, sort, recursion). However, Electron is 83% faster on DOM querySelector, has a mature DevTools experience, and supports far more APIs. See the <a href="benchmarks.html" style="color:var(--pastel-purple);font-weight:600;">full benchmarks page</a> for details.</p>
           </div>
         </div>
         <div class="faq-item">
